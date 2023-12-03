@@ -2,6 +2,9 @@
 <html>
   <head>
     <meta charset="UTF-8" />
+    {%set base='https://'+domain+'/'+hconfigs[ConfigEnum.proxy_path]+"/"+user.uuid+"/"%}
+    <meta name="apple-itunes-app" content="app-id=6450534064, app-argument=streisand://import/{{base}}">
+    
     <link rel="icon" type="image/png" href="./src/assets/images/hiddify-logo.png" />
     <link rel="stylesheet" href="node_modules/smartbanner.js/dist/smartbanner.min.css">
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -29,8 +32,9 @@
     <script src="node_modules/smartbanner.js/dist/smartbanner.min.js"></script>
     <script>
       window.userUuid = 'ab06b4e1-f372-4661-9cf9-ff3c4b656f2c';
-      window.appVersion = '1.0.0';
-      window.deepLink = "example.com"
+      window.userUuid = '{{user.uuid}}';
+      window.appVersion = '{{version}}';
+      window.deepLink = "hiddify://import/{{base}}"
     </script>
   </body>
 </html>
