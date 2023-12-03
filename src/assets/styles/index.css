@@ -9,7 +9,7 @@ body {
   overflow: hidden; /* Prevent scrolling */
 }
 
-canvas {
+#profile-qr-code {
   display: block; /* Make sure canvas is a block element */
   width: calc(100vh - 500px) !important; /* Set canvas width to 100% of its container */
   height: calc(100vh - 500px) !important; /* Allow the height to adjust proportionally */

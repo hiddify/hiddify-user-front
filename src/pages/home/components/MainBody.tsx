@@ -43,7 +43,7 @@ const MainBody = () => {
               </div>
             </div>
           </div>
-          <div className='w-full h-full bg-[#E0E4F5] rounded-t-[24px] md:rounded-[24px] bg-opacity-50 relative'>
+          <div className='pb-10 sm:pb-0 w-full h-full bg-[#E0E4F5] rounded-t-[24px] md:rounded-[24px] bg-opacity-50 relative'>
             <div className="p-4 h-full bg-transparent flex items-center justify-center">
               <SupportInfo viewMoreUrl={getInfo.data?.admin_message_url ? getInfo.data?.admin_message_url : ''} />
             </div>
