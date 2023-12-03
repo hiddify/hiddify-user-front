@@ -3,10 +3,7 @@
     "sourceLanguageTag": "en",
     "languageTags": [
       "en",
-      "fa",
-      "ru",
-      "pt",
-      "zh"
+      "fa"
     ],
     "modules": [
       "https://cdn.jsdelivr.net/npm/@inlang/plugin-i18next@4/dist/index.js",
