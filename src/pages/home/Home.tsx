@@ -31,7 +31,7 @@ const Home = () => {
   }, [getInfo.data])
 
   return getInfo.isLoading ? (<PreLoading />) : (
-    <div className={`bg-[#F4F4F9] w-[100vw] h-[100vh] overflow-auto m-0 p-0 md:flex flex-col md:justify-center md:items-center`}>
+    <div className={`bg-[#F4F4F9] w-[100vw] h-[100vh] overflow-hidden m-0 p-0 md:flex flex-col md:justify-center md:items-center`}>
       <Header 
         setShowAllConfigs={setShowAllConfigs}
         setShowTeleProxy={setShowTeleProxy}

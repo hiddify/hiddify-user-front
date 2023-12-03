@@ -95,7 +95,6 @@ const ShareLinks: React.FC<propsTypes> = ({ isModalOpen }) => {
               :
               <div className="w-fit h-fit flex justify-center items-center scale-in-center">
                 <QRCode
-                  size={214}
                   value={getInfo.data?.profile_url ? getInfo.data?.profile_url : ''}
                   bgColor='transparent'
                   fgColor='#495057'
