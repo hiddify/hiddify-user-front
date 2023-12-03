@@ -1,0 +1,36 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/png" href="./src/assets/images/hiddify-logo.png" />
+    <link rel="stylesheet" href="node_modules/smartbanner.js/dist/smartbanner.min.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <!-- Start SmartBanner configuration -->
+    <meta name="smartbanner:title" content="Smart Application">
+    <meta name="smartbanner:author" content="SmartBanner Contributors">
+    <meta name="smartbanner:price" content="FREE">
+    <meta name="smartbanner:price-suffix-apple" content=" - On the App Store">
+    <meta name="smartbanner:price-suffix-google" content=" - In Google Play">
+    <meta name="smartbanner:icon-apple" content="./src/assets/icons/applestore.png">
+    <meta name="smartbanner:icon-google" content="./src/assets/icons/playstore.png">
+    <meta name="smartbanner:button" content="VIEW">
+    <meta name="smartbanner:button-url-apple" content="https://ios/application-url">
+    <meta name="smartbanner:button-url-google" content="https://android/application-url">
+    <meta name="smartbanner:enabled-platforms" content="android,ios">
+    <meta name="smartbanner:close-label" content="Close">
+    <!-- End SmartBanner configuration -->
+
+    <title>Hiddify | Panel</title>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="./src/main.tsx"></script>
+    <script src="node_modules/smartbanner.js/dist/smartbanner.min.js"></script>
+    <script>
+      window.userUuid = 'ab06b4e1-f372-4661-9cf9-ff3c4b656f2c';
+      window.appVersion = '1.0.0';
+      window.deepLink = "example.com"
+    </script>
+  </body>
+</html>
