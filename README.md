@@ -1,3 +1,10 @@
+## Improve Translations
+You can easily contribute to this project by using the following links to improve the translations:
+- [English](https://inlang.com/editor/github.com/hiddify/hiddify-user-front?lang=en)
+- [Persian](https://inlang.com/editor/github.com/hiddify/hiddify-user-front?lang=en&lang=fa)
+- [Russian](https://inlang.com/editor/github.com/hiddify/hiddify-user-front?lang=en&lang=ru)
+- [Chinese](https://inlang.com/editor/github.com/hiddify/hiddify-user-front?lang=en&lang=zh)
+
 <h1>first clone the project</h1>
 
 <h4>You have to install node js in order to run the project</h4>
