@@ -8,7 +8,7 @@ const BrandAndLogo = () => {
   const { appVersion } = getWindowData()
 
   return (
-    <div className="flex items-end gap-3 ml-3">
+    <div className="flex items-end gap-3 mx-3">
         <Text fontSize="xs" fontWeight="light" className="text-[#495057] line-clamp-1">
           Powered by Hiddify v{appVersion}
         </Text>

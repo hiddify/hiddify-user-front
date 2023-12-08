@@ -97,7 +97,7 @@ const ConfigModal = ({ closeModal, open, domain, link }) => {
                 }
             </div>
             <div className='flex items-center justify-center'>
-                <CopyLinkBtn onClick={() => copy(link ? link : '')}>
+                <CopyLinkBtn style={{ textTransform: 'none'}} onClick={() => copy(link ? link : '')}>
                     <Text fontSize='sm' fontWeight='regular' className='text-white whitespace-nowrap'>{t('Copy Link')}</Text>
                 </CopyLinkBtn>
             </div>

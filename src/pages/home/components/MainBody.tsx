@@ -11,10 +11,14 @@ import { useState } from "react";
 import { Modal } from "../../../designSystem/Modal";
 import AppModal from "./AppModal";
 import { getWindowData } from "../../../utils/getWindowData";
+import useMediaQuery from "@hooks/useMediaQuery";
+
 
 const MainBody = () => {
   const [isAppModalOpen, setIsAppModalOpen] = useState(false)
   const { t } = useTranslation();
+
+  const isMobile = useMediaQuery('(max-width: 768px)');
 
   const getInfo = useAPI(
     'me/',
@@ -43,7 +47,7 @@ const MainBody = () => {
               </div>
             </div>
           </div>
-          <div className='pb-10 sm:pb-0 w-full h-full bg-[#E0E4F5] rounded-t-[24px] md:rounded-[24px] bg-opacity-50 relative'>
+          <div className='w-full h-full bg-[#E0E4F5] rounded-t-[24px] md:rounded-[24px] bg-opacity-50 relative'>
             <div className="p-4 h-full bg-transparent flex items-center justify-center">
               <SupportInfo viewMoreUrl={getInfo.data?.admin_message_url ? getInfo.data?.admin_message_url : ''} />
             </div>
@@ -60,7 +64,7 @@ const MainBody = () => {
           <Text fontSize='lg' fontWeight='medium' className='text-[#212529]'>
               {t('Share Link')}
           </Text>
-          <ShareLinks />
+          {!isMobile && <ShareLinks />}
         </div>
         {isAppModalOpen && deepLink ? <iframe className="hidden" src={deepLink} width="0" height="0"></iframe> : null}
       </div>

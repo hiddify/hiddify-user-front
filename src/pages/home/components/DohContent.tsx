@@ -41,9 +41,7 @@ const DohContent = () => {
   return (
     <div className='flex flex-col gap-5 h-full max-w-[500px]'>
         <Text fontSize='xs' fontWeight='regular' className='text-[#6C757D]'>
-            {t(`There are several browsers compatible with DNS over HTTPS (DoH). 
-            This protocol lets you encrypt your connection to 1.1.1.1 in order to protect your DNS queries from privacy intrusions 
-            and tampering. Some browsers might already have this setting enabled.`)}
+            {t(`There are several browsers compatible with DNS over HTTPS (DoH). This protocol lets you encrypt your connection to 1.1.1.1 in order to protect your DNS queries from privacy intrusions and tampering. Some browsers might already have this setting enabled.`)}
         </Text>
         <DohLinkInput 
             id="custom-css-outlined-input" 

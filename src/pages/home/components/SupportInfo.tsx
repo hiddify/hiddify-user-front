@@ -26,7 +26,7 @@ const SupportInfo = ({viewMoreUrl}) => {
                 {t('Join our Telegram channel in case you have any questions on how to use the links.')}
             </Text>
             <div className="w-full flex justify-end">
-                <ViewMoreButton onClick={() => window.open(viewMoreUrl, '_blank')}>
+                <ViewMoreButton style={{ textTransform: 'none'}} onClick={() => window.open(viewMoreUrl, '_blank')}>
                     {t('View More')}
                 </ViewMoreButton>
             </div>

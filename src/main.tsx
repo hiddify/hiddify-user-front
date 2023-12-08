@@ -8,8 +8,17 @@ import { QueryClient, QueryClientProvider } from 'react-query'
 import "./i18n";
 
 
-// Create a client
-const queryClient = new QueryClient()
+const queryClient: QueryClient = new QueryClient({
+  defaultOptions: {
+    queries: {
+      retry: 2,
+      staleTime: 60 * 1000 /*1 minute*/,
+      refetchOnWindowFocus: false,
+      retryOnMount: false // prevent infinite request on error in whitch component has loading before mount
+      // notifyOnChangeProps: ['data', 'error'],
+    },
+  },
+});
 
 
 ReactDOM.createRoot(document.getElementById('root')!).render(

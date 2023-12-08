@@ -41,7 +41,7 @@ const stores = ['app_store', 'google_play', 'snapcraft', 'microsoft_store']
 
 
 const AppModal = ({ profileUrl }) => {
-    const { t } = useTranslation();
+    const { t, i18n: { language} } = useTranslation();
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const [apps, setApps] = useState<any>([])
     const [showMoreApps, setShowMoreApps] = useState(false)
@@ -124,7 +124,7 @@ const AppModal = ({ profileUrl }) => {
                 <div onClick={() => setApp(null)} className='bg-[#FBFBFB] rounded-2xl py-3 px-2 cursor-pointer'>
                     <div className='flex gap-2'>
                         <div className='flex items-center justify-center p-2'>
-                            <ArrowBackIosIcon />
+                            {language === 'fa' ? <ArrowForwardIosIcon /> : <ArrowBackIosIcon />}
                         </div>
                         <div className='bg-[#F2F4FB] w-[50px] h-[50px] p-2 rounded-lg flex items-center justify-center'>
                             <CardMedia
@@ -145,9 +145,9 @@ const AppModal = ({ profileUrl }) => {
                             {t('Choose one the sources below to download the file:')}
                         </Text>
                     </div>
-                    <div className='grid grid-cols-2 gap-1 md:gap-4 px-0 md:px-10'>
+                    <div dir="rtl" className='grid grid-cols-2 gap-1 md:gap-4 px-0 md:px-10'>
                         {app?.install && app?.install?.length ? app?.install.map(item => (
-                            <div onClick={() => downloadApp(item?.url ? item?.url : '')} className='w-full bg-black rounded-md flex items-center gap-2 py-1 px-2 cursor-pointer'>
+                            <div dir={language === 'fa' ? 'rtl' : "ltr"} onClick={() => downloadApp(item?.url ? item?.url : '')} className='w-full bg-black rounded-md flex items-center gap-2 py-1 px-2 cursor-pointer'>
                                 <div className='bg-transparent w-4 h-4 md:w-6 md:h-6 flex items-center justify-center overflow-visible'>
                                     <CardMedia
                                         sx={{ height: '100%', width: '100%', backgroundSize: 'cover' }}
@@ -174,7 +174,7 @@ const AppModal = ({ profileUrl }) => {
                         <Text onClick={() => window.open(app.guide_url, "_blank")} fontSize='xs' fontWeight='medium' className='line-clamp-1 text-[#495057] underline underline-offset-4 cursor-pointer'>
                             {app.guide_url ? t('View Youtube Tutorial...') : ''}
                         </Text>
-                        <CopyLinkButton onClick={() => importApp(app.deeplink ? app.deeplink : undefined)}>
+                        <CopyLinkButton style={{ textTransform: 'none'}} onClick={() => importApp(app.deeplink ? app.deeplink : undefined)}>
                             <Text className='text-[#455FE9] mr-2'>{app.deeplink ? t('Import To App') : t('Copy Link')}</Text>
                             {app.deeplink ? null : <ContentCopyIcon />}
                         </CopyLinkButton>
@@ -208,7 +208,7 @@ const AppModal = ({ profileUrl }) => {
                                                 <Text fontSize='base' fontWeight='regular' className='text-[#495057]'>{item.title ? item.title : ''}</Text>
                                                 <Text fontSize='sm' fontWeight='normal' className='text-[#212529]'>{index === 0 ? t('*Recommended') : '' }</Text>
                                             </div>
-                                            <ArrowForwardIosIcon />
+                                            {language === 'fa' ? <ArrowBackIosIcon /> : <ArrowForwardIosIcon />}
                                         </div>
                                     </div> 
                                 </div>
@@ -240,7 +240,7 @@ const AppModal = ({ profileUrl }) => {
                     </Text>
                 </div>
                 <div className='w-full flex items-end justify-end'>
-                    <CopyLinkButton onClick={() => copy(profileUrl)}>
+                    <CopyLinkButton style={{ textTransform: 'none'}} onClick={() => copy(profileUrl)}>
                         <Text className='text-[#455FE9] mr-2'>{t('Copy Link')}</Text>
                         <ContentCopyIcon />
                     </CopyLinkButton>

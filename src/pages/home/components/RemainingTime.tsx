@@ -26,7 +26,7 @@ const RemainingTime = ({ remainingDays, resetIn }) => {
                 {t('Remaining time')}
             </Text>
             <Text className="text-[#212529] whitespace-nowrap" fontSize="sm" fontWeight="regular">
-                {dateRepresentation}
+                {dateRepresentation ? dateRepresentation : '-'}
             </Text>
         </div>
     </div>

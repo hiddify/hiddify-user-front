@@ -64,17 +64,18 @@ const Header: FC<propsTypes> = (props) => {
 
   return (
     <>
-      <div className='md:hidden fixed top-0 z-50 w-full bg-transparent flex items-center justify-between px-5 py-6'>
+      <div className={`md:hidden ${showMainBody && 'bg-[#E0E4F5] bg-opacity-50'} w-full h-[8%] flex items-center justify-between px-5 py-3`}>
         <MenuDropdown 
           dohModal={setDohModal} 
           setChangeLangModal={setChangeLangModal}
           showAllConfigs={showAllConfigsFun}
           showTeleProxy={showTeleProxyFun}
           handleGoToSpeedTest={handleGoToSpeedTest}
+          showMainBodyFun={showMainBodyFun}
         />
         <div onClick={showMainBodyFun} className="flex items-center gap-3 cursor-pointer">
           <CardMedia
-              sx={{ height: 24, width: 24 }}
+              sx={{ height: 24, width: 24, marginBottom: 1 }}
               image={HLogo}
               title="Hiddify Logo"
           />
@@ -90,11 +91,11 @@ const Header: FC<propsTypes> = (props) => {
           <ShareIcon sx={{ color: '#292D32'}} />
         </Button>
       </div>
-      <div className="hidden w-full md:w-5/6 lg:max-w-[1000px] h-fit bg-transparent md:flex items-center justify-between py-6">
+      <div className="hidden w-full md:w-9/12 h-[8%] bg-transparent md:flex items-center justify-between py-3">
         <div className="w-fit flex items-center lg:gap-11 md:gap-5">
           <div onClick={showMainBodyFun} className="flex items-center gap-3 cursor-pointer">
             <CardMedia
-                sx={{ height: 24, width: 24 }}
+                sx={{ height: 24, width: 24, marginBottom: 1 }}
                 image={HLogo}
                 title="Hiddify Logo"
             />

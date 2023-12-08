@@ -24,6 +24,14 @@ const Home = () => {
   const { i18n: {changeLanguage, language} } = useTranslation();
 
   useEffect(() => {
+    if (language === 'fa') {
+      document.body.classList.add('rtl');
+    } else {
+      document.body.classList.remove('rtl');
+    }
+  }, [language])
+
+  useEffect(() => {
       if(getInfo.data && getInfo.data.lang && language !== getInfo.data.lang){
         changeLanguage(getInfo.data.lang);
       }
@@ -40,12 +48,12 @@ const Home = () => {
         showTeleProxy={showTeleProxy}
         showMainBody={showMainBody}
       />
-      <div className="w-full md:w-5/6 lg:max-w-[1000px] h-full">
+      <div className="w-full md:w-9/12 h-[84%]">
         {showAllConfigs && <AllConfigs />}
         {showMainBody && <MainBody />}
         {showTeleProxy && <TeleProxy />}
       </div>
-      <div className="lg:max-w-[1000px] md:w-5/6 fixed md:static bottom-0 md:bottom-[unset] z-50 h-fit w-full flex justify-between items-center px-5 md:px-0 py-5">
+      <div dir="ltr" className={`${showMainBody && 'bg-[#E0E4F5] md:bg-transparent bg-opacity-50 md:bg-opacity-[unset]'} md:w-9/12 h-[8%] w-full flex justify-between items-center px-5 md:px-0 py-5`}>
           <FooterSocialIcons />
           <BrandAndLogo />
       </div>

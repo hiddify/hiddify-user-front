@@ -6,6 +6,7 @@ import DialogContent from '@mui/material/DialogContent';
 import IconButton from '@mui/material/IconButton';
 import CloseIcon from '@mui/icons-material/Close';
 import { Text } from '../Text';
+import { useTranslation } from 'react-i18next';
 
 
 type propsTypes = {
@@ -31,6 +32,7 @@ const BootstrapDialog = styled(Dialog)(({ theme }) => ({
   
 
 const Modal: React.FC<propsTypes> = ({ isModalOpen, closeModal, title, children }) => {
+  const { t, i18n: {language}} = useTranslation();
 
   return (
     <BootstrapDialog
@@ -46,7 +48,8 @@ const Modal: React.FC<propsTypes> = ({ isModalOpen, closeModal, title, children 
             onClick={closeModal}
             sx={{
                 position: 'absolute',
-                right: 8,
+                right: language === 'fa' ? 'unset' : 8,
+                left: language === 'fa' ? 8 : 'unset',
                 top: 12,
                 color: '#212529',
             }}

@@ -24,7 +24,7 @@ function Row(props) {
   const { row } = props;
   const [open, setOpen] = React.useState(false);
 
-  const { t } = useTranslation();
+  const { t, i18n: {language} } = useTranslation();
 
   const TeleLinkInput = styled(TextField)({
     '& .MuiInput-underline:after': {
@@ -67,14 +67,14 @@ function Row(props) {
 
   return (
     <React.Fragment>
-      <TableRow sx={{ '& > *': { borderBottom: 'unset', cursor: 'pointer' } }} onClick={() => setOpen(!open)}>
-        <TableCell align="left" sx={{ maxWidth: 200 }}>
+      <TableRow sx={{ '& > *': { cursor: 'pointer' } }} onClick={() => setOpen(!open)}>
+        <TableCell align={language === "fa" ? 'right' : 'left'} sx={{ maxWidth: 200 }}>
             <Text fontSize='sm' fontWeight='regular' className='whitespace-nowrap' lineClamp='1'>{row?.title ? row?.title : ''}</Text>
         </TableCell>
-        <TableCell align="left" sx={{ maxWidth: 200 }}>
+        <TableCell align={language === "fa" ? 'right' : 'left'} sx={{ maxWidth: 200 }}>
             <Text fontSize='sm' fontWeight='regular' tooltip={row?.link ? row?.link : ''} className='text-[#6C757D] line-clamp-1'>{row?.link ? row?.link : ''}</Text>
         </TableCell>
-        <TableCell align="right">
+        <TableCell align={language === "fa" ? 'left' : 'right'}>
           <IconButton
             aria-label="expand row"
             size="small"
@@ -107,7 +107,7 @@ function Row(props) {
                   }}
               />
               <div className='flex justify-end md:items-center md:justify-center'>
-                <OpenTeleBtn onClick={openTele}>
+                <OpenTeleBtn style={{ textTransform: 'none' }} onClick={openTele}>
                     <Text fontSize='sm' fontWeight='regular' className='text-white whitespace-nowrap'>{t('Open Telegram')}</Text>
                 </OpenTeleBtn>
               </div>
@@ -121,7 +121,7 @@ function Row(props) {
 
   
 const TeleProxy = () => {
-    const { t } = useTranslation();
+    const { t, i18n: {language} } = useTranslation();
 
     const getTeleProxies = useAPI(
         'mtproxies/',
@@ -131,7 +131,7 @@ const TeleProxy = () => {
     
       
   return (
-    <div className='w-full h-full pt-20 px-5 md:p-0 flex flex-col'>
+    <div className='w-full h-[84%] px-5 flex flex-col'>
         <div className='pb-3 pt-5 flex items-start justify-start flex-col gap-5'>
             <Text fontSize='lg' fontWeight='medium'>
               {t('Telegram proxy')}
@@ -147,13 +147,13 @@ const TeleProxy = () => {
                     <>
                         <TableHead>
                             <TableRow>
-                                <TableCell align="left">
+                                <TableCell align={language === "fa" ? 'right' : 'left'}>
                                     <Text fontSize='base' fontWeight='medium' className='whitespace-nowrap' lineClamp='1'>{t('Name')}</Text>
                                 </TableCell>
-                                <TableCell align="left">
+                                <TableCell align={language === "fa" ? 'right' : 'left'}>
                                     <Text fontSize='base' fontWeight='medium' className='whitespace-nowrap' lineClamp='1'>{t('Domain')}</Text>
                                 </TableCell>
-                                <TableCell align="right"></TableCell>
+                                <TableCell align={language === "fa" ? 'left' : 'right'}></TableCell>
                             </TableRow>
                         </TableHead>
                         <TableBody>

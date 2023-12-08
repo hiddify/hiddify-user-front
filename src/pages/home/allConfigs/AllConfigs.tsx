@@ -22,7 +22,7 @@ const AllConfigs = () => {
     const [configs, setConfigs] = useState<any>([])
     const [search, setSearch] = useState<string | undefined>()
 
-    const { t } = useTranslation();
+    const { t, i18n: { language } } = useTranslation();
 
     const getConfigs = useAPI(
         'all-configs/',
@@ -77,25 +77,25 @@ const AllConfigs = () => {
     
       
   return (
-    <div className='w-full h-full pt-20 px-5 md:p-0'>
+    <div className='w-full h-full px-5'>
         <TableHeader search={search} setSearch={setSearch} configsCount={configs.length} />
-        <div className='w-full h-[calc(100vh-290px)] sm:h-[calc(100vh-230px)] md:h-[calc(100vh-230px)] overflow-auto'>
+        <div className='w-full h-[84%] overflow-auto'>
             <TableContainer component={Paper}>
                 <Table stickyHeader aria-label="sticky table">
                     {getConfigs.data ? 
                     <>
                         <TableHead>
                             <TableRow>
-                                <TableCell align="left">
+                                <TableCell align={language === "fa" ? 'right' : 'left'}>
                                     <Text fontSize='base' fontWeight='medium' className='whitespace-nowrap' lineClamp='1'>{t('Name')}</Text>
                                 </TableCell>
-                                <TableCell align="left">
+                                <TableCell align={language === "fa" ? 'right' : 'left'}>
                                     <Text fontSize='base' fontWeight='medium' className='whitespace-nowrap' lineClamp='1'>{t('Domain')}</Text>
                                 </TableCell>
-                                <TableCell align="left">
+                                <TableCell align={language === "fa" ? 'right' : 'left'}>
                                     <Text fontSize='base' fontWeight='medium' className='whitespace-nowrap' lineClamp='1'>{t('Tags')}</Text>
                                 </TableCell>
-                                <TableCell align="left"></TableCell>
+                                <TableCell align={language === "fa" ? 'right' : 'left'}></TableCell>
                             </TableRow>
                         </TableHead>
                         <TableBody style={{ maxHeight: "50%"}}>
@@ -105,13 +105,13 @@ const AllConfigs = () => {
                                     onClick={() => {setConfig({link: row?.link || '', domain: row?.domain || ''}); setShowConfigModal(true)}}
                                     sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
                                 >
-                                    <TableCell align="left">
+                                    <TableCell align={language === "fa" ? 'right' : 'left'}>
                                         <Text fontSize='sm' fontWeight='regular' className='whitespace-nowrap' lineClamp='1'>{row?.name}</Text>
                                     </TableCell>
-                                    <TableCell align="left">
+                                    <TableCell align={language === "fa" ? 'right' : 'left'}>
                                         <Text fontSize='sm' fontWeight='regular' lineClamp='1' className='whitespace-nowrap text-[#6C757D]'>{row?.domain}</Text>
                                     </TableCell>
-                                    <TableCell align="left">
+                                    <TableCell align={language === "fa" ? 'right' : 'left'}>
                                         <div className='flex items-center gap-2'>
                                             {(row?.protocol &&  row?.protocol != '') && 
                                                 <div className='border border-solid border-blue-500 px-2 py-1 rounded-md w-fit h-fit'>
@@ -143,9 +143,9 @@ const AllConfigs = () => {
                                             }
                                         </div>
                                     </TableCell>
-                                    <TableCell align="left">
+                                    <TableCell align={language === "fa" ? 'right' : 'left'}>
                                         <div className='flex items-center justify-center gap-5'>
-                                            <GetLinkBtn onClick={() => {setConfig({link: row?.link || '', domain: row?.domain || ''}); setShowConfigModal(true)}}>
+                                            <GetLinkBtn style={{ textTransform: 'none'}} onClick={() => {setConfig({link: row?.link || '', domain: row?.domain || ''}); setShowConfigModal(true)}}>
                                                 <Text fontSize='sm' fontWeight='regular' className='text-white whitespace-nowrap'>{t('Get Link')}</Text>
                                             </GetLinkBtn>
                                         </div>  

@@ -11,8 +11,8 @@ body {
 
 #profile-qr-code {
   display: block; /* Make sure canvas is a block element */
-  width: calc(100vh - 500px) !important; /* Set canvas width to 100% of its container */
-  height: calc(100vh - 500px) !important; /* Allow the height to adjust proportionally */
+  width: calc(100vh - 470px) !important; /* Set canvas width to 100% of its container */
+  height: calc(100vh - 470px) !important; /* Allow the height to adjust proportionally */
 
   max-width: 214px;
   max-height: 214px;
@@ -29,4 +29,8 @@ body {
   max-height: 168px;
   min-width: 100px;
   min-height: 100px;
+}
+
+.rtl {
+  direction: rtl;
 }

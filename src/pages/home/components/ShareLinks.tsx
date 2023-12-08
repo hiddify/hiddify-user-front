@@ -22,13 +22,13 @@ const ShareLinks: React.FC<propsTypes> = ({ isModalOpen }) => {
   const { t } = useTranslation();
   const getShortLink = useAPI(
     'short/',
-    'GET',
+    'get',
     { reactQueryOptions: { enabled: true } }
   );
 
   const getInfo = useAPI(
     'me/',
-    'GET',
+    'get',
     { reactQueryOptions: { enabled: true } }
   );
 
@@ -57,14 +57,7 @@ const ShareLinks: React.FC<propsTypes> = ({ isModalOpen }) => {
 
 
   const renderer = ({ minutes, seconds, completed }) => {
-    if (completed) {
-      getShortLink.refetch()
-      // Render a completed state
-      return <span>{minutes}:{seconds}</span>;
-    } else {
-      // Render a countdown
-      return <span>{minutes}:{seconds}</span>;
-    }
+      return <span>{minutes < 10 ? `0${minutes}` : minutes}:{seconds < 10 ? `0${seconds}` : seconds}</span>;
   };
   
 
@@ -73,6 +66,7 @@ const ShareLinks: React.FC<propsTypes> = ({ isModalOpen }) => {
         <PanelLinkInput 
             id="custom-css-outlined-input" 
             className='w-full'
+            size="small"
             defaultValue={getInfo.data?.profile_url ? getInfo.data?.profile_url : ''}
             disabled
             InputProps={{
@@ -125,6 +119,7 @@ const ShareLinks: React.FC<propsTypes> = ({ isModalOpen }) => {
             <PanelLinkInput 
                 id="custom-css-outlined-input" 
                 className='w-full'
+                size="small"
                 disabled
                 defaultValue={getShortLink.data?.full_url ? getShortLink.data?.full_url : ''}
                 InputProps={{
@@ -136,7 +131,12 @@ const ShareLinks: React.FC<propsTypes> = ({ isModalOpen }) => {
                                 :
                                 <>
                                   <Text fontSize='xs' fontWeight='regular' className='text-[#6C757D]'>
-                                      <Countdown renderer={renderer} date={new Date().setSeconds(new Date().getSeconds() + getShortLink.data?.expire_in ? getShortLink.data?.expire_in : (5 * 60) )} />
+                                      <Countdown 
+                                        onComplete={() => getShortLink.refetch()}
+                                        zeroPadTime={2} 
+                                        renderer={renderer} 
+                                        date={new Date().setSeconds(new Date().getSeconds() + getShortLink.data?.expire_in )} 
+                                      />
                                   </Text>
                                   <AvTimerIcon />
                                 </>

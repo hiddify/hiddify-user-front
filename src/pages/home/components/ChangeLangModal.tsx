@@ -48,7 +48,9 @@ const ChangeLangModal = () => {
 
   return (
     <div className='w-full flex flex-col gap-4 md:w-[400px]'>
-        <Text fontSize='base' fontWeight='regular' className='text-[#495057]'>Choose your preferred language:</Text>
+        <Text fontSize='base' fontWeight='regular' className='text-[#495057]'>
+            {t('Choose your preferred language:')}
+        </Text>
         <div className='w-full'>
             <FormControl fullWidth>
                 <Select
@@ -73,6 +75,7 @@ const ChangeLangModal = () => {
                 loadingPosition="start"
                 startIcon={patchLang.isLoading && <SaveIcon />}
                 style={{
+                    textTransform: 'none',
                     color: 'white',
                     backgroundColor: '#455FE9',
                     border: '1px solid #455FE9',
