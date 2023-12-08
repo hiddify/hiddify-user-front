@@ -62,6 +62,26 @@ const AppModal = ({ profileUrl }) => {
         minWidth: "170px"
     }));
 
+    useEffect(() => {
+        const element1 = document.getElementById('appComponent')
+        const element2 = document.getElementById('appsComponent')
+        if(app){
+            if(element1){
+                element1.classList.add('morph-in')
+            }
+            if(element2){
+                element2.classList.remove('morph-in')
+            }
+        }else{
+            if(element2){
+                element2.classList.add('morph-in')
+            }
+            if(element1){
+                element1.classList.remove('morph-in')
+            }
+        }   
+    }, [app])
+
     const determineDownloadSource = (iconType: string) => {
         switch (iconType) {
             case iconType = icon.APK:
@@ -118,9 +138,8 @@ const AppModal = ({ profileUrl }) => {
 
 
   return (
-    <div className='max-w-[400px]'>
-        {app ? 
-            <div className={`${app && 'fade-in'} flex flex-col gap-6`}>
+    <div className={`max-w-[400px]`}>
+            <div id='appComponent' className={`${app ? 'flex morph-in' : 'hidden'} flex-col gap-6`}>
                 <div onClick={() => setApp(null)} className='bg-[#FBFBFB] rounded-2xl py-3 px-2 cursor-pointer'>
                     <div className='flex gap-2'>
                         <div className='flex items-center justify-center p-2'>
@@ -129,12 +148,12 @@ const AppModal = ({ profileUrl }) => {
                         <div className='bg-[#F2F4FB] w-[50px] h-[50px] p-2 rounded-lg flex items-center justify-center'>
                             <CardMedia
                                 sx={{ height: '100%', width: '100%' }}
-                                image={app?.icon_url ? app?.icon_url : ''}
+                                image={app && app?.icon_url ? app?.icon_url : ''}
                                 title="App Logo"
                             />
                         </div>
                         <div className='flex items-center justify-center'>
-                            <Text fontSize='base' fontWeight='regular' className='text-[#495057] line-clamp-1'>{app.title ? app.title : ''}</Text>
+                            <Text fontSize='base' fontWeight='regular' className='text-[#495057] line-clamp-1'>{app && app.title ? app.title : ''}</Text>
                         </div>
                     </div> 
                 </div>
@@ -146,7 +165,7 @@ const AppModal = ({ profileUrl }) => {
                         </Text>
                     </div>
                     <div dir="rtl" className='grid grid-cols-2 gap-1 md:gap-4 px-0 md:px-10'>
-                        {app?.install && app?.install?.length ? app?.install.map(item => (
+                        {app && app?.install && app?.install?.length ? app?.install.map(item => (
                             <div dir={language === 'fa' ? 'rtl' : "ltr"} onClick={() => downloadApp(item?.url ? item?.url : '')} className='w-full bg-black rounded-md flex items-center gap-2 py-1 px-2 cursor-pointer'>
                                 <div className='bg-transparent w-4 h-4 md:w-6 md:h-6 flex items-center justify-center overflow-visible'>
                                     <CardMedia
@@ -171,18 +190,17 @@ const AppModal = ({ profileUrl }) => {
                         </Text>
                     </div>
                     <div className='w-full flex items-end justify-between'>
-                        <Text onClick={() => window.open(app.guide_url, "_blank")} fontSize='xs' fontWeight='medium' className='line-clamp-1 text-[#495057] underline underline-offset-4 cursor-pointer'>
-                            {app.guide_url ? t('View Youtube Tutorial...') : ''}
+                        <Text onClick={() => window.open(app && app.guide_url, "_blank")} fontSize='xs' fontWeight='medium' className='line-clamp-1 text-[#495057] underline underline-offset-4 cursor-pointer'>
+                            {app && app.guide_url ? t('View Youtube Tutorial...') : ''}
                         </Text>
-                        <CopyLinkButton style={{ textTransform: 'none'}} onClick={() => importApp(app.deeplink ? app.deeplink : undefined)}>
-                            <Text className='text-[#455FE9] mr-2'>{app.deeplink ? t('Import To App') : t('Copy Link')}</Text>
-                            {app.deeplink ? null : <ContentCopyIcon />}
+                        <CopyLinkButton style={{ textTransform: 'none'}} onClick={() => importApp(app && app.deeplink ? app.deeplink : undefined)}>
+                            <Text className='text-[#455FE9] mr-2'>{app && app.deeplink ? t('Import To App') : t('Copy Link')}</Text>
+                            {app && app.deeplink ? null : <ContentCopyIcon />}
                         </CopyLinkButton>
                     </div>
                 </div>
             </div>
-        :
-            <div className={`${app === null && 'fade-in'} flex flex-col gap-6`}>
+            <div id='appsComponent' className={`${app === null ? 'flex morph-in' : !app ? 'flex' : 'hidden'} flex-col gap-6`}>
                 <div>
                     <Text fontSize='base' fontWeight='regular' className='text-[#495057]'>{t('Choose one of the apps below:')}</Text>
                 </div>
@@ -246,7 +264,6 @@ const AppModal = ({ profileUrl }) => {
                     </CopyLinkButton>
                 </div>
             </div>
-        }
     </div>
   )
 }

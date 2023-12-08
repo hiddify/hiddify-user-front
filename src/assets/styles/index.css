@@ -1,6 +1,3 @@
-@import url('https://fonts.googleapis.com/css2?family=Noto+Naskh+Arabic&display=swap');
-
-
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -14,9 +11,8 @@ body {
   padding: 0;
 }
 
-
 .fa-font {
-  font-family: 'Noto Naskh Arabic', serif;
+  font-family: Vazirmatn, sans-serif;
 }
 
 #profile-qr-code {

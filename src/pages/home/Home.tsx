@@ -41,7 +41,7 @@ const Home = () => {
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [getInfo.data])
 
-  const isMobile = useMediaQuery('(max-width: 768px)');
+  const isMobile = useMediaQuery('(max-width: 767px)');
 
   useEffect(() => {
     if (isMobile){
@@ -52,7 +52,7 @@ const Home = () => {
       window.addEventListener('resize', documentHeight)
       documentHeight()
     }
-  }, [])
+  }, [isMobile])
 
 
   return getInfo.isLoading ? (<PreLoading />) : (
@@ -65,12 +65,12 @@ const Home = () => {
         showTeleProxy={showTeleProxy}
         showMainBody={showMainBody}
       />
-      <div className="w-full md:w-11/12 lg:w-9/12 xl:w-7/12 h-[84%]">
+      <div className="w-full md:w-8/12 md:min-w-[650px] h-[84%]">
         {showAllConfigs && <AllConfigs />}
         {showMainBody && <MainBody />}
         {showTeleProxy && <TeleProxy />}
       </div>
-      <div dir="ltr" className={`${showMainBody && 'bg-[#E0E4F5] md:bg-transparent bg-opacity-50 md:bg-opacity-[unset]'} md:w-11/12 lg:w-9/12 xl:w-7/12 h-[8%] w-full flex justify-between items-center px-5 md:px-0 py-5`}>
+      <div dir="ltr" className={`${showMainBody && 'bg-[#E0E4F5] md:bg-transparent bg-opacity-50 md:bg-opacity-[unset]'} md:w-8/12 md:min-w-[650px] h-[8%] w-full flex justify-between items-center px-5 md:px-0 py-5`}>
           <FooterSocialIcons />
           <BrandAndLogo />
       </div>

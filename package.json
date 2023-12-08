@@ -37,6 +37,7 @@
     "react-query": "^3.39.3",
     "react-router-dom": "^6.17.0",
     "sort-by": "^1.2.0",
+    "vazirmatn": "^33.0.3",
     "vite-plugin-svgr": "^4.1.0",
     "vite-tsconfig-paths": "^4.2.1"
   },

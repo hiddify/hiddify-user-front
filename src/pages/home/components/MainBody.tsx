@@ -18,7 +18,7 @@ const MainBody = () => {
   const [isAppModalOpen, setIsAppModalOpen] = useState(false)
   const { t } = useTranslation();
 
-  const isMobile = useMediaQuery('(max-width: 768px)');
+  const isMobile = useMediaQuery('(max-width: 767px)');
 
   const getInfo = useAPI(
     'me/',

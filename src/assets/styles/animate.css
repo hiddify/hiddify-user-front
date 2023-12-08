@@ -420,6 +420,37 @@
       opacity: 1;
     }
   }
-  
-  
+
+
+
+.morph-in {
+	-webkit-animation: morph-in 0.5s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
+	        animation: morph-in 0.5s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
+}
+
+/**
+ * ----------------------------------------
+ * animation slide-in-right
+ * ----------------------------------------
+ */
+ @-webkit-keyframes morph-in {
+  0% {
+    filter: blur(1em);
+    opacity: 0;
+  }
+  100% {
+    filter: blur(0px);
+    opacity: 1;
+  }
+}
+@keyframes morph-in {
+  0% {
+            filter: blur(1em);
+            opacity: 0;
+  }
+  100% {
+            filter: blur(0em);
+            opacity: 1;
+  }
+}
   
