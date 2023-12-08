@@ -2,7 +2,7 @@
     "Share Link": "لینک اشتراک",
     "Hiddify": "هیدیفای",
     "All configurations": "تمام کانفیگ ها",
-    "Telegram proxy": "پروکسی تلگرام",
+    "Telegram proxy": "پراکسی تلگرام",
     "DoH": "DoH",
     "Speed test": "تست سرعت",
     "Temporary Short Link": "پیوند کوتاه موقت",
@@ -57,5 +57,7 @@
     "Language Settings": "تنظیمات زبان",
     "Confirm": "تایید",
     "Farsi": "فارسی",
-    "Configs": "تنظیمات"
+    "Configs": "تنظیمات",
+    "Choose your preferred language:": "زبان مورد نظر خود را انتخاب کنید"
+
 }
