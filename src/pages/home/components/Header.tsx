@@ -8,7 +8,7 @@ import { Modal } from "../../../designSystem/Modal";
 import ShareLinks from "./ShareLinks";
 import DohContent from "./DohContent";
 import { useTranslation } from "react-i18next";
-import SettingsOutlinedIcon from '@mui/icons-material/SettingsOutlined';
+import TranslateIcon from '@mui/icons-material/Translate';
 import ChangeLangModal from "./ChangeLangModal";
 import { getCurrentUrl } from "../../../utils/getCurrentUrl";
 
@@ -75,13 +75,13 @@ const Header: FC<propsTypes> = (props) => {
         />
         <div onClick={showMainBodyFun} className="flex items-center gap-3 cursor-pointer">
           <CardMedia
-              sx={{ height: 24, width: 24, marginBottom: 1 }}
+              sx={{ height: 24, width: 24 }}
               image={HLogo}
               title="Hiddify Logo"
           />
           <Text 
             fontWeight="medium" 
-            fontSize="lg" 
+            fontSize="2xl" 
             className="text-[#455FE9]" 
           >
             {t('Hiddify')}
@@ -91,7 +91,7 @@ const Header: FC<propsTypes> = (props) => {
           <ShareIcon sx={{ color: '#292D32'}} />
         </Button>
       </div>
-      <div className="hidden w-full md:w-9/12 h-[8%] bg-transparent md:flex items-center justify-between py-3">
+      <div className="hidden w-full md:w-11/12 lg:w-9/12 xl:w-7/12 h-[8%] bg-transparent md:flex items-center justify-between py-3">
         <div className="w-fit flex items-center lg:gap-11 md:gap-5">
           <div onClick={showMainBodyFun} className="flex items-center gap-3 cursor-pointer">
             <CardMedia
@@ -148,7 +148,7 @@ const Header: FC<propsTypes> = (props) => {
           onClick={() => setChangeLangModal(true)}
         >
           <Tooltip title="Change language" >
-            <SettingsOutlinedIcon sx={{ color: '#495057'}} />
+            <TranslateIcon sx={{ color: '#495057'}} />
           </Tooltip>
         </Button>
       </div>

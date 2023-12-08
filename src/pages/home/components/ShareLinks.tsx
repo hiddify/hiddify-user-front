@@ -57,7 +57,7 @@ const ShareLinks: React.FC<propsTypes> = ({ isModalOpen }) => {
 
 
   const renderer = ({ minutes, seconds, completed }) => {
-      return <span>{minutes < 10 ? `0${minutes}` : minutes}:{seconds < 10 ? `0${seconds}` : seconds}</span>;
+      return <span className='text-red-500'>{minutes < 10 ? `0${minutes}` : minutes}:{seconds < 10 ? `0${seconds}` : seconds}</span>;
   };
   
 

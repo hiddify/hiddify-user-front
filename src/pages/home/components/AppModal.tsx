@@ -120,7 +120,7 @@ const AppModal = ({ profileUrl }) => {
   return (
     <div className='max-w-[400px]'>
         {app ? 
-            <div className={`${app && 'slide-in-right'} flex flex-col gap-6`}>
+            <div className={`${app && 'fade-in'} flex flex-col gap-6`}>
                 <div onClick={() => setApp(null)} className='bg-[#FBFBFB] rounded-2xl py-3 px-2 cursor-pointer'>
                     <div className='flex gap-2'>
                         <div className='flex items-center justify-center p-2'>
@@ -182,7 +182,7 @@ const AppModal = ({ profileUrl }) => {
                 </div>
             </div>
         :
-            <div className={`${app === null && 'slide-in-left'} flex flex-col gap-6`}>
+            <div className={`${app === null && 'fade-in'} flex flex-col gap-6`}>
                 <div>
                     <Text fontSize='base' fontWeight='regular' className='text-[#495057]'>{t('Choose one of the apps below:')}</Text>
                 </div>
@@ -206,7 +206,7 @@ const AppModal = ({ profileUrl }) => {
                                         <div className='w-full flex items-center justify-between'>
                                             <div className='flex flex-col'>
                                                 <Text fontSize='base' fontWeight='regular' className='text-[#495057]'>{item.title ? item.title : ''}</Text>
-                                                <Text fontSize='sm' fontWeight='normal' className='text-[#212529]'>{index === 0 ? t('*Recommended') : '' }</Text>
+                                                <Text fontSize='sm' fontWeight='normal' className='text-[#212529]'>{item.title === "Streisand" || item.title === 'Hiddify Next' ? t('*Recommended') : '' }</Text>
                                             </div>
                                             {language === 'fa' ? <ArrowBackIosIcon /> : <ArrowForwardIosIcon />}
                                         </div>

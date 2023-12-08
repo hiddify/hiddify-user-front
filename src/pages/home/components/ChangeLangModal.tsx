@@ -59,11 +59,11 @@ const ChangeLangModal = () => {
                     className='w-full'
                     onChange={handleChange}
                 >
-                    <MenuItem value={'en'}>{t('English')}</MenuItem>
-                    <MenuItem value={'fa'}>{t('Farsi')}</MenuItem>
-                    <MenuItem value={'zh'}>{t('Chinese')}</MenuItem>
-                    <MenuItem value={'ru'}>{t('Russian')}</MenuItem>
-                    <MenuItem value={'pt'}>{t('Portuguese')}</MenuItem>
+                    <MenuItem value={'en'}>{'🇬🇧 ' + t('English')}</MenuItem>
+                    <MenuItem value={'fa'}>{'🇮🇷 ' + t('Farsi')}</MenuItem>
+                    <MenuItem value={'zh'}>{'🇨🇳 ' + t('Chinese')}</MenuItem>
+                    <MenuItem value={'ru'}>{'🇷🇺 ' + t('Russian')}</MenuItem>
+                    <MenuItem value={'pt'}>{'🇵🇹 ' + t('Portuguese')}</MenuItem>
                 </Select>
             </FormControl>
         </div>

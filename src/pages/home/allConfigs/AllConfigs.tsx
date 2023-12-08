@@ -79,7 +79,7 @@ const AllConfigs = () => {
   return (
     <div className='w-full h-full px-5'>
         <TableHeader search={search} setSearch={setSearch} configsCount={configs.length} />
-        <div className='w-full h-[84%] overflow-auto'>
+        <div className='w-full h-[calc(100vh-290px)] sm:h-[calc(100vh-230px)] md:h-[calc(100vh-230px)] overflow-auto'>
             <TableContainer component={Paper}>
                 <Table stickyHeader aria-label="sticky table">
                     {getConfigs.data ? 

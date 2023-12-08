@@ -9,7 +9,7 @@ import DnsIcon from '@mui/icons-material/Dns';
 import TelegramIcon from '@mui/icons-material/Telegram';
 import SpeedIcon from '@mui/icons-material/Speed';
 import { useTranslation } from 'react-i18next';
-import SettingsOutlinedIcon from '@mui/icons-material/SettingsOutlined';
+import TranslateIcon from '@mui/icons-material/Translate';
 import HomeIcon from '@mui/icons-material/Home';
 
 
@@ -140,7 +140,7 @@ const MenuDropdown: React.FC<propsTypes> = ({dohModal, showTeleProxy, showAllCon
           {t('Speed Test')}
         </MenuItem>
         <MenuItem onClick={() => { setChangeLangModal(true); handleClose();}} disableRipple>
-          <SettingsOutlinedIcon />
+          <TranslateIcon />
           {t('Language Settings')}
         </MenuItem>
       </StyledMenu>

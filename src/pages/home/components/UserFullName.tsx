@@ -11,7 +11,7 @@ const UserFullName = ({ fullName }) => {
             <AccountCircleOutlinedIcon sx={{ color: '#495057'}} />
         </div>
         <Text className="text-[#212529]" fontSize="sm" fontWeight="regular">
-            {t('Welcome')}, {fullName ?? ''}
+            {t('Welcome')}, <b>{fullName ?? ''}</b>
         </Text>
     </div>
   )

@@ -8,6 +8,7 @@ import { TeleProxy } from "./teleProxy"
 import useAPI from "../../hooks/useAPI"
 import PreLoading from "./components/PreLoading"
 import { useTranslation } from "react-i18next"
+import useMediaQuery from "../../hooks/useMediaQuery"
 
 
 const Home = () => {
@@ -26,8 +27,10 @@ const Home = () => {
   useEffect(() => {
     if (language === 'fa') {
       document.body.classList.add('rtl');
+      document.body.classList.add('fa-font');
     } else {
       document.body.classList.remove('rtl');
+      document.body.classList.remove('fa-font');
     }
   }, [language])
 
@@ -38,8 +41,22 @@ const Home = () => {
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [getInfo.data])
 
+  const isMobile = useMediaQuery('(max-width: 768px)');
+
+  useEffect(() => {
+    if (isMobile){
+      const documentHeight = () => {
+        const doc = document.documentElement
+        doc.style.setProperty('--doc-height', `${window.innerHeight}px`)
+        }
+      window.addEventListener('resize', documentHeight)
+      documentHeight()
+    }
+  }, [])
+
+
   return getInfo.isLoading ? (<PreLoading />) : (
-    <div className={`bg-[#F4F4F9] w-[100vw] h-[100vh] overflow-hidden m-0 p-0 md:flex flex-col md:justify-center md:items-center`}>
+    <div id="page" className={`bg-[#F4F4F9] w-full md:h-screen h-[var(--doc-height)] overflow-hidden md:overflow-hidden m-0 p-0 md:flex flex-col md:justify-center md:items-center`}>
       <Header 
         setShowAllConfigs={setShowAllConfigs}
         setShowTeleProxy={setShowTeleProxy}
@@ -48,12 +65,12 @@ const Home = () => {
         showTeleProxy={showTeleProxy}
         showMainBody={showMainBody}
       />
-      <div className="w-full md:w-9/12 h-[84%]">
+      <div className="w-full md:w-11/12 lg:w-9/12 xl:w-7/12 h-[84%]">
         {showAllConfigs && <AllConfigs />}
         {showMainBody && <MainBody />}
         {showTeleProxy && <TeleProxy />}
       </div>
-      <div dir="ltr" className={`${showMainBody && 'bg-[#E0E4F5] md:bg-transparent bg-opacity-50 md:bg-opacity-[unset]'} md:w-9/12 h-[8%] w-full flex justify-between items-center px-5 md:px-0 py-5`}>
+      <div dir="ltr" className={`${showMainBody && 'bg-[#E0E4F5] md:bg-transparent bg-opacity-50 md:bg-opacity-[unset]'} md:w-11/12 lg:w-9/12 xl:w-7/12 h-[8%] w-full flex justify-between items-center px-5 md:px-0 py-5`}>
           <FooterSocialIcons />
           <BrandAndLogo />
       </div>

@@ -13,7 +13,7 @@ const TableHeader = ({ setSearch, search, configsCount }) => {
             {t('All Configurations')} {`(${configsCount})`}
         </Text>
         <div className='flex items-center gap-3 w-full sm:max-w-[240px]'>
-            <FilterAltOutlinedIcon fontSize='large' className='text-[#ADB5BD]' />
+            <FilterAltOutlinedIcon fontSize='large' className='text-[#ADB5BD] mx-2' />
             <div className='w-full border border-solid border-[#ADB5BD] rounded-full px-3 pb-1 pt-1.5 flex items-center justify-center'>
                 <TextField
                     size="small"

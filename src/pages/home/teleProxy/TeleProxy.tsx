@@ -16,6 +16,9 @@ import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
 import ContentCopyIcon from '@mui/icons-material/ContentCopy';
 import copy from 'clipboard-copy';
 import { useTranslation } from 'react-i18next';
+import { QRCode } from 'react-qrcode-logo';
+import Hlogo from "@assets/images/hiddify-logo-gray-bg-white.png"
+
 
 
 
@@ -87,6 +90,26 @@ function Row(props) {
       <TableRow>
         <TableCell style={{ paddingBottom: 0, paddingTop: 0 }} colSpan={6}>
           <Collapse in={open} timeout="auto" unmountOnExit>
+            <div className="scale-in-center flex justify-center items-center px-5 pt-5">
+                <QRCode
+                  size={100}
+                  value={row?.link ? row?.link : ''}
+                  bgColor='transparent'
+                  fgColor='#495057'
+                  ecLevel='M'
+                  logoImage={Hlogo}
+                  logoWidth={35}
+                  logoHeight={35}
+                  logoOpacity={1}
+                  qrStyle="dots"
+                  eyeRadius={5}
+                  eyeColor="#495057"
+                  logoPadding={10}
+                  logoPaddingStyle="square"
+                  quietZone={0}
+                  removeQrCodeBehindLogo
+                />
+              </div>
             <div className="flex flex-col md:flex-row gap-5 p-2 md:p-5">
               <TeleLinkInput 
                   id="custom-css-outlined-input" 
