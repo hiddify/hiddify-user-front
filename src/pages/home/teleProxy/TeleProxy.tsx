@@ -71,13 +71,13 @@ function Row(props) {
   return (
     <React.Fragment>
       <TableRow sx={{ '& > *': { cursor: 'pointer' } }} onClick={() => setOpen(!open)}>
-        <TableCell align={language === "fa" ? 'right' : 'left'} sx={{ maxWidth: 200 }}>
+        <TableCell style={{ fontFamily: "Vazirmatn, sans-serif" }} align={language === "fa" ? 'right' : 'left'} sx={{ maxWidth: 200 }}>
             <Text fontSize='sm' fontWeight='regular' className='whitespace-nowrap' lineClamp='1'>{row?.title ? row?.title : ''}</Text>
         </TableCell>
-        <TableCell align={language === "fa" ? 'right' : 'left'} sx={{ maxWidth: 200 }}>
+        <TableCell style={{ fontFamily: "Vazirmatn, sans-serif" }} align={language === "fa" ? 'right' : 'left'} sx={{ maxWidth: 200 }}>
             <Text fontSize='sm' fontWeight='regular' tooltip={row?.link ? row?.link : ''} className='text-[#6C757D] line-clamp-1'>{row?.link ? row?.link : ''}</Text>
         </TableCell>
-        <TableCell align={language === "fa" ? 'left' : 'right'}>
+        <TableCell style={{ fontFamily: "Vazirmatn, sans-serif" }} align={language === "fa" ? 'left' : 'right'}>
           <IconButton
             aria-label="expand row"
             size="small"
@@ -130,7 +130,7 @@ function Row(props) {
                   }}
               />
               <div className='flex justify-end md:items-center md:justify-center'>
-                <OpenTeleBtn style={{ textTransform: 'none' }} onClick={openTele}>
+                <OpenTeleBtn style={{ textTransform: 'none', fontFamily: "Vazirmatn, sans-serif" }} onClick={openTele}>
                     <Text fontSize='sm' fontWeight='regular' className='text-white whitespace-nowrap'>{t('Open Telegram')}</Text>
                 </OpenTeleBtn>
               </div>

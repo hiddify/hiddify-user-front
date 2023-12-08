@@ -193,7 +193,7 @@ const AppModal = ({ profileUrl }) => {
                         <Text onClick={() => window.open(app && app.guide_url, "_blank")} fontSize='xs' fontWeight='medium' className='line-clamp-1 text-[#495057] underline underline-offset-4 cursor-pointer'>
                             {app && app.guide_url ? t('View Youtube Tutorial...') : ''}
                         </Text>
-                        <CopyLinkButton style={{ textTransform: 'none'}} onClick={() => importApp(app && app.deeplink ? app.deeplink : undefined)}>
+                        <CopyLinkButton style={{ textTransform: 'none', fontFamily: "Vazirmatn, sans-serif"}} onClick={() => importApp(app && app.deeplink ? app.deeplink : undefined)}>
                             <Text className='text-[#455FE9] mr-2'>{app && app.deeplink ? t('Import To App') : t('Copy Link')}</Text>
                             {app && app.deeplink ? null : <ContentCopyIcon />}
                         </CopyLinkButton>
@@ -258,7 +258,7 @@ const AppModal = ({ profileUrl }) => {
                     </Text>
                 </div>
                 <div className='w-full flex items-end justify-end'>
-                    <CopyLinkButton style={{ textTransform: 'none'}} onClick={() => copy(profileUrl)}>
+                    <CopyLinkButton style={{ textTransform: 'none', fontFamily: "Vazirmatn, sans-serif"}} onClick={() => copy(profileUrl)}>
                         <Text className='text-[#455FE9] mr-2'>{t('Copy Link')}</Text>
                         <ContentCopyIcon />
                     </CopyLinkButton>

@@ -54,16 +54,17 @@ const ChangeLangModal = () => {
         <div className='w-full'>
             <FormControl fullWidth>
                 <Select
+                    style={{ fontFamily: "Vazirmatn, sans-serif" }}
                     id="demo-simple-select"
                     value={lang}
                     className='w-full'
                     onChange={handleChange}
                 >
-                    <MenuItem value={'en'}>{'🇬🇧 ' + t('English')}</MenuItem>
-                    <MenuItem value={'fa'}>{'🇮🇷 ' + t('Farsi')}</MenuItem>
-                    <MenuItem value={'zh'}>{'🇨🇳 ' + t('Chinese')}</MenuItem>
-                    <MenuItem value={'ru'}>{'🇷🇺 ' + t('Russian')}</MenuItem>
-                    <MenuItem value={'pt'}>{'🇵🇹 ' + t('Portuguese')}</MenuItem>
+                    <MenuItem style={{ fontFamily: "Vazirmatn, sans-serif" }} value={'en'}>{'🇬🇧 ' + t('English')}</MenuItem>
+                    <MenuItem style={{ fontFamily: "Vazirmatn, sans-serif" }} value={'fa'}>{'🇮🇷 ' + t('Farsi')}</MenuItem>
+                    <MenuItem style={{ fontFamily: "Vazirmatn, sans-serif" }} value={'zh'}>{'🇨🇳 ' + t('Chinese')}</MenuItem>
+                    <MenuItem style={{ fontFamily: "Vazirmatn, sans-serif" }} value={'ru'}>{'🇷🇺 ' + t('Russian')}</MenuItem>
+                    <MenuItem style={{ fontFamily: "Vazirmatn, sans-serif" }} value={'pt'}>{'🇵🇹 ' + t('Portuguese')}</MenuItem>
                 </Select>
             </FormControl>
         </div>
@@ -76,6 +77,7 @@ const ChangeLangModal = () => {
                 startIcon={patchLang.isLoading && <SaveIcon />}
                 style={{
                     textTransform: 'none',
+                    fontFamily: "Vazirmatn, sans-serif",
                     color: 'white',
                     backgroundColor: '#455FE9',
                     border: '1px solid #455FE9',

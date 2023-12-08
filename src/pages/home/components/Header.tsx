@@ -64,7 +64,7 @@ const Header: FC<propsTypes> = (props) => {
 
   return (
     <>
-      <div className={`md:hidden ${showMainBody && 'bg-[#E0E4F5] bg-opacity-50'} w-full h-[8%] flex items-center justify-between px-5 py-3`}>
+      <div className={`md:hidden ${showMainBody && 'bg-[#E0E4F5] bg-opacity-50'} w-full h-[10%] flex items-center justify-between px-5 py-3`}>
         <MenuDropdown 
           dohModal={setDohModal} 
           setChangeLangModal={setChangeLangModal}
@@ -91,7 +91,7 @@ const Header: FC<propsTypes> = (props) => {
           <ShareIcon sx={{ color: '#292D32'}} />
         </Button>
       </div>
-      <div className="hidden w-full md:w-8/12 md:min-w-[650px] h-[8%] bg-transparent md:flex items-center justify-between py-3">
+      <div className="hidden w-full md:w-8/12 md:min-w-[650px] h-[10%] bg-transparent md:flex items-center justify-between py-3">
         <div className="w-fit flex items-center lg:gap-8 xl:gap-11 md:gap-5">
           <div onClick={showMainBodyFun} className="flex items-center gap-3 cursor-pointer">
             <CardMedia
@@ -99,7 +99,7 @@ const Header: FC<propsTypes> = (props) => {
                 image={HLogo}
                 title="Hiddify Logo"
             />
-            <Text fontWeight="semibold" fontSize="xl" className="hidden lg:block text-[#455FE9]" >{t('Hiddify')}</Text>
+            <Text fontWeight="semibold" fontSize="lg" className="hidden lg:block text-[#455FE9]" >{t('Hiddify')}</Text>
           </div>
           <Text 
             onClick={showMainBodyFun} 
@@ -112,7 +112,7 @@ const Header: FC<propsTypes> = (props) => {
           <Text 
             onClick={showAllConfigsFun} 
             fontWeight="semibold" 
-            fontSize="xl" 
+            fontSize="lg" 
             className={`text-[#495057] cursor-pointer ${showAllConfigs && 'underline decoration-[#455FE9] decoration-solid decoration-[2px] underline-offset-8'}`}
           >
             {t('All Configs')}
@@ -120,7 +120,7 @@ const Header: FC<propsTypes> = (props) => {
           <Text 
             onClick={showTeleProxyFun} 
             fontWeight="semibold" 
-            fontSize="xl" 
+            fontSize="lg" 
             className={`text-[#495057] cursor-pointer ${showTeleProxy && 'underline decoration-[#455FE9] decoration-solid decoration-[2px] underline-offset-8'}`}
           >
             {t('Telegram proxy')}
@@ -128,14 +128,14 @@ const Header: FC<propsTypes> = (props) => {
           <Text 
             onClick={() => setDohModal(true)} 
             fontWeight="semibold" 
-            fontSize="xl" 
+            fontSize="lg" 
             className={`text-[#495057] cursor-pointer ${dohModal && 'underline decoration-[#455FE9] decoration-solid decoration-[2px] underline-offset-8'}`}
           >
             {t('DoH')}
           </Text>
           <Text 
             fontWeight="semibold" 
-            fontSize="xl" 
+            fontSize="lg" 
             className={`text-[#495057] cursor-pointer`}
             onClick={handleGoToSpeedTest}
           >

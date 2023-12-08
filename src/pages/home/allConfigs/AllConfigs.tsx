@@ -86,13 +86,13 @@ const AllConfigs = () => {
                     <>
                         <TableHead>
                             <TableRow>
-                                <TableCell align={language === "fa" ? 'right' : 'left'}>
+                                <TableCell style={{ fontFamily: "Vazirmatn, sans-serif" }} align={language === "fa" ? 'right' : 'left'}>
                                     <Text fontSize='base' fontWeight='medium' className='whitespace-nowrap' lineClamp='1'>{t('Name')}</Text>
                                 </TableCell>
-                                <TableCell align={language === "fa" ? 'right' : 'left'}>
+                                <TableCell style={{ fontFamily: "Vazirmatn, sans-serif" }} align={language === "fa" ? 'right' : 'left'}>
                                     <Text fontSize='base' fontWeight='medium' className='whitespace-nowrap' lineClamp='1'>{t('Domain')}</Text>
                                 </TableCell>
-                                <TableCell align={language === "fa" ? 'right' : 'left'}>
+                                <TableCell style={{ fontFamily: "Vazirmatn, sans-serif" }} align={language === "fa" ? 'right' : 'left'}>
                                     <Text fontSize='base' fontWeight='medium' className='whitespace-nowrap' lineClamp='1'>{t('Tags')}</Text>
                                 </TableCell>
                                 <TableCell align={language === "fa" ? 'right' : 'left'}></TableCell>
@@ -105,13 +105,13 @@ const AllConfigs = () => {
                                     onClick={() => {setConfig({link: row?.link || '', domain: row?.domain || ''}); setShowConfigModal(true)}}
                                     sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
                                 >
-                                    <TableCell align={language === "fa" ? 'right' : 'left'}>
+                                    <TableCell style={{ fontFamily: "Vazirmatn, sans-serif" }} align={language === "fa" ? 'right' : 'left'}>
                                         <Text fontSize='sm' fontWeight='regular' className='whitespace-nowrap' lineClamp='1'>{row?.name}</Text>
                                     </TableCell>
-                                    <TableCell align={language === "fa" ? 'right' : 'left'}>
+                                    <TableCell style={{ fontFamily: "Vazirmatn, sans-serif" }} align={language === "fa" ? 'right' : 'left'}>
                                         <Text fontSize='sm' fontWeight='regular' lineClamp='1' className='whitespace-nowrap text-[#6C757D]'>{row?.domain}</Text>
                                     </TableCell>
-                                    <TableCell align={language === "fa" ? 'right' : 'left'}>
+                                    <TableCell style={{ fontFamily: "Vazirmatn, sans-serif" }} align={language === "fa" ? 'right' : 'left'}>
                                         <div className='flex items-center gap-2'>
                                             {(row?.protocol &&  row?.protocol != '') && 
                                                 <div className='border border-solid border-blue-500 px-2 py-1 rounded-md w-fit h-fit'>
@@ -145,7 +145,7 @@ const AllConfigs = () => {
                                     </TableCell>
                                     <TableCell align={language === "fa" ? 'right' : 'left'}>
                                         <div className='flex items-center justify-center gap-5'>
-                                            <GetLinkBtn style={{ textTransform: 'none'}} onClick={() => {setConfig({link: row?.link || '', domain: row?.domain || ''}); setShowConfigModal(true)}}>
+                                            <GetLinkBtn style={{ textTransform: 'none', fontFamily: "Vazirmatn, sans-serif"}} onClick={() => {setConfig({link: row?.link || '', domain: row?.domain || ''}); setShowConfigModal(true)}}>
                                                 <Text fontSize='sm' fontWeight='regular' className='text-white whitespace-nowrap'>{t('Get Link')}</Text>
                                             </GetLinkBtn>
                                         </div>  

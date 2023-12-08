@@ -4,7 +4,7 @@ import SearchIcon from '@mui/icons-material/Search';
 import { useTranslation } from 'react-i18next';
 
 const TableHeader = ({ setSearch, search, configsCount }) => {
-    const { t } = useTranslation();
+    const { t, i18n: {language} } = useTranslation();
 
   return (
     <div className='pb-3 pt-5 flex sm:items-center sm:justify-between flex-col sm:flex-row gap-5'>
@@ -23,7 +23,7 @@ const TableHeader = ({ setSearch, search, configsCount }) => {
                     InputProps={{
                         disableUnderline: true,
                         startAdornment: (
-                            <InputAdornment position="start">
+                            <InputAdornment position={language === 'fa' ? 'end' : 'start'}>
                                 <SearchIcon className='text-[#ADB5BD]' />
                             </InputAdornment>
                         )

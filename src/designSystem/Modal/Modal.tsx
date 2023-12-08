@@ -40,7 +40,7 @@ const Modal: React.FC<propsTypes> = ({ isModalOpen, closeModal, title, children 
         aria-labelledby="customized-dialog-title"
         open={isModalOpen}
     >
-        <DialogTitle sx={{ m: 0, p: 2 }} id="customized-dialog-title">
+        <DialogTitle style={{ fontFamily: "Vazirmatn, sans-serif" }} sx={{ m: 0, p: 2 }} id="customized-dialog-title">
             <Text fontSize='base' fontWeight='regular' className='text-[#212529]'>{title}</Text>
         </DialogTitle>
         <IconButton
