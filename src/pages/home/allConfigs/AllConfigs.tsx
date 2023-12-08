@@ -50,7 +50,7 @@ const AllConfigs = () => {
         const newConfigs: any = []
         if (search && getConfigs.data && getConfigs.data?.length){
             for(const item of getConfigs.data) {
-                if(isPatternMatch(`${item?.name} ${item?.domain}`, search)){
+                if(isPatternMatch(`${item?.name} ${item?.domain} ${item.protocol} ${item.transport} ${item.security} ${item.type}`, search)){
                     newConfigs.push(item)
                 }
             }
