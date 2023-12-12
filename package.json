@@ -19,6 +19,7 @@
     "@mui/lab": "^5.0.0-alpha.154",
     "@mui/material": "^5.14.14",
     "animate.css": "^4.1.1",
+    "antd": "^5.12.2",
     "axios": "^1.6.0",
     "clipboard-copy": "^4.0.1",
     "file-loader": "^6.2.0",

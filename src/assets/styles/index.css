@@ -26,15 +26,19 @@ body {
   min-height: 50px;
 }
 
-.main-button {
-  display: block; /* Make sure canvas is a block element */
-  width: calc(100vh - 500px) !important; /* Set canvas width to 100% of its container */
-  height: calc(100vh - 500px) !important; /* Allow the height to adjust proportionally */
+::-webkit-scrollbar {
+  width: 6px;
+}
+::-webkit-scrollbar-thumb {
+  background-color: rgb(216, 216, 216);
+  border-radius: 40px;
+}
+::-webkit-scrollbar-track {
+  background-color: transparent;
+}
 
-  max-width: 168px;
-  max-height: 168px;
-  min-width: 100px;
-  min-height: 100px;
+input::placeholder {
+  font-family: Vazirmatn, sans-serif
 }
 
 .rtl {

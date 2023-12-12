@@ -37,6 +37,7 @@ const RemainingTime = ({ remainingDays, resetIn }) => {
 
       const tooltipContent = (
         <div>
+          {t('Remaining time') + ': '}
           {timeRemaining.years > 0 && (
             <span>{timeRemaining.years} {timeRemaining.years === 1 ? t('year') + ' ' : t('years') + ' '}</span>
           )}

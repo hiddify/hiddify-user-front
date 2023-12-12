@@ -66,6 +66,7 @@ const ShareLinks: React.FC<propsTypes> = ({ isModalOpen }) => {
         <PanelLinkInput 
             id="custom-css-outlined-input" 
             className='w-full'
+            dir="ltr"
             size="small"
             defaultValue={getInfo.data?.profile_url ? getInfo.data?.profile_url : ''}
             disabled
@@ -120,6 +121,7 @@ const ShareLinks: React.FC<propsTypes> = ({ isModalOpen }) => {
                 id="custom-css-outlined-input" 
                 className='w-full'
                 size="small"
+                dir="ltr"
                 disabled
                 defaultValue={getShortLink.data?.full_url ? getShortLink.data?.full_url : ''}
                 InputProps={{

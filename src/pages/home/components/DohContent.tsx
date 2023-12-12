@@ -47,6 +47,7 @@ const DohContent = () => {
             id="custom-css-outlined-input" 
             className='w-full'
             defaultValue={getInfo.data?.doh ? getInfo.data?.doh : ''}
+            dir="ltr"
             disabled
             InputProps={{
                 endAdornment: (

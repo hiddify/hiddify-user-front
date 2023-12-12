@@ -162,7 +162,7 @@ const Header: FC<propsTypes> = (props) => {
       </Modal>
 
       <Modal title={t("Change language")} isModalOpen={changeLangModal} closeModal={() => setChangeLangModal(false)}>
-        <ChangeLangModal />
+        <ChangeLangModal setChangeLangModal={setChangeLangModal} />
       </Modal>
     </>
   )

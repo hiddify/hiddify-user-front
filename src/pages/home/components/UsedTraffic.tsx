@@ -15,7 +15,7 @@ const UsedTraffic = ({ current, total }) => {
 
   return (
     <ClickAwayListener onClickAway={() => setShowFullTraffic(false)}>
-        <Tooltip open={showFullTraffic} title={remaining ? remaining + 'GB' : '-'} placement="top">
+        <Tooltip open={showFullTraffic} title={current ? t('Used Traffic') + ': ' + current + 'GB' : '-'} placement="top">
             <div onClick={() => setShowFullTraffic(!showFullTraffic)} className="flex flex-col lg:flex-row items-center justify-center gap-2">
                 <div className="w-8 h-8 bg-[#D6DEF7] rounded-[8px] flex items-center justify-center">
                     <InsertChartOutlinedIcon sx={{ color: '#495057'}} />

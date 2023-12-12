@@ -56,6 +56,7 @@ const ConfigModal = ({ closeModal, open, domain, link }) => {
                   id="custom-css-outlined-input" 
                   className='w-full'
                   size="small"
+                  dir="ltr"
                   disabled
                   defaultValue={link ? link : ''}
                   InputProps={{

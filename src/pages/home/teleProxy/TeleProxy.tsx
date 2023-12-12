@@ -88,51 +88,54 @@ function Row(props) {
         </TableCell>
       </TableRow>
       <TableRow>
-        <TableCell style={{ paddingBottom: 0, paddingTop: 0 }} colSpan={6}>
+        <TableCell style={{ paddingBottom: 0, paddingTop: 0 }} colSpan={8}>
           <Collapse in={open} timeout="auto" unmountOnExit>
-            <div className="scale-in-center flex justify-center items-center px-5 pt-5">
-                <QRCode
-                  size={100}
-                  value={row?.link ? row?.link : ''}
-                  bgColor='transparent'
-                  fgColor='#495057'
-                  ecLevel='M'
-                  logoImage={Hlogo}
-                  logoWidth={35}
-                  logoHeight={35}
-                  logoOpacity={1}
-                  qrStyle="dots"
-                  eyeRadius={5}
-                  eyeColor="#495057"
-                  logoPadding={10}
-                  logoPaddingStyle="square"
-                  quietZone={0}
-                  removeQrCodeBehindLogo
-                />
+            <div className='flex flex-col md:flex-row gap-5 p-5'>
+              <div className="scale-in-center flex justify-center items-center">
+                  <QRCode
+                    size={150}
+                    value={row?.link ? row?.link : ''}
+                    bgColor='transparent'
+                    fgColor='#495057'
+                    ecLevel='M'
+                    logoImage={Hlogo}
+                    logoWidth={35}
+                    logoHeight={35}
+                    logoOpacity={1}
+                    qrStyle="dots"
+                    eyeRadius={5}
+                    eyeColor="#495057"
+                    logoPadding={10}
+                    logoPaddingStyle="square"
+                    quietZone={0}
+                    removeQrCodeBehindLogo
+                  />
               </div>
-            <div className="flex flex-col md:flex-row gap-5 p-2 md:p-5">
-              <TeleLinkInput 
-                  id="custom-css-outlined-input" 
-                  className='w-full'
-                  size="small"
-                  disabled
-                  defaultValue={row?.link ? row?.link : ''}
-                  InputProps={{
-                      endAdornment: (
-                          <InputAdornment position="end">
-                              <div className='flex items-center gap-1'>
-                                  <CopyButton onClick={() => copy(row?.link ? row?.link : '')}>
-                                    <ContentCopyIcon />
-                                  </CopyButton>
-                              </div>
-                          </InputAdornment>
-                      )
-                  }}
-              />
-              <div className='flex justify-end md:items-center md:justify-center'>
-                <OpenTeleBtn style={{ textTransform: 'none', fontFamily: "Vazirmatn, sans-serif" }} onClick={openTele}>
-                    <Text fontSize='sm' fontWeight='regular' className='text-white whitespace-nowrap'>{t('Open Telegram')}</Text>
-                </OpenTeleBtn>
+              <div className="flex flex-col gap-5 w-full">
+                <TeleLinkInput 
+                    id="custom-css-outlined-input" 
+                    className='w-full'
+                    size="small"
+                    dir="ltr"
+                    disabled
+                    defaultValue={row?.link ? row?.link : ''}
+                    InputProps={{
+                        endAdornment: (
+                            <InputAdornment position="end">
+                                <div className='flex items-center gap-1'>
+                                    <CopyButton onClick={() => copy(row?.link ? row?.link : '')}>
+                                      <ContentCopyIcon />
+                                    </CopyButton>
+                                </div>
+                            </InputAdornment>
+                        )
+                    }}
+                />
+                <div className='flex justify-center md:justify-start w-full '>
+                  <OpenTeleBtn style={{ textTransform: 'none', fontFamily: "Vazirmatn, sans-serif" }} onClick={openTele}>
+                      <Text fontSize='sm' fontWeight='regular' className='text-white whitespace-nowrap'>{t('Open Telegram')}</Text>
+                  </OpenTeleBtn>
+                </div>
               </div>
             </div>
           </Collapse>
@@ -154,7 +157,7 @@ const TeleProxy = () => {
     
       
   return (
-    <div className='w-full h-[84%] px-5 flex flex-col'>
+    <div className='w-full h-full px-5 flex flex-col'>
         <div className='pb-3 pt-5 flex items-start justify-start flex-col gap-5'>
             <Text fontSize='lg' fontWeight='medium'>
               {t('Telegram proxy')}

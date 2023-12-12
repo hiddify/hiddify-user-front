@@ -83,27 +83,25 @@ const AppModal = ({ profileUrl }) => {
     }, [app])
 
     const determineDownloadSource = (iconType: string) => {
-        switch (iconType) {
-            case iconType = icon.APK:
-                return {img: Apk, title: t('APK File')};
-            case iconType = icon.APP_STORE:
-                return {img: Appstore, title: t("App Store")};
-            case iconType = icon.GOOGLE_PLAY:
-                return {img: Playstore, title: t("Google Play")};
-            case iconType = icon.MICROSOFT_STORE:
-                return {img: Microsoft, title: t("Microsoft")};
-            case iconType = icon.APP_IMAGE:
-                return {img: Linux, title: t("AppImage File")};
-            case iconType = icon.SNAPCRAFT:
-                return {img: Snapcraft, title: t("Snapcraft")};
-            case iconType = icon.DMG:
-                return {img: Direct, title: t("DMG File")};
-            case iconType = icon.SETUP:
-                return {img: Direct, title: t("Setup File")};
-            default:
-                return {img: Direct, title: t("Setup File")};
+        if (iconType === icon.APK){
+            return {img: Apk, title: t('APK File')};
+        }else if(iconType === icon.APP_STORE){
+            return {img: Appstore, title: t("App Store")};
+        }else if(iconType === icon.GOOGLE_PLAY){
+            return {img: Playstore, title: t("Google Play")};
+        }else if(iconType === icon.MICROSOFT_STORE){
+            return {img: Microsoft, title: t("Microsoft")};
+        }else if(iconType === icon.APP_IMAGE){
+            return {img: Linux, title: t("AppImage File")};
+        }else if(iconType === icon.SNAPCRAFT){
+            return {img: Snapcraft, title: t("Snapcraft")};
+        }else if(iconType === icon.DMG){
+            return {img: Direct, title: t("DMG File")};
+        }else if(iconType === icon.SETUP){
+            return {img: Direct, title: t("Setup File")};
+        }else{
+            return {img: Direct, title: t("Setup File")};
         }
-
     }
 
     useEffect(() => {
@@ -224,7 +222,7 @@ const AppModal = ({ profileUrl }) => {
                                         <div className='w-full flex items-center justify-between'>
                                             <div className='flex flex-col'>
                                                 <Text fontSize='base' fontWeight='regular' className='text-[#495057]'>{item.title ? item.title : ''}</Text>
-                                                <Text fontSize='sm' fontWeight='normal' className='text-[#212529]'>{item.title === "Streisand" || item.title === 'Hiddify Next' ? t('*Recommended') : '' }</Text>
+                                                <Text fontSize='sm' fontWeight='normal' className='text-[#212529]'>{item.title === "Streisand" || item.title === 'Hiddify Next' || item.title === "استرایسند" || item.title === "هیدیفای نکست" ? t('*Recommended') : '' }</Text>
                                             </div>
                                             {language === 'fa' ? <ArrowBackIosIcon /> : <ArrowForwardIosIcon />}
                                         </div>

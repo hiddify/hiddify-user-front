@@ -1,21 +1,27 @@
-import Table from '@mui/material/Table';
-import TableBody from '@mui/material/TableBody';
-import TableCell from '@mui/material/TableCell';
-import TableContainer from '@mui/material/TableContainer';
-import TableHead from '@mui/material/TableHead';
-import TableRow from '@mui/material/TableRow';
-import Paper from '@mui/material/Paper';
-import { Text } from '../../../designSystem/Text';
+import React, { useEffect, useState } from 'react';
+import { Table } from 'antd';
+import type { ColumnsType } from 'antd/es/table';
+import { useTranslation } from 'react-i18next';
 import useAPI from '../../../hooks/useAPI';
+import { Text } from '../../../designSystem/Text';
+import styled from '@emotion/styled';
+import { Button, ButtonProps } from '@mui/material';
+import ConfigModal from './components/ConfigModal';
 import CircularProgress from '@mui/material/CircularProgress';
 import Box from '@mui/material/Box';
-import { Button, ButtonProps, styled } from '@mui/material';
-import ConfigModal from './components/ConfigModal';
-import { useEffect, useState } from 'react';
 import TableHeader from './components/TableHeader';
-import { useTranslation } from 'react-i18next';
-  
-const AllConfigs = () => {
+
+
+interface DataType {
+  key: string;
+  name: string | undefined;
+  domain: string | undefined;
+  tags: string[] | undefined;
+}
+
+
+
+const AllConfigs: React.FC = () => {
     const [showConfigModal, setShowConfigModal] = useState(false);
     const [config, setConfig] = useState<{link: string; domain: string} | undefined>()
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -65,6 +71,8 @@ const AllConfigs = () => {
         }
     // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [search])
+
+
     const GetLinkBtn = styled(Button)<ButtonProps>(() => ({
         color: 'white',
         backgroundColor: '#455FE9',
@@ -74,102 +82,91 @@ const AllConfigs = () => {
             backgroundColor: 'blue'
         }
     }));
-    
-      
-  return (
-    <div className='w-full h-full px-5'>
-        <TableHeader search={search} setSearch={setSearch} configsCount={configs.length} />
-        <div className='w-full h-[calc(100vh-290px)] sm:h-[calc(100vh-230px)] md:h-[calc(100vh-230px)] overflow-auto'>
-            <TableContainer component={Paper}>
-                <Table stickyHeader aria-label="sticky table">
-                    {getConfigs.data ? 
-                    <>
-                        <TableHead>
-                            <TableRow>
-                                <TableCell style={{ fontFamily: "Vazirmatn, sans-serif" }} align={language === "fa" ? 'right' : 'left'}>
-                                    <Text fontSize='base' fontWeight='medium' className='whitespace-nowrap' lineClamp='1'>{t('Name')}</Text>
-                                </TableCell>
-                                <TableCell style={{ fontFamily: "Vazirmatn, sans-serif" }} align={language === "fa" ? 'right' : 'left'}>
-                                    <Text fontSize='base' fontWeight='medium' className='whitespace-nowrap' lineClamp='1'>{t('Domain')}</Text>
-                                </TableCell>
-                                <TableCell style={{ fontFamily: "Vazirmatn, sans-serif" }} align={language === "fa" ? 'right' : 'left'}>
-                                    <Text fontSize='base' fontWeight='medium' className='whitespace-nowrap' lineClamp='1'>{t('Tags')}</Text>
-                                </TableCell>
-                                <TableCell align={language === "fa" ? 'right' : 'left'}></TableCell>
-                            </TableRow>
-                        </TableHead>
-                        <TableBody style={{ maxHeight: "50%"}}>
-                            {configs?.map((row) => (
-                                <TableRow
-                                    key={row.name}
-                                    onClick={() => {setConfig({link: row?.link || '', domain: row?.domain || ''}); setShowConfigModal(true)}}
-                                    sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
-                                >
-                                    <TableCell style={{ fontFamily: "Vazirmatn, sans-serif" }} align={language === "fa" ? 'right' : 'left'}>
-                                        <Text fontSize='sm' fontWeight='regular' className='whitespace-nowrap' lineClamp='1'>{row?.name}</Text>
-                                    </TableCell>
-                                    <TableCell style={{ fontFamily: "Vazirmatn, sans-serif" }} align={language === "fa" ? 'right' : 'left'}>
-                                        <Text fontSize='sm' fontWeight='regular' lineClamp='1' className='whitespace-nowrap text-[#6C757D]'>{row?.domain}</Text>
-                                    </TableCell>
-                                    <TableCell style={{ fontFamily: "Vazirmatn, sans-serif" }} align={language === "fa" ? 'right' : 'left'}>
-                                        <div className='flex items-center gap-2'>
-                                            {(row?.protocol &&  row?.protocol != '') && 
-                                                <div className='border border-solid border-blue-500 px-2 py-1 rounded-md w-fit h-fit'>
-                                                    <Text fontSize='sm' fontWeight='regular' lineClamp='1' className='whitespace-nowrap'>
-                                                        {row.protocol}
-                                                    </Text>
-                                                </div>
-                                            }
-                                            {(row?.transport &&  row?.transport != '') && 
-                                                <div className='border border-solid border-blue-500 px-2 py-1 rounded-md w-fit h-fit'>
-                                                    <Text fontSize='sm' fontWeight='regular' lineClamp='1' className='whitespace-nowrap'>
-                                                        {row.transport}
-                                                    </Text>
-                                                </div>
-                                            }
-                                            {(row?.security &&  row?.security != '') && 
-                                                <div className='border border-solid border-blue-500 px-2 py-1 rounded-md w-fit h-fit'>
-                                                    <Text fontSize='sm' fontWeight='regular' lineClamp='1' className='whitespace-nowrap'>
-                                                        {row.security}
-                                                    </Text>
-                                                </div>
-                                            }
-                                            {(row?.type &&  row?.type != '') && 
-                                                <div className='border border-solid border-blue-500 px-2 py-1 rounded-md w-fit h-fit'>
-                                                    <Text fontSize='sm' fontWeight='regular' lineClamp='1' className='whitespace-nowrap'>
-                                                        {row.type}
-                                                    </Text>
-                                                </div>
-                                            }
-                                        </div>
-                                    </TableCell>
-                                    <TableCell align={language === "fa" ? 'right' : 'left'}>
-                                        <div className='flex items-center justify-center gap-5'>
-                                            <GetLinkBtn style={{ textTransform: 'none', fontFamily: "Vazirmatn, sans-serif"}} onClick={() => {setConfig({link: row?.link || '', domain: row?.domain || ''}); setShowConfigModal(true)}}>
-                                                <Text fontSize='sm' fontWeight='regular' className='text-white whitespace-nowrap'>{t('Get Link')}</Text>
-                                            </GetLinkBtn>
-                                        </div>  
-                                    </TableCell>
-                                </TableRow>
-                            )) }
-                        </TableBody>
-                    </>
-                    :
+
+    const columns: ColumnsType<DataType> = [
+        {
+          title: <Text fontSize='lg' fontWeight='black'>{t('Name')}</Text>,
+          dataIndex: 'name',
+          key: 'name',
+          render: (name) => <Text fontSize='sm' fontWeight='regular' lineClamp='1' className='max-w-[200px] text-[#6C757D]'>{name}</Text>,
+        },
+        {
+          title: <Text fontSize='lg' fontWeight='black'>{t('Domain')}</Text>,
+          dataIndex: 'domain',
+          key: 'domain',
+          render: (domain) => <Text fontSize='sm' fontWeight='regular' lineClamp='1' className='max-w-[200px] text-[#6C757D]'>{domain}</Text>,
+        },
+        {
+          title: <Text fontSize='lg' fontWeight='black'>{t('Tags')}</Text>,
+          key: 'tags',
+          dataIndex: 'tags',
+          render: (tags) => (
+            <div className='flex items-center justify-start gap-1'>
+                {tags.map(item => (
+                item && (
+                    <div className='border border-solid border-blue-500 px-2 py-1 rounded-md w-fit h-fit'>
+                        <Text fontSize='sm' fontWeight='regular' lineClamp='1' className='whitespace-nowrap'>
+                            {item}
+                        </Text>
+                    </div>
+                )
+              ))}
+            </div>
+          ),
+        },
+        {
+          title: '',
+          dataIndex: 'actionData',
+          key: 'actionData',
+          render: (actionData) => (
+              <div className='flex items-center justify-center gap-5'>
+                  <GetLinkBtn style={{ textTransform: 'none', fontFamily: "Vazirmatn, sans-serif"}} onClick={() => {setConfig({link: actionData?.link || '', domain: actionData?.domain || ''}); setShowConfigModal(true)}}>
+                      <Text fontSize='sm' fontWeight='regular' className='text-white whitespace-nowrap'>{t('Get Link')}</Text>
+                  </GetLinkBtn>
+              </div>  
+          ),
+        },
+      ];
+
+
+    return( 
+        <div className='h-full px-5 md:p-0 flex flex-col'>
+                {getConfigs.isLoading ?
                     <Box className='flex items-center justify-center p-20 w-full h-full'>
                         <CircularProgress />
                     </Box>
-                    }
-                </Table>
-            </TableContainer>
+                :
+                    <>
+                        <TableHeader search={search} setSearch={setSearch} configsCount={configs.length} />
+                        <section className='overflow-auto'>
+                            <Table 
+                                pagination={false} 
+                                scroll={{ x: true }}
+                                columns={columns} 
+                                dataSource={configs ? configs.map((item, index) => ({
+                                    key: index,
+                                    name: item.name ? item.name : '',
+                                    domain: item.link ? item.link : '',
+                                    actionData: {link: item.link, domain: item.domain},
+                                    tags: [
+                                        item.security ? item.security : undefined,
+                                        item.transport ? item.transport : undefined,
+                                        item.protocol ? item.protocol : undefined,
+                                        item.type ? item.type : undefined
+                                    ]
+                                })) : []} 
+                            />
+                        </section>
+                    </>
+                }
+            <ConfigModal 
+                closeModal={() => setShowConfigModal(false)} 
+                open={showConfigModal} 
+                domain={config?.domain ? config?.domain : ''}
+                link={config?.link ? config?.link : ''}
+            />
         </div>
-        <ConfigModal 
-            closeModal={() => setShowConfigModal(false)} 
-            open={showConfigModal} 
-            domain={config?.domain ? config?.domain : ''}
-            link={config?.link ? config?.link : ''}
-        />
-    </div>
-  );
-}
+    )
+};
 
 export default AllConfigs;

@@ -52,10 +52,7 @@ const MainBody = () => {
               <SupportInfo viewMoreUrl={getInfo.data?.admin_message_url ? getInfo.data?.admin_message_url : ''} />
             </div>
           </div>
-          <MainButton 
-            onClick={() => setIsAppModalOpen(true)} 
-            className='absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2' 
-          />
+          <MainButton onClick={() => setIsAppModalOpen(true)} />
           <Modal isModalOpen={isAppModalOpen} closeModal={() => setIsAppModalOpen(false)} title={t("Configure your VPN")}>
             <AppModal profileUrl={getInfo.data?.profile_url ? getInfo.data?.profile_url : ''} />
           </Modal>
@@ -66,7 +63,7 @@ const MainBody = () => {
           </Text>
           {!isMobile && <ShareLinks />}
         </div>
-        {isAppModalOpen && deepLink ? <iframe className="hidden" src={deepLink} width="0" height="0"></iframe> : null}
+        {isAppModalOpen ? <iframe className="hidden" src={deepLink} width="0" height="0"></iframe> : null}
       </div>
   )
 }
