@@ -62,7 +62,7 @@ const Home = () => {
 
 
   return getInfo.isLoading ? (<PreLoading />) : (
-    <div id="page" className={`bg-[#F4F4F9] w-full md:h-screen h-[var(--doc-height)] overflow-hidden md:overflow-hidden m-0 p-0 md:flex flex-col md:justify-center md:items-center`}>
+    <div className={`bg-[#F4F4F9] w-full md:h-screen h-[var(--doc-height)] overflow-hidden md:overflow-hidden m-0 p-0 md:flex flex-col md:justify-center md:items-center`}>
       <Header 
         setShowAllConfigs={setShowAllConfigs}
         setShowTeleProxy={setShowTeleProxy}
@@ -71,12 +71,12 @@ const Home = () => {
         showTeleProxy={showTeleProxy}
         showMainBody={showMainBody}
       />
-      <div className="w-full md:w-8/12 md:min-w-[650px] h-[80%]">
+      <div className="w-full md:w-7/12 md:min-w-[650px] max-w-[1000px] h-[80%]">
         {showAllConfigs && <AllConfigs />}
         {showMainBody && <MainBody />}
         {showTeleProxy && <TeleProxy />}
       </div>
-      <div dir="ltr" className={`${showMainBody && 'bg-[#E0E4F5] md:bg-transparent bg-opacity-50 md:bg-opacity-[unset]'} md:w-8/12 md:min-w-[650px] h-[10%] w-full flex justify-between items-center px-5 md:px-0 py-5`}>
+      <div dir="ltr" className={`${showMainBody && 'bg-[#E0E4F5] md:bg-transparent bg-opacity-50 md:bg-opacity-[unset]'} md:w-7/12 md:min-w-[650px] h-[10%] max-w-[1000px] w-full flex justify-between items-center px-5 md:px-0 py-5`}>
           <FooterSocialIcons />
           <BrandAndLogo />
       </div>

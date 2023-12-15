@@ -91,7 +91,7 @@ const Header: FC<propsTypes> = (props) => {
           <ShareIcon sx={{ color: '#292D32'}} />
         </Button>
       </div>
-      <div className="hidden w-full md:w-8/12 md:min-w-[650px] h-[10%] bg-transparent md:flex items-center justify-between py-3">
+      <div className="hidden w-full md:w-7/12 md:min-w-[650px] max-w-[1000px] h-[10%] bg-transparent md:flex items-center justify-between py-3">
         <div className="w-fit flex items-center lg:gap-8 xl:gap-11 md:gap-5">
           <div onClick={showMainBodyFun} className="flex items-center gap-3 cursor-pointer">
             <CardMedia
