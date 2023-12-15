@@ -69,11 +69,11 @@ const ChangeLangModal: React.FC<propsType> = ({ setChangeLangModal }) => {
                     className='w-full'
                     onChange={handleChange}
                 >
-                    <MenuItem style={{ fontFamily: "Vazirmatn, sans-serif" }} value={'en'}>{'🇬🇧 ' + t('English')}</MenuItem>
+                    <MenuItem style={{ fontFamily: "Vazirmatn, sans-serif" }} value={'en'}>{language !== 'fa' ? '🇬🇧 ' + t('English') : t('English') + ' 🇬🇧'}</MenuItem>
                     <MenuItem style={{ fontFamily: "Vazirmatn, sans-serif" }} value={'fa'}>{'🇮🇷 ' + t('Farsi')}</MenuItem>
-                    <MenuItem style={{ fontFamily: "Vazirmatn, sans-serif" }} value={'zh'}>{'🇨🇳 ' + t('Chinese')}</MenuItem>
-                    <MenuItem style={{ fontFamily: "Vazirmatn, sans-serif" }} value={'ru'}>{'🇷🇺 ' + t('Russian')}</MenuItem>
-                    <MenuItem style={{ fontFamily: "Vazirmatn, sans-serif" }} value={'pt'}>{'🇵🇹 ' + t('Portuguese')}</MenuItem>
+                    <MenuItem style={{ fontFamily: "Vazirmatn, sans-serif" }} value={'zh'}>{language !== 'fa' ? '🇨🇳 ' + t('Chinese') : t('Chinese') + ' 🇨🇳'}</MenuItem>
+                    <MenuItem style={{ fontFamily: "Vazirmatn, sans-serif" }} value={'ru'}>{language !== 'fa' ? '🇷🇺 ' + t('Russian') : t('Russian') + ' 🇷🇺'}</MenuItem>
+                    <MenuItem style={{ fontFamily: "Vazirmatn, sans-serif" }} value={'pt'}>{language !== 'fa' ? '🇵🇹 ' + t('Portuguese') : t('Portuguese') + ' 🇵🇹'}</MenuItem>
                 </Select>
             </FormControl>
         </div>
