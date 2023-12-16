@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Table } from 'antd';
+import { Spin, Table } from 'antd';
 import type { ColumnsType } from 'antd/es/table';
 import { useTranslation } from 'react-i18next';
 import useAPI from '../../../hooks/useAPI';
@@ -131,34 +131,28 @@ const AllConfigs: React.FC = () => {
 
     return( 
         <div className='h-full px-5 md:p-0 flex flex-col'>
-                {getConfigs.isLoading ?
-                    <Box className='flex items-center justify-center p-20 w-full h-full'>
-                        <CircularProgress />
-                    </Box>
-                :
-                    <>
-                        <TableHeader search={search} setSearch={setSearch} configsCount={configs.length} />
-                        <section className='overflow-auto'>
-                            <Table 
-                                pagination={false} 
-                                scroll={{ x: true }}
-                                columns={columns} 
-                                dataSource={configs ? configs.map((item, index) => ({
-                                    key: index,
-                                    name: item.name ? item.name : '',
-                                    domain: item.link ? item.link : '',
-                                    actionData: {link: item.link, domain: item.domain},
-                                    tags: [
-                                        item.security ? item.security : undefined,
-                                        item.transport ? item.transport : undefined,
-                                        item.protocol ? item.protocol : undefined,
-                                        item.type ? item.type : undefined
-                                    ]
-                                })) : []} 
-                            />
-                        </section>
-                    </>
-                }
+            <TableHeader search={search} setSearch={setSearch} configsCount={configs.length} />
+            <section className='overflow-auto'>
+                <Spin spinning={getConfigs.isLoading || getConfigs.isRefetching}>
+                    <Table 
+                        pagination={false} 
+                        scroll={{ x: true }}
+                        columns={columns} 
+                        dataSource={configs ? configs.map((item, index) => ({
+                            key: index,
+                            name: item.name ? item.name : '',
+                            domain: item.link ? item.link : '',
+                            actionData: {link: item.link, domain: item.domain},
+                            tags: [
+                                item.security ? item.security : undefined,
+                                item.transport ? item.transport : undefined,
+                                item.protocol ? item.protocol : undefined,
+                                item.type ? item.type : undefined
+                            ]
+                        })) : []} 
+                    />
+                </Spin>
+            </section>
             <ConfigModal 
                 closeModal={() => setShowConfigModal(false)} 
                 open={showConfigModal} 

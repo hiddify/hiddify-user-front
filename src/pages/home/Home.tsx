@@ -9,12 +9,38 @@ import useAPI from "../../hooks/useAPI"
 import PreLoading from "./components/PreLoading"
 import { useTranslation } from "react-i18next"
 import useMediaQuery from "../../hooks/useMediaQuery"
+import { useSearchParams } from "react-router-dom"
 
 
 const Home = () => {
   const [showAllConfigs, setShowAllConfigs] = useState(false)
   const [showTeleProxy, setShowTeleProxy] = useState(false)
-  const [showMainBody, setShowMainBody] = useState(true)
+  const [showMainBody, setShowMainBody] = useState(false)
+  const [searchParams, setSearchParams] = useSearchParams()
+
+  const homePage = searchParams.get("home") === "true"
+  const allConfigsPage = searchParams.get("allConfigs") === "true"
+  const telegramProxyPage = searchParams.get("telegramProxy") === "true"
+
+  useEffect(() => {
+    if (showAllConfigs) {
+      setSearchParams({ allConfigs: "true" })
+    } else if(showTeleProxy) {
+      setSearchParams({ telegramProxy: "true" })
+    } else if(showMainBody) {
+      setSearchParams({ home: "true" })
+    } else {
+      if(homePage){
+        setShowMainBody(true)
+      } else if(allConfigsPage){
+        setShowAllConfigs(true)
+      } else if(telegramProxyPage){
+        setShowTeleProxy(true)
+      } else{
+        setShowMainBody(true)
+      }
+    }
+  }, [showAllConfigs, showTeleProxy, showMainBody])
 
   const getInfo = useAPI(
     'me/',
@@ -67,14 +93,14 @@ const Home = () => {
         setShowAllConfigs={setShowAllConfigs}
         setShowTeleProxy={setShowTeleProxy}
         setShowMainBody={setShowMainBody}
-        showAllConfigs={showAllConfigs}
-        showTeleProxy={showTeleProxy}
-        showMainBody={showMainBody}
+        showAllConfigs={searchParams.get("allConfigs") === "true"}
+        showTeleProxy={searchParams.get("telegramProxy") === "true"}
+        showMainBody={searchParams.get("home") === "true"}
       />
       <div className="w-full md:w-7/12 md:min-w-[650px] max-w-[1000px] h-[80%]">
-        {showAllConfigs && <AllConfigs />}
-        {showMainBody && <MainBody />}
-        {showTeleProxy && <TeleProxy />}
+        {searchParams.get("allConfigs") === "true" && <AllConfigs />}
+        {searchParams.get("home") === "true" && <MainBody />}
+        {searchParams.get("telegramProxy") === "true" && <TeleProxy />}
       </div>
       <div dir="ltr" className={`${showMainBody && 'bg-[#E0E4F5] md:bg-transparent bg-opacity-50 md:bg-opacity-[unset]'} md:w-7/12 md:min-w-[650px] h-[10%] max-w-[1000px] w-full flex justify-between items-center px-5 md:px-0 py-5`}>
           <FooterSocialIcons />

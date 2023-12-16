@@ -169,30 +169,34 @@ const TeleProxy = () => {
         <div className='w-full h-full overflow-auto'>
             <TableContainer component={Paper}>
                 <Table stickyHeader aria-label="sticky table">
-                    {getTeleProxies.data ? 
-                    <>
-                        <TableHead>
-                            <TableRow>
-                                <TableCell align={language === "fa" ? 'right' : 'left'}>
-                                    <Text fontSize='base' fontWeight='medium' className='whitespace-nowrap' lineClamp='1'>{t('Name')}</Text>
-                                </TableCell>
-                                <TableCell align={language === "fa" ? 'right' : 'left'}>
-                                    <Text fontSize='base' fontWeight='medium' className='whitespace-nowrap' lineClamp='1'>{t('Domain')}</Text>
-                                </TableCell>
-                                <TableCell align={language === "fa" ? 'left' : 'right'}></TableCell>
-                            </TableRow>
-                        </TableHead>
-                        <TableBody>
-                            {getTeleProxies.data?.map((row, index) => (
-                                <Row key={index} row={row} />
-                            ))}
-                        </TableBody>
-                    </>
-                    :
+                  {getTeleProxies.isLoading || getTeleProxies.isRefetching ? 
                     <Box className='flex items-center justify-center p-20 w-full h-full'>
                         <CircularProgress />
                     </Box>
-                    }
+                    :
+                    <>
+                      <TableHead>
+                          <TableRow>
+                              <TableCell align={language === "fa" ? 'right' : 'left'}>
+                                  <Text fontSize='base' fontWeight='medium' className='whitespace-nowrap' lineClamp='1'>{t('Name')}</Text>
+                              </TableCell>
+                              <TableCell align={language === "fa" ? 'right' : 'left'}>
+                                  <Text fontSize='base' fontWeight='medium' className='whitespace-nowrap' lineClamp='1'>{t('Domain')}</Text>
+                              </TableCell>
+                              <TableCell align={language === "fa" ? 'left' : 'right'}></TableCell>
+                          </TableRow>
+                      </TableHead>
+                        {getTeleProxies.data ?
+                          <TableBody>
+                            {getTeleProxies.data && getTeleProxies.data?.map((row, index) => (
+                                <Row key={index} row={row} />
+                            ))}
+                          </TableBody>
+                        :
+                        <div className='w-full h-20 bg-white'></div>
+                        }
+                    </>
+                  }
                 </Table>
             </TableContainer>
         </div>
