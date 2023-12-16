@@ -50,7 +50,7 @@ const AppModal = ({ profileUrl }) => {
 
     const getApps = useAPI(
         'apps/',
-        'GET',
+        'get',
         { reactQueryOptions: { enabled: true } }
       );
 

@@ -18,13 +18,13 @@ const Home = () => {
 
   const getInfo = useAPI(
     'me/',
-    'GET',
+    'get',
     { reactQueryOptions: { enabled: true } }
   );
 
   const getApps = useAPI(
     'apps/',
-    'GET',
+    'get',
     { reactQueryOptions: { enabled: true } }
   );
 

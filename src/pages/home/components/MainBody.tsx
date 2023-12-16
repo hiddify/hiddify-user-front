@@ -22,7 +22,7 @@ const MainBody = () => {
 
   const getInfo = useAPI(
     'me/',
-    'GET',
+    'get',
     { reactQueryOptions: { enabled: true } }
   );
 

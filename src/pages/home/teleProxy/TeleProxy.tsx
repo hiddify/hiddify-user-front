@@ -151,7 +151,7 @@ const TeleProxy = () => {
 
     const getTeleProxies = useAPI(
         'mtproxies/',
-        'GET',
+        'get',
         { reactQueryOptions: { enabled: true } }
       );
     

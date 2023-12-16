@@ -16,17 +16,17 @@ const ChangeLangModal: React.FC<propsType> = ({ setChangeLangModal }) => {
     const { t, i18n: {changeLanguage, language} } = useTranslation();
     const [lang, setLang] = useState(language ? language : 'en')
 
-    const patchLang = useAPI('me/', 'PATCH', {});
+    const patchLang = useAPI('me/', 'patch', {});
 
     const getInfo = useAPI(
         'me/',
-        'GET',
+        'get',
         { reactQueryOptions: { enabled: true } }
       );
 
     const getApps = useAPI(
         'apps/',
-        'GET',
+        'get',
         { reactQueryOptions: { enabled: true } }
       );
 

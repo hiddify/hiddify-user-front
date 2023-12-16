@@ -32,7 +32,7 @@ const AllConfigs: React.FC = () => {
 
     const getConfigs = useAPI(
         'all-configs/',
-        'GET',
+        'get',
         { reactQueryOptions: { enabled: true } }
       );
 
