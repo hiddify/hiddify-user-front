@@ -8,18 +8,8 @@ import { useEffect, useState } from 'react';
 
 const RemainingTime = ({ remainingDays, resetIn }) => {
     const [showFullTime, setShowFullTime] = useState(false)
+    const [dateRepresentation, setDateRepresentation] = useState('-')
     const { t } = useTranslation();
-
-    const years = remainingDays ? Math.floor(remainingDays / 365) : 0;
-    const months =remainingDays ? Math.floor((remainingDays % 365) / 30) : 0; // Assuming an average of 30 days per month
-
-    let dateRepresentation = '';
-
-    if (years > 0) {
-        dateRepresentation = years + (years === 1 ? " " + t('year') : " " + t('years'));
-    } else if (months > 0) {
-        dateRepresentation = months + (months === 1 ? " " + t('month') : " " + t('months'));
-    }
 
     const calculateRemainingTime = (days) => {
         const years = Math.floor(days / 365);
@@ -32,7 +22,17 @@ const RemainingTime = ({ remainingDays, resetIn }) => {
       const [timeRemaining, setTimeRemaining] = useState(calculateRemainingTime(remainingDays));
     
       useEffect(() => {
-        setTimeRemaining(calculateRemainingTime(remainingDays));
+        const remaining = calculateRemainingTime(remainingDays)
+
+        setTimeRemaining(remaining)
+
+        if (remaining.years > 0) {
+          setDateRepresentation(remaining.years + (remaining.years === 1 ? " " + t('year') : " " + t('years')))
+        } else if (remaining.months > 0) {
+          setDateRepresentation(remaining.months + (remaining.months === 1 ? " " + t('month') : " " + t('months')))
+        } else if (remaining.days > 0) {
+          setDateRepresentation(remaining.days + (remaining.days === 1 ? " " + t('day') : " " + t('days')))
+        }
       }, [remainingDays]);
 
       const tooltipContent = (
