@@ -138,6 +138,15 @@ const AllConfigs: React.FC = () => {
                         pagination={false} 
                         scroll={{ x: true }}
                         columns={columns} 
+                        onRow={(record) => {
+                            return {
+                                onClick: () => {
+                                    //@ts-ignore
+                                    setConfig({ link: record.actionData?.link || '', domain: record.actionData?.domain || '' });
+                                    setShowConfigModal(true);
+                                },
+                            };
+                        }}
                         dataSource={configs ? configs.map((item, index) => ({
                             key: index,
                             name: item.name ? item.name : '',

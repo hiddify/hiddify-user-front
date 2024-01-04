@@ -122,9 +122,11 @@ const ShareLinks: React.FC<propsTypes> = ({ isModalOpen }) => {
                 className='w-full'
                 size="small"
                 dir="ltr"
+                multiline
                 disabled
                 defaultValue={getShortLink.data?.full_url ? getShortLink.data?.full_url : ''}
                 InputProps={{
+                    style: { resize: "both" },
                     endAdornment: (
                         <InputAdornment position="end">
                             <div className='flex items-center gap-1'>
