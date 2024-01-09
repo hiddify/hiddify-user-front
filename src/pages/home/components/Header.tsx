@@ -19,6 +19,7 @@ type propsTypes = {
   showAllConfigs: boolean;
   showTeleProxy: boolean;
   showMainBody: boolean;
+  info: any;
 }
 
 const Header: FC<propsTypes> = (props) => {
@@ -29,6 +30,7 @@ const Header: FC<propsTypes> = (props) => {
     showAllConfigs, 
     showTeleProxy, 
     showMainBody,
+    info,
   } = props;
 
   const [shareModal, setShareModal ] = useState(false)
@@ -76,15 +78,15 @@ const Header: FC<propsTypes> = (props) => {
         <div onClick={showMainBodyFun} className="flex items-center gap-3 cursor-pointer">
           <CardMedia
               sx={{ height: 24, width: 24, marginBottom: 1 }}
-              image={HLogo}
-              title="Hiddify Logo"
+              image={info?.brand_icon_url ? info?.brand_icon_url : HLogo}
+              title="Logo"
           />
           <Text 
             fontWeight="medium" 
             fontSize="xl" 
             className="text-[#455FE9]" 
           >
-            {t('Hiddify')}
+            {info?.brand_title ? info?.brand_title : t('Hiddify')}
           </Text>
         </div>
         <Button onClick={() => setShareModal(true)} className='bg-transparent [&.css-1e6y48t-MuiButtonBase-root-MuiButton-root]:min-w-[unset]'>
@@ -96,10 +98,10 @@ const Header: FC<propsTypes> = (props) => {
           <div onClick={showMainBodyFun} className="flex items-center gap-3 cursor-pointer">
             <CardMedia
                 sx={{ height: 24, width: 24, marginBottom: 1 }}
-                image={HLogo}
-                title="Hiddify Logo"
+                image={info?.brand_icon_url ? info?.brand_icon_url : HLogo}
+                title="Logo"
             />
-            <Text fontWeight="semibold" fontSize="lg" className="hidden lg:block text-[#455FE9]" >{t('Hiddify')}</Text>
+            <Text fontWeight="semibold" fontSize="lg" className="hidden lg:block text-[#455FE9]" >{info?.brand_title ? info?.brand_title : t('Hiddify')}</Text>
           </div>
           <Text 
             onClick={showMainBodyFun} 

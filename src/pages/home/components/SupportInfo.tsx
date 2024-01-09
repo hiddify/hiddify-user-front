@@ -3,7 +3,7 @@ import { Text } from '../../../designSystem/Text'
 import { Button, ButtonProps, styled } from "@mui/material";
 
 
-const SupportInfo = ({viewMoreUrl}) => {
+const SupportInfo = ({viewMoreUrl, adminMessageHtml}) => {
     const { t } = useTranslation();
 
     const ViewMoreButton = styled(Button)<ButtonProps>(() => ({
@@ -23,7 +23,7 @@ const SupportInfo = ({viewMoreUrl}) => {
         </div>
         <div className="mt-4 flex flex-col gap-5">
             <Text className="text-[#495057]" fontWeight="regular" fontSize="sm">
-                {t('Join our Telegram channel in case you have any questions on how to use the links.')}
+                {adminMessageHtml}
             </Text>
             <div className="w-full flex justify-end">
                 <ViewMoreButton style={{ textTransform: 'none', fontFamily: "Vazirmatn, sans-serif"}} onClick={() => window.open(viewMoreUrl, '_blank')}>

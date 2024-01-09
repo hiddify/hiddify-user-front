@@ -96,6 +96,7 @@ const Home = () => {
         showAllConfigs={searchParams.get("allConfigs") === "true"}
         showTeleProxy={searchParams.get("telegramProxy") === "true"}
         showMainBody={searchParams.get("home") === "true"}
+        info={getInfo.data}
       />
       <div className="w-full md:w-7/12 md:min-w-[650px] max-w-[1000px] h-[80%]">
         {searchParams.get("allConfigs") === "true" && <AllConfigs />}
