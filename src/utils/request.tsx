@@ -6,7 +6,7 @@ import { getWindowData } from './getWindowData';
 
 const axiosInstance: AxiosInstance = axios.create({
   timeout: 150000,
-  baseURL: getCurrentUrl(false) + "/" + '/api/v2/user/',
+  baseURL: getCurrentUrl(false) + '/api/v2/user/',
 });
 
 axiosInstance.interceptors.request.use(
