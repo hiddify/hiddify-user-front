@@ -12,7 +12,7 @@ const BrandAndLogo = () => {
   return (
     <div className="flex items-end gap-3 mx-3">
         <Text onClick={() => window.open('https://hiddify.com', '_blank')} fontSize="xs" fontWeight="light" className="text-[#495057] line-clamp-1">
-          {showText && 'Powered by Hiddify'} v{appVersion}
+          {showText && 'Powered by Hiddify'} {appVersion ? "v" + appVersion : ''}
         </Text>
         <div onClick={() => setShowText(!showText)}>
           <CardMedia

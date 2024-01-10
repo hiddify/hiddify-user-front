@@ -23,7 +23,7 @@ const SupportInfo = ({viewMoreUrl, adminMessageHtml}) => {
         </div>
         <div className="mt-4 flex flex-col gap-5">
             <Text className="text-[#495057]" fontWeight="regular" fontSize="sm">
-                {adminMessageHtml}
+                <div dangerouslySetInnerHTML={{ __html: adminMessageHtml }} />
             </Text>
             <div className="w-full flex justify-end">
                 <ViewMoreButton style={{ textTransform: 'none', fontFamily: "Vazirmatn, sans-serif"}} onClick={() => window.open(viewMoreUrl, '_blank')}>
