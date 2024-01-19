@@ -10,7 +10,7 @@ import Hlogo from "@assets/images/hiddify-logo-gray-bg-white.png"
 
 
 
-const ConfigModal = ({ closeModal, open, domain, link }) => {
+const ConfigModal = ({ closeModal, open, domain, link, title }) => {
     const { t } = useTranslation();
 
     const TeleLinkInput = styled(TextField)({
@@ -46,7 +46,7 @@ const ConfigModal = ({ closeModal, open, domain, link }) => {
       }));
       
   return (
-    <Modal closeModal={closeModal} isModalOpen={open} title={t('Subscription Link b64')}>
+    <Modal closeModal={closeModal} isModalOpen={open} title={title}>
         <div className='w-full md:w-[400px] h-fit flex flex-col gap-4'>
             <div className='flex items-center gap-2'>
                 <Text fontSize='sm' fontWeight='light' className='text-[#6C757D]'>{t('Domain')}:</Text>

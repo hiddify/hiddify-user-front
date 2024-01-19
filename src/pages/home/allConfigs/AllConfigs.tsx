@@ -23,7 +23,7 @@ interface DataType {
 
 const AllConfigs: React.FC = () => {
     const [showConfigModal, setShowConfigModal] = useState(false);
-    const [config, setConfig] = useState<{link: string; domain: string} | undefined>()
+    const [config, setConfig] = useState<{link: string; domain: string, title: string} | undefined>()
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const [configs, setConfigs] = useState<any>([])
     const [search, setSearch] = useState<string | undefined>()
@@ -120,7 +120,7 @@ const AllConfigs: React.FC = () => {
           key: 'actionData',
           render: (actionData) => (
               <div className='flex items-center justify-center gap-5'>
-                  <GetLinkBtn style={{ textTransform: 'none', fontFamily: "Vazirmatn, sans-serif"}} onClick={() => {setConfig({link: actionData?.link || '', domain: actionData?.domain || ''}); setShowConfigModal(true)}}>
+                  <GetLinkBtn style={{ textTransform: 'none', fontFamily: "Vazirmatn, sans-serif"}} onClick={() => {setConfig({link: actionData?.link || '', domain: actionData?.domain || '', title: actionData.title || ''}); setShowConfigModal(true)}}>
                       <Text fontSize='sm' fontWeight='regular' className='text-white whitespace-nowrap'>{t('Get Link')}</Text>
                   </GetLinkBtn>
               </div>  
@@ -151,7 +151,7 @@ const AllConfigs: React.FC = () => {
                             key: index,
                             name: item.name ? item.name : '',
                             domain: item.link ? item.link : '',
-                            actionData: {link: item.link, domain: item.domain},
+                            actionData: {link: item.link, domain: item.domain, title: item.name},
                             tags: [
                                 item.security ? item.security : undefined,
                                 item.transport ? item.transport : undefined,
@@ -167,6 +167,7 @@ const AllConfigs: React.FC = () => {
                 open={showConfigModal} 
                 domain={config?.domain ? config?.domain : ''}
                 link={config?.link ? config?.link : ''}
+                title={config?.title ? config.title : ''}
             />
         </div>
     )
