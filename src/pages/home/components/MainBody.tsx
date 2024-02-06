@@ -7,15 +7,18 @@ import ShareLinks from "./ShareLinks";
 import { Text } from "../../../designSystem/Text";
 import useAPI from "../../../hooks/useAPI";
 import { useTranslation } from "react-i18next";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Modal } from "../../../designSystem/Modal";
 import AppModal from "./AppModal";
 import { getWindowData } from "../../../utils/getWindowData";
 import useMediaQuery from "@hooks/useMediaQuery";
+import modal from "antd/es/modal";
+import { Button } from "antd";
 
 
 const MainBody = () => {
   const [isAppModalOpen, setIsAppModalOpen] = useState(false)
+  const [isModalOpen, setIsModalOpen] = useState(false)
   const { t } = useTranslation();
 
   const isMobile = useMediaQuery('(max-width: 767px)');
@@ -27,6 +30,13 @@ const MainBody = () => {
   );
 
   const { deepLink } = getWindowData()
+
+
+  useEffect(() => {
+    // if(getInfo.data && !getInfo.data.telegram_id){
+      setIsModalOpen(true)
+    // }
+  }, [getInfo.data])
 
 
   return (
@@ -67,6 +77,20 @@ const MainBody = () => {
           {!isMobile && <ShareLinks />}
         </div>
         {isAppModalOpen ? <iframe className="hidden" src={deepLink} width="0" height="0"></iframe> : null}
+        <Modal isModalOpen={isModalOpen} closeModal={() => setIsModalOpen(false)} title={t('Connect To Telegram')}>
+          <div className="flex flex-col gap-10">
+            <Text fontSize='base' fontWeight='medium' className='text-[#212529] max-w-[400px]'>
+              {t('Please connect your Telegram account to the panel to know the latest status of your subscription')}
+            </Text>
+            <div className="flex flex-row justify-start items-center gap-5">
+              <Button onClick={() => {window.open(getInfo.data && getInfo.data.telegram_bot_url ? getInfo.data.telegram_bot_url : '', '_blank')}} className="bg-blue-500">
+                <Text fontSize='base' fontWeight='medium' className='text-white'>
+                  {t('Connect To Telegram')}
+                </Text>
+              </Button>
+            </div>
+          </div>
+        </Modal>
       </div>
   )
 }

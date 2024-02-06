@@ -14,7 +14,7 @@ const RemainingTime = ({ remainingDays, resetIn }) => {
     const calculateRemainingTime = (days) => {
         const years = Math.floor(days / 365);
         const months = Math.floor((days % 365) / 30);
-        const daysLeft = days % 30;
+        const daysLeft = days % 365 === 0 || days % 30 === 0 ? 0 : days % 30;
     
         return { years, months, days: daysLeft };
       };
