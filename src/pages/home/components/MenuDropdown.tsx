@@ -11,6 +11,7 @@ import SpeedIcon from '@mui/icons-material/Speed';
 import { useTranslation } from 'react-i18next';
 import TranslateIcon from '@mui/icons-material/Translate';
 import HomeIcon from '@mui/icons-material/Home';
+import useAPI from '../../../hooks/useAPI';
 
 
 type propsTypes = {
@@ -33,6 +34,12 @@ const MenuDropdown: React.FC<propsTypes> = ({dohModal, showTeleProxy, showAllCon
   };
 
   const { t, i18n: {language} } = useTranslation();
+
+  const getInfo = useAPI(
+    'me/',
+    'get',
+    { reactQueryOptions: { enabled: true } }
+  );
 
   const StyledMenu = styled((props: MenuProps) => (
     <Menu
@@ -119,16 +126,18 @@ const MenuDropdown: React.FC<propsTypes> = ({dohModal, showTeleProxy, showAllCon
           <QrCodeIcon />
           {t('All Configs')}
         </MenuItem>
-        <MenuItem 
-          onClick={() => {
-            showTeleProxy(); handleClose()}
-          } 
-          style={{ fontFamily: 'Vazirmatn, sans-serif' }}
-          disableRipple
-        >
-          <TelegramIcon />
-          {t('Telegram Proxy')}
-        </MenuItem>
+        {getInfo.data && getInfo.data?.telegram_proxy_enable ? 
+          <MenuItem 
+            onClick={() => {
+              showTeleProxy(); handleClose()}
+            } 
+            style={{ fontFamily: 'Vazirmatn, sans-serif' }}
+            disableRipple
+          >
+            <TelegramIcon />
+            {t('Telegram Proxy')}
+          </MenuItem>
+        : null}
         <MenuItem 
           onClick={() => {
             dohModal(true); handleClose()}
@@ -139,10 +148,12 @@ const MenuDropdown: React.FC<propsTypes> = ({dohModal, showTeleProxy, showAllCon
           <DnsIcon />
           {t('DNS over HTTPS')}
         </MenuItem>
-        <MenuItem style={{ fontFamily: 'Vazirmatn, sans-serif' }} onClick={() => { handleGoToSpeedTest(); handleClose();}} disableRipple>
-          <SpeedIcon />
-          {t('Speed Test')}
-        </MenuItem>
+        {getInfo.data && getInfo.data?.speedtest_enable ? 
+          <MenuItem style={{ fontFamily: 'Vazirmatn, sans-serif' }} onClick={() => { handleGoToSpeedTest(); handleClose();}} disableRipple>
+            <SpeedIcon />
+            {t('Speed Test')}
+          </MenuItem>
+        : null}
         <MenuItem style={{ fontFamily: 'Vazirmatn, sans-serif' }} onClick={() => { setChangeLangModal(true); handleClose();}} disableRipple>
           <TranslateIcon />
           {t('Language Settings')}

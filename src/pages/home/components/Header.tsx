@@ -11,6 +11,7 @@ import { useTranslation } from "react-i18next";
 import TranslateIcon from '@mui/icons-material/Translate';
 import ChangeLangModal from "./ChangeLangModal";
 import { getCurrentUrl } from "../../../utils/getCurrentUrl";
+import useAPI from "../../../hooks/useAPI";
 
 type propsTypes = {
   setShowAllConfigs:  Dispatch<SetStateAction<boolean>>;
@@ -56,6 +57,12 @@ const Header: FC<propsTypes> = (props) => {
     setShowTeleProxy(true)
     setShowMainBody(false)
   }
+
+  const getInfo = useAPI(
+    'me/',
+    'get',
+    { reactQueryOptions: { enabled: true } }
+  );
 
   const handleGoToSpeedTest = () => {
 
@@ -119,14 +126,16 @@ const Header: FC<propsTypes> = (props) => {
           >
             {t('All Configs')}
           </Text>
-          <Text 
-            onClick={showTeleProxyFun} 
-            fontWeight="semibold" 
-            fontSize="lg" 
-            className={`text-[#495057] cursor-pointer ${showTeleProxy && 'underline decoration-[#455FE9] decoration-solid decoration-[2px] underline-offset-8'}`}
-          >
-            {t('Telegram proxy')}
-          </Text>
+          {getInfo.data && getInfo.data?.telegram_proxy_enable ? 
+            <Text 
+              onClick={showTeleProxyFun} 
+              fontWeight="semibold" 
+              fontSize="lg" 
+              className={`text-[#495057] cursor-pointer ${showTeleProxy && 'underline decoration-[#455FE9] decoration-solid decoration-[2px] underline-offset-8'}`}
+            >
+              {t('Telegram proxy')}
+            </Text>
+          : null}
           <Text 
             onClick={() => setDohModal(true)} 
             fontWeight="semibold" 
@@ -135,14 +144,16 @@ const Header: FC<propsTypes> = (props) => {
           >
             {t('DoH')}
           </Text>
-          <Text 
-            fontWeight="semibold" 
-            fontSize="lg" 
-            className={`text-[#495057] cursor-pointer`}
-            onClick={handleGoToSpeedTest}
-          >
-            {t('Speed test')}
-          </Text>
+          {getInfo.data && getInfo.data?.speedtest_enable ? 
+            <Text 
+              fontWeight="semibold" 
+              fontSize="lg" 
+              className={`text-[#495057] cursor-pointer`}
+              onClick={handleGoToSpeedTest}
+            >
+              {t('Speed test')}
+            </Text>
+          : null}
         </div>
         <Button
           size='small'

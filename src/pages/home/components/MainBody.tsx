@@ -33,9 +33,9 @@ const MainBody = () => {
 
 
   useEffect(() => {
-    // if(getInfo.data && !getInfo.data.telegram_id){
+    if(getInfo.data && !getInfo.data?.telegram_id && getInfo.data?.telegram_bot_url){
       setIsModalOpen(true)
-    // }
+    }
   }, [getInfo.data])
 
 
