@@ -129,11 +129,11 @@ const ShareLinks: React.FC<propsTypes> = ({ isModalOpen }) => {
                     style: { resize: "both" },
                     endAdornment: (
                         <InputAdornment position="end">
-                            <div className='flex items-center gap-1'>
                                 {getShortLink.isLoading ? 
                                 <CircularProgress size={20} thickness={4}/>
                                 :
-                                <>
+                                <div className='flex flex-col justify-center items-center'>
+                                  <AvTimerIcon fontSize='small' />
                                   <Text fontSize='xs' fontWeight='regular' className='text-[#6C757D]'>
                                       <Countdown 
                                         onComplete={() => getShortLink.refetch()}
@@ -142,10 +142,8 @@ const ShareLinks: React.FC<propsTypes> = ({ isModalOpen }) => {
                                         date={new Date().setSeconds(new Date().getSeconds() + getShortLink.data?.expire_in )} 
                                       />
                                   </Text>
-                                  <AvTimerIcon />
-                                </>
+                                  </div>
                                 }
-                            </div>
                         </InputAdornment>
                     )
                 }}
