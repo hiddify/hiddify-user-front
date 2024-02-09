@@ -27,11 +27,11 @@ const RemainingTime = ({ remainingDays, resetIn }) => {
         setTimeRemaining(remaining)
 
         if (remaining.years > 0) {
-          setDateRepresentation(remaining.years + (remaining.years === 1 ? " " + t('year') : " " + t('years')))
+          setDateRepresentation(remaining.years + (remaining.years === 1 ? " " + t('Year') : " " + t('Years')))
         } else if (remaining.months > 0) {
-          setDateRepresentation(remaining.months + (remaining.months === 1 ? " " + t('month') : " " + t('months')))
+          setDateRepresentation(remaining.months + (remaining.months === 1 ? " " + t('Month') : " " + t('Months')))
         } else if (remaining.days > 0) {
-          setDateRepresentation(remaining.days + (remaining.days === 1 ? " " + t('day') : " " + t('days')))
+          setDateRepresentation(remaining.days + (remaining.days === 1 ? " " + t('Day') : " " + t('Days')))
         }
       }, [remainingDays]);
 
@@ -39,13 +39,13 @@ const RemainingTime = ({ remainingDays, resetIn }) => {
         <div>
           {t('Remaining time') + ': '}
           {timeRemaining.years > 0 && (
-            <span>{timeRemaining.years} {timeRemaining.years === 1 ? t('year') + ' ' : t('years') + ' '}</span>
+            <span>{timeRemaining.years} {timeRemaining.years === 1 ? t('Year') + ' ' : t('Years') + ' '}</span>
           )}
           {timeRemaining.months > 0 && (
-            <span>{timeRemaining.months} {timeRemaining.months === 1 ? t('month') + ' ' : t('months') + ' '}</span>
+            <span>{timeRemaining.months} {timeRemaining.months === 1 ? t('Month') + ' ' : t('Months') + ' '}</span>
           )}
           {timeRemaining.days > 0 && (
-            <span>{timeRemaining.days} {timeRemaining.days === 1 ? t('day') + ' ' : t('days') + ' '}</span>
+            <span>{timeRemaining.days} {timeRemaining.days === 1 ? t('Day') + ' ' : t('Days') + ' '}</span>
           )}
         </div>
       );
