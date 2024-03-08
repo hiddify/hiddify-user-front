@@ -19,6 +19,7 @@ import { Button } from "antd";
 const MainBody = () => {
   const [isAppModalOpen, setIsAppModalOpen] = useState(false)
   const [isModalOpen, setIsModalOpen] = useState(false)
+  const [disableTeleModal, setDisableTeleModal] = useState(false)
   const { t } = useTranslation();
 
   const isMobile = useMediaQuery('(max-width: 767px)');
@@ -33,7 +34,7 @@ const MainBody = () => {
 
 
   useEffect(() => {
-    if(getInfo.data){
+    if(getInfo.data && !disableTeleModal){
       if(
         getInfo.data?.telegram_bot_url && 
         getInfo.data?.telegram_bot_url?.length && 
@@ -83,7 +84,7 @@ const MainBody = () => {
           {!isMobile && <ShareLinks />}
         </div>
         {isAppModalOpen ? <iframe className="hidden" src={deepLink} width="0" height="0"></iframe> : null}
-        <Modal isModalOpen={isModalOpen} closeModal={() => setIsModalOpen(false)} title={t('Connect To Telegram')}>
+        <Modal isModalOpen={isModalOpen} closeModal={() => {setIsModalOpen(false); setDisableTeleModal(true)}} title={t('Connect To Telegram')}>
           <div className="flex flex-col gap-10">
             <Text fontSize='base' fontWeight='medium' className='text-[#212529] max-w-[400px]'>
               {t('Please connect your Telegram account to the panel to know the latest status of your subscription')}
