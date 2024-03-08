@@ -147,18 +147,22 @@ const AllConfigs: React.FC = () => {
                                 },
                             };
                         }}
-                        dataSource={configs ? configs.map((item, index) => ({
+                        dataSource={configs?.map((item, index) => ({
                             key: index,
                             name: item.name ? item.name : '',
                             domain: item.link ? item.link : '',
-                            actionData: {link: item.link, domain: item.domain, title: item.name},
+                            actionData: {
+                                link: item?.link ? item?.link : undefined, 
+                                domain: item?.domain ? item?.domain : undefined, 
+                                title: item?.name ? item?.name : undefined
+                            },
                             tags: [
                                 item.security ? item.security : undefined,
                                 item.transport ? item.transport : undefined,
                                 item.protocol ? item.protocol : undefined,
                                 item.type ? item.type : undefined
                             ]
-                        })) : []} 
+                        }))} 
                     />
                 </Spin>
             </section>
