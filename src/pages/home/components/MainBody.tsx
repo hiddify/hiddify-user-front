@@ -34,19 +34,11 @@ const MainBody = () => {
 
   useEffect(() => {
     if(getInfo.data){
-      const hasTeleId = (
-        getInfo.data?.telegram_id !== 0 || 
-        getInfo.data?.telegram_id !== undefined || 
-        getInfo.data?.telegram_id !== null || 
-        getInfo.data?.telegram_id !== '')
-
-      const hasTeleBotUrl = (
-        getInfo.data?.telegram_bot_url !== '' &&
-        getInfo.data?.telegram_bot_url !== null &&
-        getInfo.data?.telegram_bot_url !== undefined
-      )
-
-      if(hasTeleBotUrl && !hasTeleId){
+      if(
+        getInfo.data?.telegram_bot_url && 
+        getInfo.data?.telegram_bot_url?.length && 
+        getInfo.data?.telegram_id === null
+        ){
         setIsModalOpen(true)
       }
     }
