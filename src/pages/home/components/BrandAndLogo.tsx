@@ -1,6 +1,6 @@
 import { Text } from "@designSystem/Text"
 import { CardMedia } from "@mui/material";
-import HLogo from '@assets/images/hiddify-logo.png'
+import HLogo from '@assets/images/hiddify-logo-noroz.png'
 import { getWindowData } from "../../../utils/getWindowData";
 import { useState } from "react";
 

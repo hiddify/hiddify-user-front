@@ -4,50 +4,19 @@ import AccessAlarmIcon from '@mui/icons-material/AccessAlarm';
 import AllInclusiveIcon from '@mui/icons-material/AllInclusive';
 import { ClickAwayListener, Tooltip } from '@mui/material';
 import { useEffect, useState } from 'react';
+import moment from 'moment';
 
 
 const RemainingTime = ({ remainingDays, resetIn }) => {
     const [showFullTime, setShowFullTime] = useState(false)
-    const [dateRepresentation, setDateRepresentation] = useState('-')
     const { t } = useTranslation();
-
-    const calculateRemainingTime = (days) => {
-        const years = Math.floor(days / 365);
-        const months = Math.floor((days % 365) / 30);
-        const daysLeft = days % 365 === 0 || days % 30 === 0 ? 0 : days % 30;
     
-        return { years, months, days: daysLeft };
-      };
-    
-      const [timeRemaining, setTimeRemaining] = useState(calculateRemainingTime(remainingDays));
-    
-      useEffect(() => {
-        const remaining = calculateRemainingTime(remainingDays)
-
-        setTimeRemaining(remaining)
-
-        if (remaining.years > 0) {
-          setDateRepresentation(remaining.years + (remaining.years === 1 ? " " + t('Year') : " " + t('Years')))
-        } else if (remaining.months > 0) {
-          setDateRepresentation(remaining.months + (remaining.months === 1 ? " " + t('Month') : " " + t('Months')))
-        } else if (remaining.days > 0) {
-          setDateRepresentation(remaining.days + (remaining.days === 1 ? " " + t('Day') : " " + t('Days')))
-        }
-      }, [remainingDays]);
 
       const tooltipContent = (
-        <div>
+        <span>
           {t('Remaining time') + ': '}
-          {timeRemaining.years > 0 && (
-            <span>{timeRemaining.years} {timeRemaining.years === 1 ? t('Year') + ' ' : t('Years') + ' '}</span>
-          )}
-          {timeRemaining.months > 0 && (
-            <span>{timeRemaining.months} {timeRemaining.months === 1 ? t('Month') + ' ' : t('Months') + ' '}</span>
-          )}
-          {timeRemaining.days > 0 && (
-            <span>{timeRemaining.days} {timeRemaining.days === 1 ? t('Day') + ' ' : t('Days') + ' '}</span>
-          )}
-        </div>
+          {remainingDays ? remainingDays + ' ' + t('Days') : '-'}
+        </span>
       );
 
   return (
@@ -62,7 +31,7 @@ const RemainingTime = ({ remainingDays, resetIn }) => {
                         {t('Remaining time')}
                     </Text>
                     <Text className="text-[#212529] whitespace-nowrap" fontSize="sm" fontWeight="regular">
-                        {remainingDays > 1000 ? <AllInclusiveIcon className='text-[#212529]' fontSize='small' /> : dateRepresentation ? dateRepresentation : '-'}
+                        {remainingDays > 1000 ? <AllInclusiveIcon className='text-[#212529]' fontSize='small' /> : remainingDays ? remainingDays + ' ' + t('Days') : '-'}
                     </Text>
                 </div>
             </div>
