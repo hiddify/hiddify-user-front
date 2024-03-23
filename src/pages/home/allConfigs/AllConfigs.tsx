@@ -150,7 +150,7 @@ const AllConfigs: React.FC = () => {
                         dataSource={configs?.map((item, index) => ({
                             key: index,
                             name: item.name ? item.name : '',
-                            domain: item.link ? item.link : '',
+                            domain: item.domain ? item.domain : '',
                             actionData: {
                                 link: item?.link ? item?.link : undefined, 
                                 domain: item?.domain ? item?.domain : undefined, 
