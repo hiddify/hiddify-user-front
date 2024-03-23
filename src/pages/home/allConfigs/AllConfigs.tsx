@@ -88,7 +88,7 @@ const AllConfigs: React.FC = () => {
           title: <Text fontSize='lg' fontWeight='black'>{t('Name')}</Text>,
           dataIndex: 'name',
           key: 'name',
-          render: (name) => <Text fontSize='sm' fontWeight='regular' lineClamp='1' className='text-[#6C757D]'>{name}</Text>,
+          render: (name) => <Text fontSize='sm' fontWeight='regular' className='text-[#6C757D] whitespace-nowrap'>{name}</Text>,
         },
         {
           title: <Text fontSize='lg' fontWeight='black'>{t('Domain')}</Text>,
