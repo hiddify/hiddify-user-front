@@ -91,12 +91,6 @@ const AllConfigs: React.FC = () => {
           render: (name) => <Text fontSize='sm' fontWeight='regular' className='text-[#6C757D] whitespace-nowrap'>{name}</Text>,
         },
         {
-          title: <Text fontSize='lg' fontWeight='black'>{t('Domain')}</Text>,
-          dataIndex: 'domain',
-          key: 'domain',
-          render: (domain) => <Text fontSize='sm' fontWeight='regular' lineClamp='1' className='max-w-[200px] text-[#6C757D]'>{domain}</Text>,
-        },
-        {
           title: <Text fontSize='lg' fontWeight='black'>{t('Tags')}</Text>,
           key: 'tags',
           dataIndex: 'tags',
@@ -150,13 +144,13 @@ const AllConfigs: React.FC = () => {
                         dataSource={configs?.map((item, index) => ({
                             key: index,
                             name: item.name ? item.name : '',
-                            domain: item.domain ? item.domain : '',
                             actionData: {
                                 link: item?.link ? item?.link : undefined, 
                                 domain: item?.domain ? item?.domain : undefined, 
                                 title: item?.name ? item?.name : undefined
                             },
                             tags: [
+                                item.domain ? item.domain : undefined,
                                 item.security ? item.security : undefined,
                                 item.transport ? item.transport : undefined,
                                 item.protocol ? item.protocol : undefined,
