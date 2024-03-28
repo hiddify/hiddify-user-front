@@ -3,7 +3,7 @@ import ShareIcon from '@mui/icons-material/Share';
 import MenuDropdown from "./MenuDropdown";
 import { Dispatch, FC, SetStateAction, useState } from "react";
 import { Button, CardMedia, Tooltip } from "@mui/material";
-import HLogo from '@assets/images/hiddify-logo-noroz.png'
+import HLogo from '@assets/images/hiddify-logo.png'
 import { Modal } from "../../../designSystem/Modal";
 import ShareLinks from "./ShareLinks";
 import DohContent from "./DohContent";

@@ -52,11 +52,19 @@ const MainBody = () => {
           <div className='w-full h-full bg-[#E0E4F5] rounded-b-[24px] md:rounded-[24px] bg-opacity-50 relative'>
             <div className="w-full absolute top-[40%] md:top-1/2 left-1/2 -translate-x-1/2 -translate-y-[40%] md:-translate-y-1/2 flex items-center flex-col gap-7">
               <UserFullName fullName={getInfo.data?.profile_title ? getInfo.data?.profile_title : ''} />
-              <div className="px-10 md:px-8 lg:px-10 w-full max-w-[400px] flex items-center justify-between">
-                <UsedTraffic 
-                  current={getInfo.data?.profile_usage_current ? getInfo.data?.profile_usage_current : ''} 
-                  total={getInfo.data?.profile_usage_total ? getInfo.data?.profile_usage_total : ''} 
-                />
+              <div className="px-10 md:px-8 lg:px-10 w-full max-w-[400px] flex items-start justify-between">
+                <div className="flex flex-col">
+                  <UsedTraffic 
+                    current={getInfo.data?.profile_usage_current ? getInfo.data?.profile_usage_current : ''} 
+                    total={getInfo.data?.profile_usage_total ? getInfo.data?.profile_usage_total : ''} 
+                  />
+                  {getInfo.data?.profile_remaining_days && getInfo.data?.profile_reset_days && getInfo.data?.profile_reset_days < getInfo.data?.profile_remaining_days ?
+                    <Text className="text-gray-500 whitespace-nowrap" fontSize="xs" fontWeight="extralight">
+                        {t('Reset In') + " "} {getInfo.data?.profile_reset_days} {" " + t("Days")}
+                    </Text>
+                  : null}
+                </div>
+                
                 <RemainingTime 
                   remainingDays={getInfo.data?.profile_remaining_days ? getInfo.data?.profile_remaining_days : ''} 
                   resetIn={getInfo.data?.profile_reset_days ? getInfo.data?.profile_reset_days : ''}  
