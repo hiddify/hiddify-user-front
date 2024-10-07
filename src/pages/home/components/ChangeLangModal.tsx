@@ -7,6 +7,7 @@ import Select, { SelectChangeEvent } from '@mui/material/Select';
 import useAPI from '../../../hooks/useAPI';
 import LoadingButton from '@mui/lab/LoadingButton';
 import SaveIcon from '@mui/icons-material/Save';
+import { useSearchParams } from "react-router-dom"
 
 type propsType = {
     setChangeLangModal: Dispatch<SetStateAction<boolean>>
@@ -18,10 +19,17 @@ const ChangeLangModal: React.FC<propsType> = ({ setChangeLangModal }) => {
 
     const patchLang = useAPI('me/', 'patch', {});
 
+    const [searchParams, setSearchParams] = useSearchParams()
+    const username = searchParams.get("username")
+    const password = searchParams.get("password")
     const getInfo = useAPI(
-        'me/',
+        'https://tunnelino.com/api/v1/me',
         'get',
-        { reactQueryOptions: { enabled: true } }
+        {
+          query: { username, password },
+          reactQueryOptions: { enabled: true },
+          // Pass the extracted query params to the API
+        }
       );
 
     const getApps = useAPI(
@@ -89,8 +97,8 @@ const ChangeLangModal: React.FC<propsType> = ({ setChangeLangModal }) => {
                     textTransform: 'none',
                     fontFamily: "Vazirmatn, sans-serif",
                     color: 'white',
-                    backgroundColor: '#455FE9',
-                    border: '1px solid #455FE9',
+                    backgroundColor: '#118ae9',
+                    border: '1px solid #118ae9',
                     borderRadius: '8px'
                 }}
             >

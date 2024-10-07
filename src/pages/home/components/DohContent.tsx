@@ -4,17 +4,24 @@ import ContentCopyIcon from '@mui/icons-material/ContentCopy';
 import { Text } from '../../../designSystem/Text';
 import copy from 'clipboard-copy';
 import { useTranslation } from 'react-i18next';
+import { useSearchParams } from "react-router-dom"
 
 
 
 const DohContent = () => {
     const { t } = useTranslation();
-
+    const [searchParams, setSearchParams] = useSearchParams()
+    const username = searchParams.get("username")
+    const password = searchParams.get("password")
     const getInfo = useAPI(
-        'me/',
+        'https://tunnelino.com/api/v1/me',
         'get',
-        { reactQueryOptions: { enabled: true } }
-    );
+        {
+          query: { username, password },
+          reactQueryOptions: { enabled: true },
+          // Pass the extracted query params to the API
+        }
+      );
 
     const CopyButton = styled(Button)<ButtonProps>(() => ({
         color: '#ADB5BD',

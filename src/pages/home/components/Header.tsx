@@ -3,7 +3,7 @@ import ShareIcon from '@mui/icons-material/Share';
 import MenuDropdown from "./MenuDropdown";
 import { Dispatch, FC, SetStateAction, useState } from "react";
 import { Button, CardMedia, Tooltip } from "@mui/material";
-import HLogo from '@assets/images/hiddify-logo.png'
+import HLogo from '@assets/images/apple-touch-icon.png'
 import { Modal } from "../../../designSystem/Modal";
 import ShareLinks from "./ShareLinks";
 import DohContent from "./DohContent";
@@ -12,6 +12,7 @@ import TranslateIcon from '@mui/icons-material/Translate';
 import ChangeLangModal from "./ChangeLangModal";
 import { getCurrentUrl } from "../../../utils/getCurrentUrl";
 import useAPI from "../../../hooks/useAPI";
+import { useSearchParams } from "react-router-dom"
 
 type propsTypes = {
   setShowAllConfigs:  Dispatch<SetStateAction<boolean>>;
@@ -37,6 +38,9 @@ const Header: FC<propsTypes> = (props) => {
   const [shareModal, setShareModal ] = useState(false)
   const [dohModal, setDohModal ] = useState(false)
   const [changeLangModal, setChangeLangModal] = useState(false)
+  const [searchParams, setSearchParams] = useSearchParams()
+  const username = searchParams.get("username")
+  const password = searchParams.get("password")
 
   const { t } = useTranslation();
 
@@ -59,9 +63,13 @@ const Header: FC<propsTypes> = (props) => {
   }
 
   const getInfo = useAPI(
-    'me/',
+    'https://tunnelino.com/api/v1/me',
     'get',
-    { reactQueryOptions: { enabled: true } }
+    {
+      query: { username, password },
+      reactQueryOptions: { enabled: true },
+      // Pass the extracted query params to the API
+    }
   );
 
   const handleGoToSpeedTest = () => {
@@ -91,9 +99,9 @@ const Header: FC<propsTypes> = (props) => {
           <Text 
             fontWeight="medium" 
             fontSize="xl" 
-            className="text-[#455FE9]" 
+            className="text-[#118ae9]" 
           >
-            {info?.brand_title ? info?.brand_title : t('Hiddify')}
+            {info?.brand_title ? info?.brand_title : t('Tunnelino')}
           </Text>
         </div>
         <Button onClick={() => setShareModal(true)} className='bg-transparent [&.css-1e6y48t-MuiButtonBase-root-MuiButton-root]:min-w-[unset]'>
@@ -108,42 +116,18 @@ const Header: FC<propsTypes> = (props) => {
                 image={info?.brand_icon_url ? info?.brand_icon_url : HLogo}
                 title="Logo"
             />
-            <Text fontWeight="semibold" fontSize="lg" className="hidden lg:block text-[#455FE9]" >{info?.brand_title ? info?.brand_title : t('Hiddify')}</Text>
+            <Text fontWeight="semibold" fontSize="lg" className="hidden lg:block text-[#118ae9]" >{info?.brand_title ? info?.brand_title : t('Tunnelino')}</Text>
           </div>
-          <Text 
-            onClick={showMainBodyFun} 
-            fontWeight="semibold" 
-            fontSize="xl" 
-            className={`text-[#495057] cursor-pointer ${showMainBody && 'underline decoration-[#455FE9] decoration-solid decoration-[2px] underline-offset-8'}`}
-          >
-            {t('Home')}
-          </Text>
-          <Text 
-            onClick={showAllConfigsFun} 
-            fontWeight="semibold" 
-            fontSize="lg" 
-            className={`text-[#495057] cursor-pointer ${showAllConfigs && 'underline decoration-[#455FE9] decoration-solid decoration-[2px] underline-offset-8'}`}
-          >
-            {t('All Configs')}
-          </Text>
           {getInfo.data && getInfo.data?.telegram_proxy_enable ? 
             <Text 
               onClick={showTeleProxyFun} 
               fontWeight="semibold" 
               fontSize="lg" 
-              className={`text-[#495057] cursor-pointer ${showTeleProxy && 'underline decoration-[#455FE9] decoration-solid decoration-[2px] underline-offset-8'}`}
+              className={`text-[#495057] cursor-pointer ${showTeleProxy && 'underline decoration-[#118ae9] decoration-solid decoration-[2px] underline-offset-8'}`}
             >
               {t('Telegram proxy')}
             </Text>
           : null}
-          <Text 
-            onClick={() => setDohModal(true)} 
-            fontWeight="semibold" 
-            fontSize="lg" 
-            className={`text-[#495057] cursor-pointer ${dohModal && 'underline decoration-[#455FE9] decoration-solid decoration-[2px] underline-offset-8'}`}
-          >
-            {t('DoH')}
-          </Text>
           {getInfo.data && getInfo.data?.speedtest_enable ? 
             <Text 
               fontWeight="semibold" 

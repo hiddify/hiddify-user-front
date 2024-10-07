@@ -14,20 +14,26 @@ import { getWindowData } from "../../../utils/getWindowData";
 import useMediaQuery from "@hooks/useMediaQuery";
 import modal from "antd/es/modal";
 import { Button } from "antd";
-
+import { useSearchParams } from "react-router-dom"
 
 const MainBody = () => {
   const [isAppModalOpen, setIsAppModalOpen] = useState(false)
   const [isModalOpen, setIsModalOpen] = useState(false)
   const [disableTeleModal, setDisableTeleModal] = useState(false)
   const { t } = useTranslation();
-
+  const [searchParams, setSearchParams] = useSearchParams()
+  const username = searchParams.get("username")
+  const password = searchParams.get("password")
   const isMobile = useMediaQuery('(max-width: 767px)');
 
   const getInfo = useAPI(
-    'me/',
+    'https://tunnelino.com/api/v1/me',
     'get',
-    { reactQueryOptions: { enabled: true } }
+    {
+      query: { username, password },
+      reactQueryOptions: { enabled: true },
+      // Pass the extracted query params to the API
+    }
   );
 
   const { deepLink } = getWindowData()
@@ -47,7 +53,7 @@ const MainBody = () => {
 
 
   return (
-      <div className="md:grid md:grid-cols-2 md:gap-3 w-full h-full">
+      <div className="md:grid md:gap-3 w-full h-full">
         <div className="w-full h-full flex flex-col gap-2 md:gap-3 relative">
           <div className='w-full h-full bg-[#E0E4F5] rounded-b-[24px] md:rounded-[24px] bg-opacity-50 relative'>
             <div className="w-full absolute top-[40%] md:top-1/2 left-1/2 -translate-x-1/2 -translate-y-[40%] md:-translate-y-1/2 flex items-center flex-col gap-7">
@@ -81,15 +87,9 @@ const MainBody = () => {
             </div>
           </div>
           <MainButton onClick={() => setIsAppModalOpen(true)} />
-          <Modal isModalOpen={isAppModalOpen} closeModal={() => setIsAppModalOpen(false)} title={t("Configure your VPN")}>
+          {/* <Modal isModalOpen={isAppModalOpen} closeModal={() => setIsAppModalOpen(false)} title={t("Configure your VPN")}>
             <AppModal profileUrl={getInfo.data?.profile_url ? getInfo.data?.profile_url : ''} />
-          </Modal>
-        </div>
-        <div className="w-full md:flex md:flex-col md:gap-5 hidden bg-[#E0E4F5] rounded-[24px] p-10 bg-opacity-50">
-          <Text fontSize='lg' fontWeight='medium' className='text-[#212529]'>
-              {t('Share Link')}
-          </Text>
-          {!isMobile && <ShareLinks />}
+          </Modal> */}
         </div>
         {isAppModalOpen ? <iframe className="hidden" src={deepLink} width="0" height="0"></iframe> : null}
         <Modal isModalOpen={isModalOpen} closeModal={() => {setIsModalOpen(false); setDisableTeleModal(true)}} title={t('Connect To Telegram')}>

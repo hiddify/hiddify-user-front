@@ -55,7 +55,7 @@ const AppModal = ({ profileUrl }) => {
       );
 
     const CopyLinkButton = styled(Button)<ButtonProps>(() => ({
-        color: '#455FE9',
+        color: '#118ae9',
         backgroundColor: '#E0E4F5',
         border: '1px solid #E0E4F5',
         borderRadius: '8px',
@@ -192,7 +192,7 @@ const AppModal = ({ profileUrl }) => {
                             {app && app.guide_url ? t('View Youtube Tutorial...') : ''}
                         </Text>
                         <CopyLinkButton style={{ textTransform: 'none', fontFamily: "Vazirmatn, sans-serif"}} onClick={() => importApp(app && app.deeplink ? app.deeplink : undefined)}>
-                            <Text className='text-[#455FE9] mr-2'>{app && app.deeplink ? t('Import To App') : t('Copy Link')}</Text>
+                            <Text className='text-[#118ae9] mr-2'>{app && app.deeplink ? t('Import To App') : t('Copy Link')}</Text>
                             {app && app.deeplink ? null : <ContentCopyIcon />}
                         </CopyLinkButton>
                     </div>
@@ -257,7 +257,7 @@ const AppModal = ({ profileUrl }) => {
                 </div>
                 <div className='w-full flex items-end justify-end'>
                     <CopyLinkButton style={{ textTransform: 'none', fontFamily: "Vazirmatn, sans-serif"}} onClick={() => copy(profileUrl)}>
-                        <Text className='text-[#455FE9] mr-2'>{t('Copy Link')}</Text>
+                        <Text className='text-[#118ae9] mr-2'>{t('Copy Link')}</Text>
                         <ContentCopyIcon />
                     </CopyLinkButton>
                 </div>

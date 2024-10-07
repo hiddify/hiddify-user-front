@@ -7,8 +7,8 @@ const SupportInfo = ({viewMoreUrl, adminMessageHtml}) => {
     const { t } = useTranslation();
 
     const ViewMoreButton = styled(Button)<ButtonProps>(() => ({
-        color: '#455FE9',
-        border: '1px solid #455FE9',
+        color: '#118ae9',
+        border: '1px solid #118ae9',
         padding: '6px, 12px, 6px, 12px',
         borderRadius: '8px',
         fontSize: '14px',

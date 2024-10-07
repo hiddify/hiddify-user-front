@@ -48,8 +48,8 @@ function Row(props) {
 
   const OpenTeleBtn = styled(Button)<ButtonProps>(() => ({
     color: 'white',
-    backgroundColor: '#455FE9',
-    border: '1px solid #455FE9',
+    backgroundColor: '#118ae9',
+    border: '1px solid #118ae9',
     borderRadius: '8px',
     "&:hover": {
         backgroundColor: 'blue'

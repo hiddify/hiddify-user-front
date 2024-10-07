@@ -1,6 +1,6 @@
 import { Text } from "@designSystem/Text"
 import { CardMedia } from "@mui/material";
-import HLogo from '@assets/images/hiddify-logo.png'
+import HLogo from '@assets/images/apple-touch-icon.png'
 import { getWindowData } from "../../../utils/getWindowData";
 import { useState } from "react";
 
@@ -18,7 +18,7 @@ const BrandAndLogo = () => {
           <CardMedia
               sx={{ height: 24, width: 24 }}
               image={HLogo}
-              title="Hiddify Logo"
+              title="Tunnelino Logo"
           />
         </div>
     </div>

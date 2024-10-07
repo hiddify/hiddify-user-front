@@ -8,8 +8,8 @@ import CircularProgress from '@mui/material/CircularProgress';
 import { QRCode } from 'react-qrcode-logo';
 import copy from 'clipboard-copy';
 import { useTranslation } from 'react-i18next';
-import HlogoPurpleBg from "@assets/images/hiddify-logo-gray-bg-purple.png"
-import HlogoWhiteBg from "@assets/images/hiddify-logo-gray-bg-white.png"
+import HlogoPurpleBg from "@assets/images/apple-touch-icon.png"
+import HlogoWhiteBg from "@assets/images/apple-touch-icon.png"
 import React from 'react';
 
 
@@ -110,7 +110,7 @@ const ShareLinks: React.FC<propsTypes> = ({ isModalOpen }) => {
               </div>
             }
         </div>
-        <div className='flex gap-5 flex-col'>
+        {/* <div className='flex gap-5 flex-col'>
             <div className='flex flex-col gap-3'>
                 <Text fontSize='base' fontWeight='regular' className='text-[#212529]'>{t('Temporary Short Link')}</Text>
                 <Text fontSize='xs' fontWeight='regular' className='text-[#212529]'>
@@ -148,7 +148,7 @@ const ShareLinks: React.FC<propsTypes> = ({ isModalOpen }) => {
                     )
                 }}
             />
-        </div>
+        </div> */}
     </div>
   )
 }

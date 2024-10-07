@@ -21,38 +21,38 @@ const Home = () => {
   const homePage = searchParams.get("home") === "true"
   const allConfigsPage = searchParams.get("allConfigs") === "true"
   const telegramProxyPage = searchParams.get("telegramProxy") === "true"
+  const username = searchParams.get("username")
+  const password = searchParams.get("password")
 
-  useEffect(() => {
-    if (showAllConfigs) {
-      setSearchParams({ allConfigs: "true" })
-    } else if(showTeleProxy) {
-      setSearchParams({ telegramProxy: "true" })
-    } else if(showMainBody) {
-      setSearchParams({ home: "true" })
-    } else {
-      if(homePage){
-        setShowMainBody(true)
-      } else if(allConfigsPage){
-        setShowAllConfigs(true)
-      } else if(telegramProxyPage){
-        setShowTeleProxy(true)
-      } else{
-        setShowMainBody(true)
-      }
-    }
-  }, [showAllConfigs, showTeleProxy, showMainBody])
-
+  // useEffect(() => {
+  //   if (showAllConfigs) {
+  //     setSearchParams({ allConfigs: "true" })
+  //   } else if(showTeleProxy) {
+  //     setSearchParams({ telegramProxy: "true" })
+  //   } else if(showMainBody) {
+  //     setSearchParams({ home: "true",username:"username",password:"password" })
+  //   } else {
+  //     if(homePage){
+  //       setShowMainBody(true)
+  //     } else if(allConfigsPage){
+  //       setShowAllConfigs(true)
+  //     } else if(telegramProxyPage){
+  //       setShowTeleProxy(true)
+  //     } else{
+  //       setShowMainBody(true)
+  //     }
+  //   }
+  // }, [showAllConfigs, showTeleProxy, showMainBody])
   const getInfo = useAPI(
-    'me/',
+    'https://tunnelino.com/api/v1/me',
     'get',
-    { reactQueryOptions: { enabled: true } }
+    {
+      query: { username, password },
+      reactQueryOptions: { enabled: true },
+      // Pass the extracted query params to the API
+    }
   );
 
-  const getApps = useAPI(
-    'apps/',
-    'get',
-    { reactQueryOptions: { enabled: true } }
-  );
 
   const { i18n: {changeLanguage, language} } = useTranslation();
 

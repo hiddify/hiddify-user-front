@@ -11,8 +11,8 @@ const PreLoading = () => {
             <div className='w-[250px] h-[250px] md:w-[350px] md:h-[350px] bg-gray-300 bg-opacity-50 rounded-full flex items-center justify-center p-20'>
               <HLogoSvg />
             </div>
-            <Text fontSize='lg' fontWeight='semibold' className='text-[#455FE9]'>Hiddify</Text>
-            <Text fontSize='lg' fontWeight='semibold' className='text-[#455FE9]'>Powered By Hiddify.com</Text>
+            <Text fontSize='lg' fontWeight='semibold' className='text-[#118ae9]'>Tunnelino</Text>
+            <Text fontSize='lg' fontWeight='semibold' className='text-[#118ae9]'>Powered By Tunnelino.com</Text>
         </div>
     </div>
   )

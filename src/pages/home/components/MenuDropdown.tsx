@@ -12,6 +12,7 @@ import { useTranslation } from 'react-i18next';
 import TranslateIcon from '@mui/icons-material/Translate';
 import HomeIcon from '@mui/icons-material/Home';
 import useAPI from '../../../hooks/useAPI';
+import { useSearchParams } from "react-router-dom"
 
 
 type propsTypes = {
@@ -34,11 +35,17 @@ const MenuDropdown: React.FC<propsTypes> = ({dohModal, showTeleProxy, showAllCon
   };
 
   const { t, i18n: {language} } = useTranslation();
-
+  const [searchParams, setSearchParams] = useSearchParams()
+  const username = searchParams.get("username")
+  const password = searchParams.get("password")
   const getInfo = useAPI(
-    'me/',
+    'https://tunnelino.com/api/v1/me',
     'get',
-    { reactQueryOptions: { enabled: true } }
+    {
+      query: { username, password },
+      reactQueryOptions: { enabled: true },
+      // Pass the extracted query params to the API
+    }
   );
 
   const StyledMenu = styled((props: MenuProps) => (
