@@ -4,14 +4,37 @@
 
 :root {
   --vh-offset: 0;
+  /* Same stack as admin_v2; fa swaps in Vazirmatn FD (۰۱۲۳…) */
+  --ui-font: Vazirmatn, sans-serif;
+}
+
+html[lang='fa'] {
+  --ui-font: 'Vazirmatn FD', Vazirmatn, sans-serif;
 }
 
 body {
   margin: 0;
   padding: 0;
+  font-family: var(--ui-font);
 }
 
 .fa-font {
+  font-family: var(--ui-font);
+}
+
+/* Ant Design Spin tip uses its own stack; keep the page font */
+.ant-spin,
+.ant-spin-text,
+.ant-spin-nested-loading {
+  font-family: var(--ui-font);
+}
+
+/* Links / URLs must keep Latin digits (copy-paste safe) */
+html[lang='fa'] [dir='ltr'] input,
+html[lang='fa'] [dir='ltr'] textarea,
+html[lang='fa'] input[dir='ltr'],
+html[lang='fa'] textarea[dir='ltr'],
+html[lang='fa'] .latin-digits {
   font-family: Vazirmatn, sans-serif;
 }
 
@@ -38,7 +61,7 @@ body {
 }
 
 input::placeholder {
-  font-family: Vazirmatn, sans-serif
+  font-family: var(--ui-font);
 }
 
 .rtl {

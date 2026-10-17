@@ -1,25 +1,30 @@
+import path from 'node:path'
+import { fileURLToPath } from 'node:url'
 import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react'
-import svgr from "vite-plugin-svgr";
-import tsconfigPaths from 'vite-tsconfig-paths';
+import svgr from 'vite-plugin-svgr'
+import tsconfigPaths from 'vite-tsconfig-paths'
 
+const root = path.dirname(fileURLToPath(import.meta.url))
 
-// https://vitejs.dev/config/
+// Same layout as admin_v2: source here, production bundle in ../static/user-front/.
+// Flask reads the Vite manifest and serves a Jinja shell (panel/user/templates/user_front.html).
 export default defineConfig({
+  root,
+  base: './',
+  publicDir: path.resolve(root, 'public'),
   resolve: {
-    //FIX AWS-Amplify Error
     alias: {
       './runtimeConfig': './runtimeConfig.browser',
       'xmlhttprequest-ssl': './node_modules/engine.io-client/lib/xmlhttprequest.js',
     },
   },
   plugins: [
-    react(), 
+    react(),
     tsconfigPaths(),
     svgr({
-      // A minimatch pattern, or array of patterns, which specifies the files in the build the plugin should include. By default all svg files will be included.
-      include: "**/*.svg?react",
-    })
+      include: '**/*.svg?react',
+    }),
   ],
   server: {
     open: true,
@@ -29,6 +34,18 @@ export default defineConfig({
     port: 5000,
   },
   build: {
-    target: 'esnext' //browsers can handle the latest ES features
-  }
+    outDir: path.resolve(root, '../static/user-front'),
+    emptyOutDir: true,
+    target: 'esnext',
+    manifest: true,
+    reportCompressedSize: false,
+    rollupOptions: {
+      maxParallelFileOps: 2,
+      output: {
+        entryFileNames: 'assets/[name]-[hash].js',
+        chunkFileNames: 'assets/[name]-[hash].js',
+        assetFileNames: 'assets/[name]-[hash][extname]',
+      },
+    },
+  },
 })

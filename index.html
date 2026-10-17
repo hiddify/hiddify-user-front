@@ -2,26 +2,17 @@
 <html>
   <head>
     <meta charset="UTF-8" />
-    
-    <meta name="apple-itunes-app" content="app-id=6596777532, app-argument=hiddify://import/{{profile_url}}">
-    <meta name="google-play-app" content="app-id=app.hiddify.com">
-    
-    <link rel="icon" type="image/png" href="./src/assets/images/hiddify-logo.png" />
-<!--     <link rel="stylesheet" href="node_modules/smartbanner.js/dist/smartbanner.min.css"> -->
-    <link href="https://cdn.jsdelivr.net/gh/rastikerdar/vazirmatn@v33.003/Vazirmatn-font-face.css" rel="stylesheet" type="text/css" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="icon" type="image/x-icon" href="{{ static_url_for( filename='images/favicon.ico')}}">
-    <link rel="manifest" href="{{ url_for('common_bp.LoginView:create_pwa_manifest',secret_uuid=g.account.uuid or '')}}">
-    
-    <title>Hiddify | Panel</title>
+    <title>Hiddify | Panel (dev)</title>
+    <!-- Production uses panel/user/templates/user_front.html (Flask + Vite manifest). -->
   </head>
   <body>
     <div id="root"></div>
-    <script type="module" src="./src/main.tsx"></script>
-    <!--<script src="node_modules/smartbanner.js/dist/smartbanner.min.js"></script>-->
     <script>
-      window.appVersion = '{{version}}';
-      window.deepLink = "hiddify://import/{{profile_url}}"
+      window.appVersion = window.appVersion || "dev";
+      window.deepLink = window.deepLink || "";
+      window.__USER_FRONT_STATIC__ = window.__USER_FRONT_STATIC__ || "";
     </script>
+    <script type="module" src="./src/main.tsx"></script>
   </body>
 </html>

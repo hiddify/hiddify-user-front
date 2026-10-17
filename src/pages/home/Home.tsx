@@ -57,6 +57,9 @@ const Home = () => {
   const { i18n: {changeLanguage, language} } = useTranslation();
 
   useEffect(() => {
+    // Match admin_v2: html lang drives Vazirmatn FD (Persian digits) via CSS.
+    document.documentElement.lang = language || 'en'
+    document.documentElement.dir = language === 'fa' ? 'rtl' : 'ltr'
     if (language === 'fa') {
       document.body.classList.add('rtl');
       document.body.classList.add('fa-font');

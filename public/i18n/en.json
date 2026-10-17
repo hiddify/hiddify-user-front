@@ -71,5 +71,10 @@
     "Days": "Days",
     "Used Traffic": "Used Traffic",
     "Please connect your Telegram account to the panel to know the latest status of your subscription": "Please connect your Telegram account to the panel to know the latest status of your subscription",
-    "Connect To Telegram": "Connect To Telegram"
+    "Connect To Telegram": "Connect To Telegram",
+    "Subscription Links": "Subscription Links",
+    "Individual Configs": "Individual Configs",
+    "No configurations": "No configurations",
+    "Loading": "Loading…",
+    "Loading configurations": "Loading configurations…"
 }

@@ -1,3 +1,5 @@
+import 'vazirmatn/Vazirmatn-font-face.css'
+import 'vazirmatn/misc/Farsi-Digits/Vazirmatn-FD-font-face.css'
 import '@assets/styles/index.css'
 import '@assets/styles/animate.css'
 import React from 'react'

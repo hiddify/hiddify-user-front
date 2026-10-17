@@ -110,7 +110,7 @@ const MenuDropdown: React.FC<propsTypes> = ({dohModal, showTeleProxy, showAllCon
           onClick={() => {
             showMainBodyFun(); handleClose()}
           } 
-          style={{ fontFamily: 'Vazirmatn, sans-serif' }}
+          style={{ fontFamily: 'var(--ui-font)' }}
           disableRipple
         >
           <HomeIcon />
@@ -120,7 +120,7 @@ const MenuDropdown: React.FC<propsTypes> = ({dohModal, showTeleProxy, showAllCon
           onClick={() => {
             showAllConfigs(); handleClose()}
           } 
-          style={{ fontFamily: 'Vazirmatn, sans-serif' }}
+          style={{ fontFamily: 'var(--ui-font)' }}
           disableRipple
         >
           <QrCodeIcon />
@@ -131,7 +131,7 @@ const MenuDropdown: React.FC<propsTypes> = ({dohModal, showTeleProxy, showAllCon
             onClick={() => {
               showTeleProxy(); handleClose()}
             } 
-            style={{ fontFamily: 'Vazirmatn, sans-serif' }}
+            style={{ fontFamily: 'var(--ui-font)' }}
             disableRipple
           >
             <TelegramIcon />
@@ -142,19 +142,19 @@ const MenuDropdown: React.FC<propsTypes> = ({dohModal, showTeleProxy, showAllCon
           onClick={() => {
             dohModal(true); handleClose()}
           } 
-          style={{ fontFamily: 'Vazirmatn, sans-serif' }}
+          style={{ fontFamily: 'var(--ui-font)' }}
           disableRipple
         >
           <DnsIcon />
           {t('DNS over HTTPS')}
         </MenuItem>
         {getInfo.data && getInfo.data?.speedtest_enable ? 
-          <MenuItem style={{ fontFamily: 'Vazirmatn, sans-serif' }} onClick={() => { handleGoToSpeedTest(); handleClose();}} disableRipple>
+          <MenuItem style={{ fontFamily: 'var(--ui-font)' }} onClick={() => { handleGoToSpeedTest(); handleClose();}} disableRipple>
             <SpeedIcon />
             {t('Speed Test')}
           </MenuItem>
         : null}
-        <MenuItem style={{ fontFamily: 'Vazirmatn, sans-serif' }} onClick={() => { setChangeLangModal(true); handleClose();}} disableRipple>
+        <MenuItem style={{ fontFamily: 'var(--ui-font)' }} onClick={() => { setChangeLangModal(true); handleClose();}} disableRipple>
           <TranslateIcon />
           {t('Language Settings')}
         </MenuItem>
