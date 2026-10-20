@@ -8,6 +8,9 @@ import { router } from './routes/routes'
 import { RouterProvider } from 'react-router-dom'
 import { QueryClient, QueryClientProvider } from 'react-query'
 import "./i18n";
+import { setupTelegramMiniApp } from "./utils/telegramMiniApp";
+
+setupTelegramMiniApp();
 
 
 const queryClient: QueryClient = new QueryClient({
