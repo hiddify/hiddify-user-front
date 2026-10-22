@@ -1,4 +1,5 @@
 /* eslint-disable @typescript-eslint/ban-ts-comment */
+import { hiddify } from './hiddify';
 
 type windowDataTypes = {
     appVersion: string;
@@ -6,11 +7,13 @@ type windowDataTypes = {
 }
 
 export const getWindowData = (): windowDataTypes => {
-    //@ts-ignore
-    const appVersion: string = window.appVersion;
+    const { version, deep_link } = hiddify()
 
     //@ts-ignore
-    const deepLink: string = window.deepLink;
+    const appVersion: string = version || window.appVersion;
+
+    //@ts-ignore
+    const deepLink: string = deep_link || window.deepLink;
 
     return { deepLink, appVersion }
 }
