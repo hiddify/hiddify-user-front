@@ -6,13 +6,13 @@ import "./PwaGuide.css";
 /**
  * "Install as an app" spotlight on the home page: a looping animation of the browser's own controls — Safari on
  * iPhone / iPad, Chrome on Android, Chrome on a computer — then "Got it" and "Do not show this again".
- * Shown each time the panel is opened (once per page load), never when it already runs as the installed app.
+ * Shown once: until "Got it" (or closing it), and only when `enabled` — the user has linked Telegram, or the panel
+ * has no bot (MainBody: the Telegram spotlight comes first). Never when the panel already runs as the installed app.
  * The same guide as admin_v2's PwaInstallDialog / PwaInstallGuide.
  */
 type Platform = "ios" | "android" | "desktop";
 
 const DISMISS_KEY = "hiddify.user.pwaGuide.dismissed";
-let offeredThisLoad = false;
 
 function isStandalone(): boolean {
   return window.matchMedia?.("(display-mode: standalone)").matches || (navigator as Navigator & { standalone?: boolean }).standalone === true;
@@ -106,19 +106,17 @@ const Scene = ({ platform }: { platform: Platform }) => {
   );
 };
 
-const PwaGuide = () => {
+const PwaGuide = ({ enabled }: { enabled: boolean }) => {
   const { t, i18n } = useTranslation();
   const [open, setOpen] = useState(false);
-  const [never, setNever] = useState(false);
   const [detected] = useState<Platform>(detectPlatform);
   const [platform, setPlatform] = useState<Platform>(detected);
 
   useEffect(() => {
-    if (offeredThisLoad || dismissed() || isStandalone()) return;
-    offeredThisLoad = true;
+    if (!enabled || dismissed() || isStandalone()) return;
     const timer = window.setTimeout(() => setOpen(true), 1200); // after the page has drawn
     return () => window.clearTimeout(timer);
-  }, []);
+  }, [enabled]);
 
   const steps =
     platform === "ios"
@@ -129,13 +127,12 @@ const PwaGuide = () => {
   // On a phone the computer's system is unknown (an iPhone even says "Mac OS X"): just "Computer"
   const tab = (p: Platform) => (p === "ios" ? "iPhone · Safari" : p === "android" ? "Android · Chrome" : `${detected === "desktop" ? desktopOsName() : t("Computer")} · Chrome`);
 
+  /** Seen once is enough: "Got it" (or closing it) and it does not come back in this browser. */
   function gotIt() {
-    if (never) {
-      try {
-        localStorage.setItem(DISMISS_KEY, "1");
-      } catch {
-        /* private mode: for this visit only */
-      }
+    try {
+      localStorage.setItem(DISMISS_KEY, "1");
+    } catch {
+      /* private mode: for this visit only */
     }
     setOpen(false);
   }
@@ -168,10 +165,6 @@ const PwaGuide = () => {
             ))}
           </ol>
         </div>
-        <label className="pwa-guide__never">
-          <input type="checkbox" checked={never} onChange={(e) => setNever(e.target.checked)} />
-          <span>{t("Do not show this again")}</span>
-        </label>
         <button type="button" className="pwa-guide__got" onClick={gotIt} autoFocus>
           ✓ {t("Got it")}
         </button>

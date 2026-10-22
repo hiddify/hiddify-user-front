@@ -94,5 +94,11 @@
     "The panel opens in its own window, like an app": "O painel abre na própria janela, como um app",
     "Do not show this again": "Não mostrar novamente",
     "Got it": "Entendi",
-    "Computer": "Computador"
+    "Computer": "Computador",
+    "Connect to the Hiddify Telegram bot": "Conecte-se ao bot do Telegram da Hiddify",
+    "Get your account details in Telegram, and open your user panel from there in one tap.": "Veja os dados da sua conta no Telegram e abra o painel de usuário de lá com um toque.",
+    "Tap “Connect to Telegram” and press Start in the bot": "Toque em “Conectar ao Telegram” e pressione Start no bot",
+    "The bot shows your account: traffic and days left": "O bot mostra sua conta: tráfego e dias restantes",
+    "Open your user panel from the bot at any time": "Abra o painel de usuário pelo bot quando quiser",
+    "Later": "Depois"
 }

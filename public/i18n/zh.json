@@ -94,5 +94,11 @@
     "The panel opens in its own window, like an app": "面板会在独立窗口中打开，就像应用一样",
     "Do not show this again": "不再显示",
     "Got it": "知道了",
-    "Computer": "电脑"
+    "Computer": "电脑",
+    "Connect to the Hiddify Telegram bot": "连接 Hiddify Telegram 机器人",
+    "Get your account details in Telegram, and open your user panel from there in one tap.": "在 Telegram 中查看账户详情，并一键从那里打开用户面板。",
+    "Tap “Connect to Telegram” and press Start in the bot": "轻点“连接 Telegram”，然后在机器人中按 Start",
+    "The bot shows your account: traffic and days left": "机器人会显示您的账户：流量和剩余天数",
+    "Open your user panel from the bot at any time": "随时从机器人打开用户面板",
+    "Later": "稍后"
 }

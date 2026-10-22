@@ -94,5 +94,11 @@
     "The panel opens in its own window, like an app": "The panel opens in its own window, like an app",
     "Do not show this again": "Do not show this again",
     "Got it": "Got it",
-    "Computer": "Computer"
+    "Computer": "Computer",
+    "Connect to the Hiddify Telegram bot": "Connect to the Hiddify Telegram bot",
+    "Get your account details in Telegram, and open your user panel from there in one tap.": "Get your account details in Telegram, and open your user panel from there in one tap.",
+    "Tap “Connect to Telegram” and press Start in the bot": "Tap “Connect To Telegram” and press Start in the bot",
+    "The bot shows your account: traffic and days left": "The bot shows your account: traffic and days left",
+    "Open your user panel from the bot at any time": "Open your user panel from the bot at any time",
+    "Later": "Later"
 }

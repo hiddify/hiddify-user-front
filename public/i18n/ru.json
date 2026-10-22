@@ -94,5 +94,11 @@
     "The panel opens in its own window, like an app": "Панель откроется в своём окне, как приложение",
     "Do not show this again": "Больше не показывать",
     "Got it": "Понятно",
-    "Computer": "Компьютер"
+    "Computer": "Компьютер",
+    "Connect to the Hiddify Telegram bot": "Подключитесь к Telegram-боту Hiddify",
+    "Get your account details in Telegram, and open your user panel from there in one tap.": "Смотрите данные аккаунта в Telegram и открывайте оттуда панель пользователя одним касанием.",
+    "Tap “Connect to Telegram” and press Start in the bot": "Нажмите «Подключить Telegram» и затем Start в боте",
+    "The bot shows your account: traffic and days left": "Бот покажет ваш аккаунт: трафик и оставшиеся дни",
+    "Open your user panel from the bot at any time": "Открывайте панель пользователя из бота в любое время",
+    "Later": "Позже"
 }

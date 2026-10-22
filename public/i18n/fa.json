@@ -86,5 +86,11 @@
     "The panel opens in its own window, like an app": "پنل در پنجرهٔ جداگانهٔ خودش، مثل یک برنامه، باز می‌شود",
     "Do not show this again": "دیگر نمایش داده نشود",
     "Got it": "متوجه شدم",
-    "Computer": "کامپیوتر"
+    "Computer": "کامپیوتر",
+    "Connect to the Hiddify Telegram bot": "به ربات تلگرام هیدیفای وصل شوید",
+    "Get your account details in Telegram, and open your user panel from there in one tap.": "مشخصات حسابتان را در تلگرام ببینید و پنل کاربری را از همان‌جا با یک لمس باز کنید.",
+    "Tap “Connect to Telegram” and press Start in the bot": "روی «اتصال به تلگرام» بزنید و در ربات دکمهٔ Start را بزنید",
+    "The bot shows your account: traffic and days left": "ربات مشخصات حسابتان را نشان می‌دهد: حجم و روزهای باقی‌مانده",
+    "Open your user panel from the bot at any time": "هر وقت خواستید پنل کاربری را از داخل ربات باز کنید",
+    "Later": "بعداً"
 }

@@ -11,10 +11,10 @@ import { useEffect, useState } from "react";
 import { Modal } from "../../../designSystem/Modal";
 import AppModal from "./AppModal";
 import PwaGuide from "./pwa/PwaGuide";
+import TelegramSpotlight from "./telegram/TelegramSpotlight";
 import { getWindowData } from "../../../utils/getWindowData";
 import useMediaQuery from "@hooks/useMediaQuery";
 import modal from "antd/es/modal";
-import { Button } from "antd";
 
 
 const MainBody = () => {
@@ -32,6 +32,10 @@ const MainBody = () => {
   );
 
   const { deepLink } = getWindowData()
+
+  /** Telegram comes first: the install guide waits until the account is linked (or there is no bot to link). */
+  const hasBot = !!getInfo.data?.telegram_bot_url?.length
+  const pwaEnabled = !!getInfo.data && (!hasBot || getInfo.data?.telegram_id != null)
 
 
   useEffect(() => {
@@ -93,22 +97,13 @@ const MainBody = () => {
           {!isMobile && <ShareLinks />}
         </div>
         {isAppModalOpen ? <iframe className="hidden" src={deepLink} width="0" height="0"></iframe> : null}
-        <Modal isModalOpen={isModalOpen} closeModal={() => {setIsModalOpen(false); setDisableTeleModal(true)}} title={t('Connect To Telegram')}>
-          <div className="flex flex-col gap-10">
-            <Text fontSize='base' fontWeight='medium' className='text-[#212529] max-w-[400px]'>
-              {t('Please connect your Telegram account to the panel to know the latest status of your subscription')}
-            </Text>
-            <div className="flex flex-row justify-start items-center gap-5">
-              <Button onClick={() => {window.open(getInfo.data && getInfo.data.telegram_bot_url ? getInfo.data.telegram_bot_url : '', '_blank')}} className="bg-blue-500">
-                <Text fontSize='base' fontWeight='medium' className='text-white'>
-                  {t('Connect To Telegram')}
-                </Text>
-              </Button>
-            </div>
-          </div>
-        </Modal>
-        {/* "Install as an app" guide: on the home page only, once each time the panel is opened */}
-        <PwaGuide />
+        <TelegramSpotlight
+          open={isModalOpen}
+          botUrl={getInfo.data?.telegram_bot_url ?? ''}
+          onClose={() => {setIsModalOpen(false); setDisableTeleModal(true)}}
+        />
+        {/* "Install as an app" guide: once, after Telegram is linked (or when the panel has no bot) */}
+        <PwaGuide enabled={pwaEnabled} />
       </div>
   )
 }
