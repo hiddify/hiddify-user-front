@@ -6,13 +6,18 @@ import "./PwaGuide.css";
 /**
  * "Install as an app" spotlight on the home page: a looping animation of the browser's own controls — Safari on
  * iPhone / iPad, Chrome on Android, Chrome on a computer — then "Got it" and "Do not show this again".
- * Shown once: until "Got it" (or closing it), and only when `enabled` — the user has linked Telegram, or the panel
- * has no bot (MainBody: the Telegram spotlight comes first). Never when the panel already runs as the installed app.
+ * Shown once, on the 3rd visit that is `enabled` — the user has linked Telegram, or the panel has no bot (MainBody:
+ * the Telegram spotlight comes first) — and never again after "Got it" (or closing it). Visits before that, or while
+ * not linked, do not count. Never when the panel already runs as the installed app.
  * The same guide as admin_v2's PwaInstallDialog / PwaInstallGuide.
  */
 type Platform = "ios" | "android" | "desktop";
 
 const DISMISS_KEY = "hiddify.user.pwaGuide.dismissed";
+const VISITS_KEY = "hiddify.user.pwaGuide.visits";
+const SHOW_ON_VISIT = 3;
+/** One visit per page load, however often the home page mounts in it. */
+let visitThisLoad = 0;
 
 function isStandalone(): boolean {
   return window.matchMedia?.("(display-mode: standalone)").matches || (navigator as Navigator & { standalone?: boolean }).standalone === true;
@@ -29,6 +34,17 @@ function desktopOsName(): string {
   if (/mac os|macintosh/i.test(ua)) return "macOS";
   if (/linux|x11|cros/i.test(ua)) return "Linux";
   return "Windows · macOS · Linux";
+}
+/** This load counted as a visit (once); the visits so far, this one included. */
+function countVisit(): number {
+  if (visitThisLoad) return visitThisLoad;
+  try {
+    visitThisLoad = (Number(localStorage.getItem(VISITS_KEY)) || 0) + 1;
+    localStorage.setItem(VISITS_KEY, String(visitThisLoad));
+  } catch {
+    visitThisLoad = 1; // private mode: no history, so it never reaches the 3rd visit
+  }
+  return visitThisLoad;
 }
 function dismissed(): boolean {
   try {
@@ -114,6 +130,7 @@ const PwaGuide = ({ enabled }: { enabled: boolean }) => {
 
   useEffect(() => {
     if (!enabled || dismissed() || isStandalone()) return;
+    if (countVisit() < SHOW_ON_VISIT) return;
     const timer = window.setTimeout(() => setOpen(true), 1200); // after the page has drawn
     return () => window.clearTimeout(timer);
   }, [enabled]);
