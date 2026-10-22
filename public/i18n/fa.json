@@ -70,5 +70,21 @@
     "Loading": "در حال بارگذاری…",
     "Loading configurations": "در حال بارگذاری کانفیگ‌ها…",
     "Scan or copy your subscription link": "کد QR را اسکن کنید یا لینک اشتراک را کپی کنید.",
-    "Reset In": "بازنشانی در"
+    "Reset In": "بازنشانی در",
+    "Install the panel as an app": "پنل را به‌صورت برنامه نصب کنید",
+    "Keep the panel one tap away, like any app on your phone or computer.": "پنل را مثل هر برنامهٔ دیگر گوشی یا کامپیوترتان، با یک لمس در دسترس داشته باشید.",
+    "Your device": "دستگاه شما",
+    "In Safari, tap the ••• button in the bar at the bottom": "در سافاری روی دکمهٔ ••• در نوار پایین بزنید",
+    "Tap Share": "روی «اشتراک‌گذاری» (Share) بزنید",
+    "Choose “Add to Home Screen”": "«افزودن به صفحهٔ اصلی» (Add to Home Screen) را انتخاب کنید",
+    "Tap Add: the panel is on your home screen": "روی «افزودن» (Add) بزنید: پنل روی صفحهٔ اصلی گوشی است",
+    "In Chrome, tap the ⋮ menu at the top": "در کروم روی منوی ⋮ بالای صفحه بزنید",
+    "Choose “Add to home screen” (or “Install app”)": "«افزودن به صفحهٔ اصلی» (یا «نصب برنامه») را انتخاب کنید",
+    "Tap Install: the panel opens like an app": "روی «نصب» (Install) بزنید: پنل مثل یک برنامه باز می‌شود",
+    "In Chrome, click the install icon at the end of the address bar": "در کروم روی آیکون نصب در انتهای نوار آدرس کلیک کنید",
+    "Click Install": "روی «نصب» (Install) کلیک کنید",
+    "The panel opens in its own window, like an app": "پنل در پنجرهٔ جداگانهٔ خودش، مثل یک برنامه، باز می‌شود",
+    "Do not show this again": "دیگر نمایش داده نشود",
+    "Got it": "متوجه شدم",
+    "Computer": "کامپیوتر"
 }

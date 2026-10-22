@@ -10,6 +10,7 @@ import { useTranslation } from "react-i18next";
 import { useEffect, useState } from "react";
 import { Modal } from "../../../designSystem/Modal";
 import AppModal from "./AppModal";
+import PwaGuide from "./pwa/PwaGuide";
 import { getWindowData } from "../../../utils/getWindowData";
 import useMediaQuery from "@hooks/useMediaQuery";
 import modal from "antd/es/modal";
@@ -106,6 +107,8 @@ const MainBody = () => {
             </div>
           </div>
         </Modal>
+        {/* "Install as an app" guide: on the home page only, once each time the panel is opened */}
+        <PwaGuide />
       </div>
   )
 }

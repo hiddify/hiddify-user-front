@@ -78,5 +78,21 @@
     "Loading": "Загрузка…",
     "Loading configurations": "Загрузка конфигураций…",
     "Scan or copy your subscription link": "Отсканируйте QR‑код или скопируйте ссылку подписки.",
-    "Reset In": "Сброс через"
+    "Reset In": "Сброс через",
+    "Install the panel as an app": "Установите панель как приложение",
+    "Keep the panel one tap away, like any app on your phone or computer.": "Панель будет в одном касании, как любое приложение на телефоне или компьютере.",
+    "Your device": "Ваше устройство",
+    "In Safari, tap the ••• button in the bar at the bottom": "В Safari нажмите кнопку ••• на нижней панели",
+    "Tap Share": "Нажмите «Поделиться»",
+    "Choose “Add to Home Screen”": "Выберите «На экран «Домой»»",
+    "Tap Add: the panel is on your home screen": "Нажмите «Добавить»: панель появится на экране «Домой»",
+    "In Chrome, tap the ⋮ menu at the top": "В Chrome нажмите меню ⋮ вверху",
+    "Choose “Add to home screen” (or “Install app”)": "Выберите «Добавить на главный экран» (или «Установить приложение»)",
+    "Tap Install: the panel opens like an app": "Нажмите «Установить»: панель откроется как приложение",
+    "In Chrome, click the install icon at the end of the address bar": "В Chrome нажмите значок установки в конце адресной строки",
+    "Click Install": "Нажмите «Установить»",
+    "The panel opens in its own window, like an app": "Панель откроется в своём окне, как приложение",
+    "Do not show this again": "Больше не показывать",
+    "Got it": "Понятно",
+    "Computer": "Компьютер"
 }

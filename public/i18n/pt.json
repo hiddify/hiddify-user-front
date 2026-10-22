@@ -78,5 +78,21 @@
     "Loading": "Carregando…",
     "Loading configurations": "Carregando configurações…",
     "Scan or copy your subscription link": "Digitalize o QR code ou copie o link da assinatura.",
-    "Reset In": "Reinicia em"
+    "Reset In": "Reinicia em",
+    "Install the panel as an app": "Instale o painel como app",
+    "Keep the panel one tap away, like any app on your phone or computer.": "Deixe o painel a um toque, como qualquer app do seu telefone ou computador.",
+    "Your device": "Seu dispositivo",
+    "In Safari, tap the ••• button in the bar at the bottom": "No Safari, toque no botão ••• na barra de baixo",
+    "Tap Share": "Toque em Compartilhar",
+    "Choose “Add to Home Screen”": "Escolha “Adicionar à Tela de Início”",
+    "Tap Add: the panel is on your home screen": "Toque em Adicionar: o painel fica na tela de início",
+    "In Chrome, tap the ⋮ menu at the top": "No Chrome, toque no menu ⋮ no topo",
+    "Choose “Add to home screen” (or “Install app”)": "Escolha “Adicionar à tela inicial” (ou “Instalar app”)",
+    "Tap Install: the panel opens like an app": "Toque em Instalar: o painel abre como um app",
+    "In Chrome, click the install icon at the end of the address bar": "No Chrome, clique no ícone de instalar no fim da barra de endereço",
+    "Click Install": "Clique em Instalar",
+    "The panel opens in its own window, like an app": "O painel abre na própria janela, como um app",
+    "Do not show this again": "Não mostrar novamente",
+    "Got it": "Entendi",
+    "Computer": "Computador"
 }
