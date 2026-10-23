@@ -1,6 +1,8 @@
 import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import Dialog from "@mui/material/Dialog";
+import CheckRoundedIcon from "@mui/icons-material/CheckRounded";
+import NorthEastRoundedIcon from "@mui/icons-material/NorthEastRounded";
 import "./PwaGuide.css";
 
 /**
@@ -117,7 +119,7 @@ const Scene = ({ platform }: { platform: Platform }) => {
         <div className="win-app__title"><span className="app-icon app-icon--tiny" /><span className="page__bar" /></div>
         <div className="page"><span className="page__bar page__bar--wide" /><span className="page__card" /></div>
       </div>
-      <span className="cursor">➚</span>
+      <span className="cursor"><NorthEastRoundedIcon fontSize="inherit" /></span>
     </div>
   );
 };
@@ -183,7 +185,7 @@ const PwaGuide = ({ enabled }: { enabled: boolean }) => {
           </ol>
         </div>
         <button type="button" className="pwa-guide__got" onClick={gotIt} autoFocus>
-          ✓ {t("Got it")}
+          <CheckRoundedIcon fontSize="inherit" /> {t("Got it")}
         </button>
       </div>
     </Dialog>
