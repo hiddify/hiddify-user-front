@@ -16,9 +16,11 @@ import useAPI from "../../../hooks/useAPI";
 type propsTypes = {
   setShowAllConfigs:  Dispatch<SetStateAction<boolean>>;
   setShowTeleProxy:  Dispatch<SetStateAction<boolean>>;
+  setShowIpLookup:  Dispatch<SetStateAction<boolean>>;
   setShowMainBody:  Dispatch<SetStateAction<boolean>>;
   showAllConfigs: boolean;
   showTeleProxy: boolean;
+  showIpLookup: boolean;
   showMainBody: boolean;
   info: any;
 }
@@ -27,9 +29,11 @@ const Header: FC<propsTypes> = (props) => {
   const { 
     setShowAllConfigs, 
     setShowTeleProxy, 
+    setShowIpLookup,
     setShowMainBody, 
     showAllConfigs, 
     showTeleProxy, 
+    showIpLookup,
     showMainBody,
     info,
   } = props;
@@ -43,18 +47,28 @@ const Header: FC<propsTypes> = (props) => {
   const showMainBodyFun = () => {
     setShowAllConfigs(false)
     setShowTeleProxy(false)
+    setShowIpLookup(false)
     setShowMainBody(true)
   }
 
   const showAllConfigsFun = () => {
     setShowAllConfigs(true)
     setShowTeleProxy(false)
+    setShowIpLookup(false)
     setShowMainBody(false)
   }
 
   const showTeleProxyFun = () => {
     setShowAllConfigs(false)
     setShowTeleProxy(true)
+    setShowIpLookup(false)
+    setShowMainBody(false)
+  }
+
+  const showIpLookupFun = () => {
+    setShowAllConfigs(false)
+    setShowTeleProxy(false)
+    setShowIpLookup(true)
     setShowMainBody(false)
   }
 
@@ -79,6 +93,7 @@ const Header: FC<propsTypes> = (props) => {
           setChangeLangModal={setChangeLangModal}
           showAllConfigs={showAllConfigsFun}
           showTeleProxy={showTeleProxyFun}
+          showIpLookup={showIpLookupFun}
           handleGoToSpeedTest={handleGoToSpeedTest}
           showMainBodyFun={showMainBodyFun}
         />
@@ -143,6 +158,14 @@ const Header: FC<propsTypes> = (props) => {
             className={`text-[#495057] cursor-pointer ${dohModal && 'underline decoration-[#455FE9] decoration-solid decoration-[2px] underline-offset-8'}`}
           >
             {t('DoH')}
+          </Text>
+          <Text 
+            onClick={showIpLookupFun} 
+            fontWeight="semibold" 
+            fontSize="lg" 
+            className={`text-[#495057] cursor-pointer ${showIpLookup && 'underline decoration-[#455FE9] decoration-solid decoration-[2px] underline-offset-8'}`}
+          >
+            {t('My IP')}
           </Text>
           {getInfo.data && getInfo.data?.speedtest_enable ? 
             <Text 

@@ -5,6 +5,7 @@ import Header from "./components/Header"
 import { AllConfigs } from "./allConfigs"
 import { useEffect, useState } from "react"
 import { TeleProxy } from "./teleProxy"
+import { IpLookup } from "./ipLookup"
 import useAPI from "../../hooks/useAPI"
 import PreLoading from "./components/PreLoading"
 import { useTranslation } from "react-i18next"
@@ -15,18 +16,22 @@ import { useSearchParams } from "react-router-dom"
 const Home = () => {
   const [showAllConfigs, setShowAllConfigs] = useState(false)
   const [showTeleProxy, setShowTeleProxy] = useState(false)
+  const [showIpLookup, setShowIpLookup] = useState(false)
   const [showMainBody, setShowMainBody] = useState(false)
   const [searchParams, setSearchParams] = useSearchParams()
 
   const homePage = searchParams.get("home") === "true"
   const allConfigsPage = searchParams.get("allConfigs") === "true"
   const telegramProxyPage = searchParams.get("telegramProxy") === "true"
+  const ipLookupPage = searchParams.get("ipLookup") === "true"
 
   useEffect(() => {
     if (showAllConfigs) {
       setSearchParams({ allConfigs: "true" })
     } else if(showTeleProxy) {
       setSearchParams({ telegramProxy: "true" })
+    } else if(showIpLookup) {
+      setSearchParams({ ipLookup: "true" })
     } else if(showMainBody) {
       setSearchParams({ home: "true" })
     } else {
@@ -36,11 +41,13 @@ const Home = () => {
         setShowAllConfigs(true)
       } else if(telegramProxyPage){
         setShowTeleProxy(true)
+      } else if(ipLookupPage){
+        setShowIpLookup(true)
       } else{
         setShowMainBody(true)
       }
     }
-  }, [showAllConfigs, showTeleProxy, showMainBody])
+  }, [showAllConfigs, showTeleProxy, showIpLookup, showMainBody])
 
   const getInfo = useAPI(
     'me/',
@@ -95,9 +102,11 @@ const Home = () => {
       <Header 
         setShowAllConfigs={setShowAllConfigs}
         setShowTeleProxy={setShowTeleProxy}
+        setShowIpLookup={setShowIpLookup}
         setShowMainBody={setShowMainBody}
         showAllConfigs={searchParams.get("allConfigs") === "true"}
         showTeleProxy={searchParams.get("telegramProxy") === "true"}
+        showIpLookup={searchParams.get("ipLookup") === "true"}
         showMainBody={searchParams.get("home") === "true"}
         info={getInfo.data}
       />
@@ -105,6 +114,7 @@ const Home = () => {
         {searchParams.get("allConfigs") === "true" && <AllConfigs />}
         {searchParams.get("home") === "true" && <MainBody />}
         {searchParams.get("telegramProxy") === "true" && <TeleProxy />}
+        {searchParams.get("ipLookup") === "true" && <IpLookup />}
       </div>
       <div dir="ltr" className={`${showMainBody && 'bg-[#E0E4F5] md:bg-transparent bg-opacity-50 md:bg-opacity-[unset]'} md:w-7/12 md:min-w-[650px] h-[10%] max-w-[1000px] w-full flex justify-between items-center px-5 md:px-0 py-5`}>
           <FooterSocialIcons />

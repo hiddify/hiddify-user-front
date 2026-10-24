@@ -11,6 +11,7 @@ import SpeedIcon from '@mui/icons-material/Speed';
 import { useTranslation } from 'react-i18next';
 import TranslateIcon from '@mui/icons-material/Translate';
 import HomeIcon from '@mui/icons-material/Home';
+import PublicIcon from '@mui/icons-material/Public';
 import useAPI from '../../../hooks/useAPI';
 
 
@@ -18,12 +19,13 @@ type propsTypes = {
   dohModal: React.Dispatch<React.SetStateAction<boolean>>;
   showAllConfigs: () => void;
   showTeleProxy: () => void;
+  showIpLookup: () => void;
   handleGoToSpeedTest: () => void;
   setChangeLangModal: React.Dispatch<React.SetStateAction<boolean>>;
   showMainBodyFun: () => void;
 }
 
-const MenuDropdown: React.FC<propsTypes> = ({dohModal, showTeleProxy, showAllConfigs, handleGoToSpeedTest, setChangeLangModal, showMainBodyFun}) => {
+const MenuDropdown: React.FC<propsTypes> = ({dohModal, showTeleProxy, showAllConfigs, showIpLookup, handleGoToSpeedTest, setChangeLangModal, showMainBodyFun}) => {
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
   const open = Boolean(anchorEl);
   const handleClick = (event: React.MouseEvent<HTMLElement>) => {
@@ -138,6 +140,16 @@ const MenuDropdown: React.FC<propsTypes> = ({dohModal, showTeleProxy, showAllCon
             {t('Telegram Proxy')}
           </MenuItem>
         : null}
+        <MenuItem 
+          onClick={() => {
+            showIpLookup(); handleClose()}
+          } 
+          style={{ fontFamily: 'var(--ui-font)' }}
+          disableRipple
+        >
+          <PublicIcon />
+          {t('My IP')}
+        </MenuItem>
         <MenuItem 
           onClick={() => {
             dohModal(true); handleClose()}
