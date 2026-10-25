@@ -9,6 +9,12 @@ const root = path.dirname(fileURLToPath(import.meta.url))
 
 // Same layout as admin_v2: source here, production bundle in ../static/user-front/.
 // Flask reads the Vite manifest and serves a Jinja shell (panel/user/templates/user_front.html).
+// USER_FRONT_OUT_DIR=dist builds a page that stands on its own (index.html + assets), for GitHub Pages and the panel's
+// "custom user page" setting (see the README).
+const outDir = process.env.USER_FRONT_OUT_DIR
+  ? path.resolve(root, process.env.USER_FRONT_OUT_DIR)
+  : path.resolve(root, '../static/user-front')
+
 export default defineConfig({
   root,
   base: './',
@@ -34,7 +40,7 @@ export default defineConfig({
     port: 5000,
   },
   build: {
-    outDir: path.resolve(root, '../static/user-front'),
+    outDir,
     emptyOutDir: true,
     target: 'esnext',
     manifest: true,
