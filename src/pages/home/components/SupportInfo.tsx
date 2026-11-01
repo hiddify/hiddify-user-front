@@ -1,10 +1,9 @@
-import { useTranslation } from 'react-i18next';
 import { Text } from '../../../designSystem/Text'
 import { Button, ButtonProps, styled } from "@mui/material";
 
 
-const SupportInfo = ({viewMoreUrl, adminMessageHtml}) => {
-    const { t } = useTranslation();
+// title / moreText: the box's title and "View More" button set by the admin; null: hidden
+const SupportInfo = ({viewMoreUrl, adminMessageHtml, title, moreText}) => {
 
     const ViewMoreButton = styled(Button)<ButtonProps>(() => ({
         color: '#455FE9',
@@ -16,20 +15,24 @@ const SupportInfo = ({viewMoreUrl, adminMessageHtml}) => {
     }));
   return (
     <div className="p-4 h-fit w-[360px]">
+        {title !== null && (
         <div className="flex justify-start">
             <Text className="text-black" fontWeight="medium" fontSize="lg">
-                {t('Support')}
+                {title}
             </Text>
         </div>
-        <div className="mt-4 flex flex-col gap-5">
+        )}
+        <div className={`${title !== null ? 'mt-4 ' : ''}flex flex-col gap-5`}>
             <Text className="text-[#495057]" fontWeight="regular" fontSize="sm">
                 <div dangerouslySetInnerHTML={{ __html: adminMessageHtml }} />
             </Text>
+            {moreText !== null && (
             <div className="w-full flex justify-end">
                 <ViewMoreButton style={{ textTransform: 'none', fontFamily: 'var(--ui-font)'}} onClick={() => window.open(viewMoreUrl, '_blank')}>
-                    {t('View More')}
+                    {moreText}
                 </ViewMoreButton>
             </div>
+            )}
         </div>
     </div>
   )
