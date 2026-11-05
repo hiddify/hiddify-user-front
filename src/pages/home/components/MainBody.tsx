@@ -79,6 +79,7 @@ const MainBody = () => {
               <SupportInfo 
                 viewMoreUrl={getInfo.data?.admin_message_url ? getInfo.data?.admin_message_url : ''} 
                 adminMessageHtml={getInfo.data?.admin_message_html ? getInfo.data?.admin_message_html : ''} 
+                fullHtml={getInfo.data?.admin_message_full_html || ''}
                 title={getInfo.data?.admin_message_title_show === false ? null : (getInfo.data?.admin_message_title || t('Support'))}
                 moreText={getInfo.data?.admin_message_more_show === false ? null : (getInfo.data?.admin_message_more || t('View More'))}
               />
