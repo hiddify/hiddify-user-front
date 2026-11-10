@@ -7,6 +7,7 @@ import Select, { SelectChangeEvent } from '@mui/material/Select';
 import useAPI from '../../../hooks/useAPI';
 import LoadingButton from '@mui/lab/LoadingButton';
 import SaveIcon from '@mui/icons-material/Save';
+import { LANGUAGES, isRtl } from '../../../utils/languages';
 
 type propsType = {
     setChangeLangModal: Dispatch<SetStateAction<boolean>>
@@ -69,11 +70,11 @@ const ChangeLangModal: React.FC<propsType> = ({ setChangeLangModal }) => {
                     className='w-full'
                     onChange={handleChange}
                 >
-                    <MenuItem style={{ fontFamily: 'var(--ui-font)' }} value={'en'}>{language !== 'fa' ? '🇬🇧 ' + t('English') : t('English') + ' 🇬🇧'}</MenuItem>
-                    <MenuItem style={{ fontFamily: 'var(--ui-font)' }} value={'fa'}>{'🇮🇷 ' + t('Farsi')}</MenuItem>
-                    <MenuItem style={{ fontFamily: 'var(--ui-font)' }} value={'zh'}>{language !== 'fa' ? '🇨🇳 ' + t('Chinese') : t('Chinese') + ' 🇨🇳'}</MenuItem>
-                    <MenuItem style={{ fontFamily: 'var(--ui-font)' }} value={'ru'}>{language !== 'fa' ? '🇷🇺 ' + t('Russian') : t('Russian') + ' 🇷🇺'}</MenuItem>
-                    <MenuItem style={{ fontFamily: 'var(--ui-font)' }} value={'pt'}>{language !== 'fa' ? '🇵🇹 ' + t('Portuguese') : t('Portuguese') + ' 🇵🇹'}</MenuItem>
+                    {LANGUAGES.map((l) => (
+                        <MenuItem key={l.code} style={{ fontFamily: 'var(--ui-font)' }} value={l.code}>
+                            <span dir={isRtl(l.code) ? 'rtl' : 'ltr'}>{l.flag} {l.name}</span>
+                        </MenuItem>
+                    ))}
                 </Select>
             </FormControl>
         </div>

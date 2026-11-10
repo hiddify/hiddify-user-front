@@ -1,4 +1,5 @@
 import * as React from 'react';
+import { isRtl } from '../../utils/languages';
 import { styled } from '@mui/material/styles';
 import Dialog from '@mui/material/Dialog';
 import DialogTitle from '@mui/material/DialogTitle';
@@ -48,8 +49,8 @@ const Modal: React.FC<propsTypes> = ({ isModalOpen, closeModal, title, children 
             onClick={closeModal}
             sx={{
                 position: 'absolute',
-                right: language === 'fa' ? 'unset' : 8,
-                left: language === 'fa' ? 8 : 'unset',
+                right: isRtl(language) ? 'unset' : 8,
+                left: isRtl(language) ? 8 : 'unset',
                 top: 12,
                 color: '#212529',
             }}

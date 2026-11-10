@@ -1,4 +1,5 @@
 import Table from '@mui/material/Table';
+import { isRtl } from '../../../utils/languages';
 import TableBody from '@mui/material/TableBody';
 import TableCell from '@mui/material/TableCell';
 import TableContainer from '@mui/material/TableContainer';
@@ -71,13 +72,13 @@ function Row(props) {
   return (
     <React.Fragment>
       <TableRow sx={{ '& > *': { cursor: 'pointer' } }} onClick={() => setOpen(!open)}>
-        <TableCell style={{ fontFamily: 'var(--ui-font)' }} align={language === "fa" ? 'right' : 'left'} sx={{ maxWidth: 200 }}>
+        <TableCell style={{ fontFamily: 'var(--ui-font)' }} align={isRtl(language) ? 'right' : 'left'} sx={{ maxWidth: 200 }}>
             <Text fontSize='sm' fontWeight='regular' className='whitespace-nowrap' lineClamp='1'>{row?.title ? row?.title : ''}</Text>
         </TableCell>
-        <TableCell style={{ fontFamily: 'var(--ui-font)' }} align={language === "fa" ? 'right' : 'left'} sx={{ maxWidth: 200 }}>
+        <TableCell style={{ fontFamily: 'var(--ui-font)' }} align={isRtl(language) ? 'right' : 'left'} sx={{ maxWidth: 200 }}>
             <Text fontSize='sm' fontWeight='regular' tooltip={row?.link ? row?.link : ''} className='text-[#6C757D] line-clamp-1'>{row?.link ? row?.link : ''}</Text>
         </TableCell>
-        <TableCell style={{ fontFamily: 'var(--ui-font)' }} align={language === "fa" ? 'left' : 'right'}>
+        <TableCell style={{ fontFamily: 'var(--ui-font)' }} align={isRtl(language) ? 'left' : 'right'}>
           <IconButton
             aria-label="expand row"
             size="small"
@@ -177,13 +178,13 @@ const TeleProxy = () => {
                     <>
                       <TableHead>
                           <TableRow>
-                              <TableCell align={language === "fa" ? 'right' : 'left'}>
+                              <TableCell align={isRtl(language) ? 'right' : 'left'}>
                                   <Text fontSize='base' fontWeight='medium' className='whitespace-nowrap' lineClamp='1'>{t('Name')}</Text>
                               </TableCell>
-                              <TableCell align={language === "fa" ? 'right' : 'left'}>
+                              <TableCell align={isRtl(language) ? 'right' : 'left'}>
                                   <Text fontSize='base' fontWeight='medium' className='whitespace-nowrap' lineClamp='1'>{t('Domain')}</Text>
                               </TableCell>
-                              <TableCell align={language === "fa" ? 'left' : 'right'}></TableCell>
+                              <TableCell align={isRtl(language) ? 'left' : 'right'}></TableCell>
                           </TableRow>
                       </TableHead>
                         {getTeleProxies.data ?
