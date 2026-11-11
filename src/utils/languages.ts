@@ -16,6 +16,7 @@ export const LANGUAGES: { code: string; flag: string; name: string }[] = [
   { code: 'ps', flag: '🇦🇫', name: 'پښتو' },
   { code: 'bn', flag: '🇧🇩', name: 'বাংলা' },
   { code: 'tr', flag: '🇹🇷', name: 'Türkçe' },
+  { code: 'uz', flag: '🇺🇿', name: 'Oʻzbekcha' },
 ]
 
 const RTL = new Set(['fa', 'ar', 'ur', 'ps'])
