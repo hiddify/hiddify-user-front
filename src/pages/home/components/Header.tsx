@@ -87,7 +87,7 @@ const Header: FC<propsTypes> = (props) => {
 
   return (
     <>
-      <div className={`md:hidden ${showMainBody && 'bg-[#E0E4F5] bg-opacity-50'} w-full h-[10%] flex items-center justify-between px-5 py-3`}>
+      <div className={`pwa-top-bar md:hidden ${showMainBody && 'bg-[#E0E4F5] bg-opacity-50'} w-full h-[10%] flex items-center justify-between px-5 py-3`}>
         <MenuDropdown 
           dohModal={setDohModal} 
           setChangeLangModal={setChangeLangModal}
@@ -115,7 +115,7 @@ const Header: FC<propsTypes> = (props) => {
           <ShareIcon sx={{ color: '#292D32'}} />
         </Button>
       </div>
-      <div className="hidden w-full md:w-7/12 md:min-w-[650px] max-w-[1000px] h-[10%] bg-transparent md:flex items-center justify-between py-3">
+      <div className="pwa-top-bar hidden w-full md:w-7/12 md:min-w-[650px] max-w-[1000px] h-[10%] bg-transparent md:flex items-center justify-between py-3">
         <div className="w-fit flex items-center lg:gap-8 xl:gap-11 md:gap-5">
           <div onClick={showMainBodyFun} className="flex items-center gap-3 cursor-pointer">
             <CardMedia

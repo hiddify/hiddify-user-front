@@ -9,8 +9,10 @@ import { RouterProvider } from 'react-router-dom'
 import { QueryClient, QueryClientProvider } from 'react-query'
 import "./i18n";
 import { setupTelegramMiniApp } from "./utils/telegramMiniApp";
+import { holdBackGesture } from "./utils/pwaApp";
 
 setupTelegramMiniApp();
+holdBackGesture();
 
 
 const queryClient: QueryClient = new QueryClient({

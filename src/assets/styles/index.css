@@ -12,6 +12,110 @@ html[lang='fa'] {
   --ui-font: 'Vazirmatn FD', Vazirmatn, sans-serif;
 }
 
+/* The installed app (PWA) on a phone with a notch: the page draws under the status bar (viewport-fit=cover, set in
+   the installed app only), so the header grows by the status bar's height and its color runs up behind the clock;
+   the middle part gives that height back. Plus 20%: iOS 26 blurs a band below the status bar, and the header's
+   content must sit under it. In a browser tab --pwa-top is 0 and nothing changes. */
+:root {
+  --pwa-top: 0px;
+}
+
+@media (display-mode: standalone) {
+  :root {
+    --pwa-top: calc(env(safe-area-inset-top, 0px) * 1.2);
+  }
+
+  .pwa-top-bar {
+    height: calc(10% + var(--pwa-top));
+    padding-top: calc(0.75rem + var(--pwa-top));
+  }
+
+  .pwa-top-rest {
+    height: calc(80% - var(--pwa-top));
+  }
+
+  /* iOS paints the status bar with the page's background (no black-translucent bar on this page): the header's
+     color, so the status bar and the header read as one */
+  html,
+  body {
+    background: #ececf8;
+  }
+
+  /* The page itself never moves (no rubber band, no pull-to-refresh): only the parts inside it scroll. No
+     overflow: hidden here: on iOS it clips the page to the viewport, which is short by the status bar there. */
+  html,
+  body {
+    overscroll-behavior: none;
+  }
+}
+
+/* The installed app on a phone: the page fills the whole screen. The header and the footer take only what they need
+   (their content plus the status bar / the home indicator), the middle part the rest; the upper panel ends at the
+   screen's middle and the connect button sits exactly there, whatever the phone. */
+@media (display-mode: standalone) and (max-width: 767px) {
+  :root {
+    --pwa-head: calc(var(--pwa-top) + 3.75rem);
+    --pwa-foot: calc(env(safe-area-inset-bottom, 0px) + 3.75rem);
+  }
+
+  .pwa-root {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 100dvh;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .pwa-top-bar {
+    flex: none;
+    height: var(--pwa-head);
+    padding-top: var(--pwa-top);
+    padding-bottom: 0;
+  }
+
+  .pwa-top-rest {
+    flex: 1 1 auto;
+    height: auto;
+    min-height: 0;
+  }
+
+  .pwa-footer {
+    flex: none;
+    height: var(--pwa-foot);
+    padding-top: 0;
+    padding-bottom: max(env(safe-area-inset-bottom, 0px), 0.75rem);
+  }
+
+  .pwa-upper {
+    flex: none;
+    height: calc(50dvh - var(--pwa-head) - 0.25rem);
+  }
+
+  .pwa-lower {
+    flex: 1 1 0;
+    height: auto;
+  }
+
+  .pwa-center {
+    top: calc(50dvh - var(--pwa-head));
+  }
+
+  /* the welcome and the two counters: centred in the part of the upper panel the button (140px) leaves free */
+  .pwa-upper > :first-child {
+    top: calc((100% - 70px) / 2);
+    --tw-translate-y: -50%;
+  }
+}
+
+/* short phones (iPhone SE, small Androids): the welcome and the counters closer together, so they clear the button */
+@media (display-mode: standalone) and (max-width: 767px) and (max-height: 620px) {
+  .pwa-upper > :first-child {
+    gap: 0.75rem;
+  }
+}
+
 body {
   margin: 0;
   padding: 0;

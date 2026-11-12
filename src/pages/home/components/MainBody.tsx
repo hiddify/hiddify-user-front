@@ -54,7 +54,7 @@ const MainBody = () => {
   return (
       <div className="md:grid md:grid-cols-2 md:gap-3 w-full h-full">
         <div className="w-full h-full flex flex-col gap-2 md:gap-3 relative">
-          <div className='w-full h-full bg-[#E0E4F5] rounded-b-[24px] md:rounded-[24px] bg-opacity-50 relative'>
+          <div className='pwa-upper w-full h-full bg-[#E0E4F5] rounded-b-[24px] md:rounded-[24px] bg-opacity-50 relative'>
             <div className="w-full absolute top-[40%] md:top-1/2 left-1/2 -translate-x-1/2 -translate-y-[40%] md:-translate-y-1/2 flex items-center flex-col gap-7">
               <UserFullName fullName={getInfo.data?.profile_title ? getInfo.data?.profile_title : ''} />
               <div className="px-10 md:px-8 lg:px-10 w-full max-w-[400px] flex items-start justify-between">
@@ -79,7 +79,7 @@ const MainBody = () => {
           </div>
           {/* min-h-0: a long support text must not make this panel taller than the one above, or the connect button
               (centred between them) moves down over the text. The top padding keeps the box below the button. */}
-          <div className='w-full h-full min-h-0 bg-[#E0E4F5] rounded-t-[24px] md:rounded-[24px] bg-opacity-50 relative'>
+          <div className='pwa-lower w-full h-full min-h-0 bg-[#E0E4F5] rounded-t-[24px] md:rounded-[24px] bg-opacity-50 relative'>
             <div className="px-4 pb-4 pt-[82px] md:pt-[62px] lg:pt-[77px] h-full bg-transparent flex flex-col items-center justify-center">
               <SupportInfo 
                 viewMoreUrl={getInfo.data?.admin_message_url ? getInfo.data?.admin_message_url : ''} 
@@ -90,7 +90,7 @@ const MainBody = () => {
               />
             </div>
           </div>
-          <MainButton onClick={() => setIsAppModalOpen(true)} />
+          <MainButton className="pwa-center" onClick={() => setIsAppModalOpen(true)} />
           <Modal isModalOpen={isAppModalOpen} closeModal={() => setIsAppModalOpen(false)} title={t("Configure your VPN")}>
             <AppModal profileUrl={getInfo.data?.profile_url ? getInfo.data?.profile_url : ''} />
           </Modal>

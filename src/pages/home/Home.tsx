@@ -12,6 +12,11 @@ import PreLoading from "./components/PreLoading"
 import { useTranslation } from "react-i18next"
 import useMediaQuery from "../../hooks/useMediaQuery"
 import { useSearchParams } from "react-router-dom"
+import { isStandalone } from "../../utils/pwaApp"
+
+// The installed app keeps one address: the views do not go into the history, so a swipe or "back" has nothing to go
+// back to (the views come from the state there, see isView)
+const inApp = isStandalone()
 
 
 const Home = () => {
@@ -26,15 +31,19 @@ const Home = () => {
   const telegramProxyPage = searchParams.get("telegramProxy") === "true"
   const ipLookupPage = searchParams.get("ipLookup") === "true"
 
+  // the view on screen: from the address in a browser tab, from the state in the installed app (same order as below)
+  const currentView = showAllConfigs ? "allConfigs" : showTeleProxy ? "telegramProxy" : showIpLookup ? "ipLookup" : showMainBody ? "home" : null
+  const isView = (name: string) => (inApp ? currentView === name : searchParams.get(name) === "true")
+
   useEffect(() => {
     if (showAllConfigs) {
-      setSearchParams({ allConfigs: "true" })
+      if (!inApp) setSearchParams({ allConfigs: "true" })
     } else if(showTeleProxy) {
-      setSearchParams({ telegramProxy: "true" })
+      if (!inApp) setSearchParams({ telegramProxy: "true" })
     } else if(showIpLookup) {
-      setSearchParams({ ipLookup: "true" })
+      if (!inApp) setSearchParams({ ipLookup: "true" })
     } else if(showMainBody) {
-      setSearchParams({ home: "true" })
+      if (!inApp) setSearchParams({ home: "true" })
     } else {
       if(homePage){
         setShowMainBody(true)
@@ -94,25 +103,25 @@ const Home = () => {
 
 
   return getInfo.isLoading ? (<PreLoading />) : (
-    <div className={`bg-[#F4F4F9] w-full md:h-screen h-[var(--doc-height)] overflow-hidden md:overflow-hidden m-0 p-0 md:flex flex-col md:justify-center md:items-center`}>
+    <div className={`pwa-root bg-[#F4F4F9] w-full md:h-screen h-[var(--doc-height)] overflow-hidden md:overflow-hidden m-0 p-0 md:flex flex-col md:justify-center md:items-center`}>
       <Header 
         setShowAllConfigs={setShowAllConfigs}
         setShowTeleProxy={setShowTeleProxy}
         setShowIpLookup={setShowIpLookup}
         setShowMainBody={setShowMainBody}
-        showAllConfigs={searchParams.get("allConfigs") === "true"}
-        showTeleProxy={searchParams.get("telegramProxy") === "true"}
-        showIpLookup={searchParams.get("ipLookup") === "true"}
-        showMainBody={searchParams.get("home") === "true"}
+        showAllConfigs={isView("allConfigs")}
+        showTeleProxy={isView("telegramProxy")}
+        showIpLookup={isView("ipLookup")}
+        showMainBody={isView("home")}
         info={getInfo.data}
       />
-      <div className="w-full md:w-7/12 md:min-w-[650px] max-w-[1000px] h-[80%]">
-        {searchParams.get("allConfigs") === "true" && <AllConfigs />}
-        {searchParams.get("home") === "true" && <MainBody />}
-        {searchParams.get("telegramProxy") === "true" && <TeleProxy />}
-        {searchParams.get("ipLookup") === "true" && <IpLookup />}
+      <div className="pwa-top-rest w-full md:w-7/12 md:min-w-[650px] max-w-[1000px] h-[80%]">
+        {isView("allConfigs") && <AllConfigs />}
+        {isView("home") && <MainBody />}
+        {isView("telegramProxy") && <TeleProxy />}
+        {isView("ipLookup") && <IpLookup />}
       </div>
-      <div dir="ltr" className={`${showMainBody && 'bg-[#E0E4F5] md:bg-transparent bg-opacity-50 md:bg-opacity-[unset]'} md:w-7/12 md:min-w-[650px] h-[10%] max-w-[1000px] w-full flex justify-between items-center px-5 md:px-0 py-5`}>
+      <div dir="ltr" className={`pwa-footer ${showMainBody && 'bg-[#E0E4F5] md:bg-transparent bg-opacity-50 md:bg-opacity-[unset]'} md:w-7/12 md:min-w-[650px] h-[10%] max-w-[1000px] w-full flex justify-between items-center px-5 md:px-0 py-5`}>
           <FooterSocialIcons />
           <BrandAndLogo />
       </div>
