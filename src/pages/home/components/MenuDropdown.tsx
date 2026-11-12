@@ -1,4 +1,5 @@
 import * as React from 'react';
+import { PWA_BACK } from '../../../utils/pwaApp';
 import { isRtl } from '../../../utils/languages';
 import { styled, alpha } from '@mui/material/styles';
 import Button from '@mui/material/Button';
@@ -35,6 +36,15 @@ const MenuDropdown: React.FC<propsTypes> = ({dohModal, showTeleProxy, showAllCon
   const handleClose = () => {
     setAnchorEl(null);
   };
+
+  // The installed app on Android: the system's back (button or edge swipe) opens this menu, and closes it again
+  // (utils/pwaApp.ts sends PWA_BACK instead of leaving the page)
+  const buttonRef = React.useRef<HTMLButtonElement | null>(null);
+  React.useEffect(() => {
+    const onBack = () => setAnchorEl((cur) => (cur ? null : buttonRef.current));
+    window.addEventListener(PWA_BACK, onBack);
+    return () => window.removeEventListener(PWA_BACK, onBack);
+  }, []);
 
   const { t, i18n: {language} } = useTranslation();
 
@@ -89,6 +99,7 @@ const MenuDropdown: React.FC<propsTypes> = ({dohModal, showTeleProxy, showAllCon
   return (
     <>
       <Button
+        ref={buttonRef}
         id="demo-customized-button"
         aria-controls={open ? 'demo-customized-menu' : undefined}
         aria-haspopup="true"
