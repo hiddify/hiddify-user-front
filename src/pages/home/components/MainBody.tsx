@@ -77,11 +77,14 @@ const MainBody = () => {
               </div>
             </div>
           </div>
-          <div className='w-full h-full bg-[#E0E4F5] rounded-t-[24px] md:rounded-[24px] bg-opacity-50 relative'>
-            <div className="p-4 h-full  mt-5 md:m-0 bg-transparent flex items-center justify-center">
+          {/* min-h-0: a long support text must not make this panel taller than the one above, or the connect button
+              (centred between them) moves down over the text. The top padding keeps the box below the button. */}
+          <div className='w-full h-full min-h-0 bg-[#E0E4F5] rounded-t-[24px] md:rounded-[24px] bg-opacity-50 relative'>
+            <div className="px-4 pb-4 pt-[82px] md:pt-[62px] lg:pt-[77px] h-full bg-transparent flex flex-col items-center justify-center">
               <SupportInfo 
                 viewMoreUrl={getInfo.data?.admin_message_url ? getInfo.data?.admin_message_url : ''} 
                 adminMessageHtml={getInfo.data?.admin_message_html ? getInfo.data?.admin_message_html : ''} 
+                fullHtml={getInfo.data?.admin_message_full_html || ''}
                 title={getInfo.data?.admin_message_title_show === false ? null : (getInfo.data?.admin_message_title || t('Support'))}
                 moreText={getInfo.data?.admin_message_more_show === false ? null : (getInfo.data?.admin_message_more || t('View More'))}
               />
