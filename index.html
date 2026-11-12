@@ -2,28 +2,20 @@
 <html>
   <head>
     <meta charset="UTF-8" />
-    
-    <meta name="apple-itunes-app" content="app-id=6596777532, app-argument=hiddify://import/{{profile_url}}">
-    <meta name="google-play-app" content="app-id=app.hiddify.com">
-    
-    <link rel="icon" type="image/png" href="/assets/hiddify-logo-7617d937.png" />
-<!--     <link rel="stylesheet" href="node_modules/smartbanner.js/dist/smartbanner.min.css"> -->
-    <link href="https://cdn.jsdelivr.net/gh/rastikerdar/vazirmatn@v33.003/Vazirmatn-font-face.css" rel="stylesheet" type="text/css" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="icon" type="image/x-icon" href="{{ static_url_for( filename='images/favicon.ico')}}">
-    <link rel="manifest" href="{{ url_for('common_bp.LoginView:create_pwa_manifest',secret_uuid=g.account.uuid or '')}}">
-    
-    <title>Hiddify | Panel</title>
-    <script type="module" crossorigin src="/assets/index-ccb9873c.js"></script>
-    <link rel="stylesheet" href="/assets/index-fa00de9a.css">
+    <title>Hiddify</title>
+    <!-- The panel's built-in page uses panel/user/templates/user_front.html (Flask + Vite manifest); this file is the
+         dev page and the standalone build (USER_FRONT_OUT_DIR=dist) used as a custom user page. -->
+    <script type="module" crossorigin src="./assets/index-4488e221.js"></script>
+    <link rel="stylesheet" href="./assets/index-4f0dd792.css">
   </head>
   <body>
     <div id="root"></div>
-    
-    <!--<script src="node_modules/smartbanner.js/dist/smartbanner.min.js"></script>-->
     <script>
-      window.appVersion = '{{version}}';
-      window.deepLink = "hiddify://import/{{profile_url}}"
+      window.appVersion = window.appVersion || "dev";
+      window.deepLink = window.deepLink || "";
+      window.__USER_FRONT_STATIC__ = window.__USER_FRONT_STATIC__ || "";
     </script>
+    
   </body>
 </html>

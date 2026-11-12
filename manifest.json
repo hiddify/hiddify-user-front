@@ -1,0 +1,131 @@
+{
+  "index.css": {
+    "file": "assets/index-4f0dd792.css",
+    "src": "index.css"
+  },
+  "index.html": {
+    "assets": [
+      "assets/applestore-ed24a1a4.png",
+      "assets/playstore-5e992c29.png",
+      "assets/linux-b48917d1.png",
+      "assets/snapcraft-e9da85a9.png",
+      "assets/hiddify-logo-7617d937.png",
+      "assets/Vazirmatn-Thin-fa5ff0c3.woff2",
+      "assets/Vazirmatn-ExtraLight-77efc8bd.woff2",
+      "assets/Vazirmatn-Light-a3aa104f.woff2",
+      "assets/Vazirmatn-Regular-e3821013.woff2",
+      "assets/Vazirmatn-Medium-3333e311.woff2",
+      "assets/Vazirmatn-SemiBold-6a39a3c2.woff2",
+      "assets/Vazirmatn-Bold-836fae7d.woff2",
+      "assets/Vazirmatn-ExtraBold-cd67558b.woff2",
+      "assets/Vazirmatn-Black-e65a0552.woff2",
+      "assets/Vazirmatn-FD-Thin-f1067340.woff2",
+      "assets/Vazirmatn-FD-ExtraLight-cb5350cc.woff2",
+      "assets/Vazirmatn-FD-Light-57316b17.woff2",
+      "assets/Vazirmatn-FD-Regular-35740bc0.woff2",
+      "assets/Vazirmatn-FD-Medium-cfecf151.woff2",
+      "assets/Vazirmatn-FD-SemiBold-484fad63.woff2",
+      "assets/Vazirmatn-FD-Bold-59df46af.woff2",
+      "assets/Vazirmatn-FD-ExtraBold-f7193733.woff2",
+      "assets/Vazirmatn-FD-Black-b1246659.woff2"
+    ],
+    "css": [
+      "assets/index-4f0dd792.css"
+    ],
+    "file": "assets/index-4488e221.js",
+    "isEntry": true,
+    "src": "index.html"
+  },
+  "node_modules/vazirmatn/fonts/webfonts/Vazirmatn-Black.woff2": {
+    "file": "assets/Vazirmatn-Black-e65a0552.woff2",
+    "src": "node_modules/vazirmatn/fonts/webfonts/Vazirmatn-Black.woff2"
+  },
+  "node_modules/vazirmatn/fonts/webfonts/Vazirmatn-Bold.woff2": {
+    "file": "assets/Vazirmatn-Bold-836fae7d.woff2",
+    "src": "node_modules/vazirmatn/fonts/webfonts/Vazirmatn-Bold.woff2"
+  },
+  "node_modules/vazirmatn/fonts/webfonts/Vazirmatn-ExtraBold.woff2": {
+    "file": "assets/Vazirmatn-ExtraBold-cd67558b.woff2",
+    "src": "node_modules/vazirmatn/fonts/webfonts/Vazirmatn-ExtraBold.woff2"
+  },
+  "node_modules/vazirmatn/fonts/webfonts/Vazirmatn-ExtraLight.woff2": {
+    "file": "assets/Vazirmatn-ExtraLight-77efc8bd.woff2",
+    "src": "node_modules/vazirmatn/fonts/webfonts/Vazirmatn-ExtraLight.woff2"
+  },
+  "node_modules/vazirmatn/fonts/webfonts/Vazirmatn-Light.woff2": {
+    "file": "assets/Vazirmatn-Light-a3aa104f.woff2",
+    "src": "node_modules/vazirmatn/fonts/webfonts/Vazirmatn-Light.woff2"
+  },
+  "node_modules/vazirmatn/fonts/webfonts/Vazirmatn-Medium.woff2": {
+    "file": "assets/Vazirmatn-Medium-3333e311.woff2",
+    "src": "node_modules/vazirmatn/fonts/webfonts/Vazirmatn-Medium.woff2"
+  },
+  "node_modules/vazirmatn/fonts/webfonts/Vazirmatn-Regular.woff2": {
+    "file": "assets/Vazirmatn-Regular-e3821013.woff2",
+    "src": "node_modules/vazirmatn/fonts/webfonts/Vazirmatn-Regular.woff2"
+  },
+  "node_modules/vazirmatn/fonts/webfonts/Vazirmatn-SemiBold.woff2": {
+    "file": "assets/Vazirmatn-SemiBold-6a39a3c2.woff2",
+    "src": "node_modules/vazirmatn/fonts/webfonts/Vazirmatn-SemiBold.woff2"
+  },
+  "node_modules/vazirmatn/fonts/webfonts/Vazirmatn-Thin.woff2": {
+    "file": "assets/Vazirmatn-Thin-fa5ff0c3.woff2",
+    "src": "node_modules/vazirmatn/fonts/webfonts/Vazirmatn-Thin.woff2"
+  },
+  "node_modules/vazirmatn/misc/Farsi-Digits/fonts/webfonts/Vazirmatn-FD-Black.woff2": {
+    "file": "assets/Vazirmatn-FD-Black-b1246659.woff2",
+    "src": "node_modules/vazirmatn/misc/Farsi-Digits/fonts/webfonts/Vazirmatn-FD-Black.woff2"
+  },
+  "node_modules/vazirmatn/misc/Farsi-Digits/fonts/webfonts/Vazirmatn-FD-Bold.woff2": {
+    "file": "assets/Vazirmatn-FD-Bold-59df46af.woff2",
+    "src": "node_modules/vazirmatn/misc/Farsi-Digits/fonts/webfonts/Vazirmatn-FD-Bold.woff2"
+  },
+  "node_modules/vazirmatn/misc/Farsi-Digits/fonts/webfonts/Vazirmatn-FD-ExtraBold.woff2": {
+    "file": "assets/Vazirmatn-FD-ExtraBold-f7193733.woff2",
+    "src": "node_modules/vazirmatn/misc/Farsi-Digits/fonts/webfonts/Vazirmatn-FD-ExtraBold.woff2"
+  },
+  "node_modules/vazirmatn/misc/Farsi-Digits/fonts/webfonts/Vazirmatn-FD-ExtraLight.woff2": {
+    "file": "assets/Vazirmatn-FD-ExtraLight-cb5350cc.woff2",
+    "src": "node_modules/vazirmatn/misc/Farsi-Digits/fonts/webfonts/Vazirmatn-FD-ExtraLight.woff2"
+  },
+  "node_modules/vazirmatn/misc/Farsi-Digits/fonts/webfonts/Vazirmatn-FD-Light.woff2": {
+    "file": "assets/Vazirmatn-FD-Light-57316b17.woff2",
+    "src": "node_modules/vazirmatn/misc/Farsi-Digits/fonts/webfonts/Vazirmatn-FD-Light.woff2"
+  },
+  "node_modules/vazirmatn/misc/Farsi-Digits/fonts/webfonts/Vazirmatn-FD-Medium.woff2": {
+    "file": "assets/Vazirmatn-FD-Medium-cfecf151.woff2",
+    "src": "node_modules/vazirmatn/misc/Farsi-Digits/fonts/webfonts/Vazirmatn-FD-Medium.woff2"
+  },
+  "node_modules/vazirmatn/misc/Farsi-Digits/fonts/webfonts/Vazirmatn-FD-Regular.woff2": {
+    "file": "assets/Vazirmatn-FD-Regular-35740bc0.woff2",
+    "src": "node_modules/vazirmatn/misc/Farsi-Digits/fonts/webfonts/Vazirmatn-FD-Regular.woff2"
+  },
+  "node_modules/vazirmatn/misc/Farsi-Digits/fonts/webfonts/Vazirmatn-FD-SemiBold.woff2": {
+    "file": "assets/Vazirmatn-FD-SemiBold-484fad63.woff2",
+    "src": "node_modules/vazirmatn/misc/Farsi-Digits/fonts/webfonts/Vazirmatn-FD-SemiBold.woff2"
+  },
+  "node_modules/vazirmatn/misc/Farsi-Digits/fonts/webfonts/Vazirmatn-FD-Thin.woff2": {
+    "file": "assets/Vazirmatn-FD-Thin-f1067340.woff2",
+    "src": "node_modules/vazirmatn/misc/Farsi-Digits/fonts/webfonts/Vazirmatn-FD-Thin.woff2"
+  },
+  "src/assets/icons/applestore.png": {
+    "file": "assets/applestore-ed24a1a4.png",
+    "src": "src/assets/icons/applestore.png"
+  },
+  "src/assets/icons/linux.png": {
+    "file": "assets/linux-b48917d1.png",
+    "src": "src/assets/icons/linux.png"
+  },
+  "src/assets/icons/playstore.png": {
+    "file": "assets/playstore-5e992c29.png",
+    "src": "src/assets/icons/playstore.png"
+  },
+  "src/assets/icons/snapcraft.png": {
+    "file": "assets/snapcraft-e9da85a9.png",
+    "src": "src/assets/icons/snapcraft.png"
+  },
+  "src/assets/images/hiddify-logo.png": {
+    "file": "assets/hiddify-logo-7617d937.png",
+    "src": "src/assets/images/hiddify-logo.png"
+  }
+}
