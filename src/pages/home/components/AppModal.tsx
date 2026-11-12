@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react'
+import { isRtl } from '../../../utils/languages';
 import { Text } from '../../../designSystem/Text'
 import styled from '@emotion/styled';
 import { Button, ButtonProps, CardMedia, CircularProgress } from '@mui/material';
@@ -141,7 +142,7 @@ const AppModal = ({ profileUrl }) => {
                 <div onClick={() => setApp(null)} className='bg-[#FBFBFB] rounded-2xl py-3 px-2 cursor-pointer'>
                     <div className='flex gap-2'>
                         <div className='flex items-center justify-center p-2'>
-                            {language === 'fa' ? <ArrowForwardIosIcon /> : <ArrowBackIosIcon />}
+                            {isRtl(language) ? <ArrowForwardIosIcon /> : <ArrowBackIosIcon />}
                         </div>
                         <div className='bg-[#F2F4FB] w-[50px] h-[50px] p-2 rounded-lg flex items-center justify-center'>
                             <CardMedia
@@ -164,7 +165,7 @@ const AppModal = ({ profileUrl }) => {
                     </div>
                     <div dir="rtl" className='grid grid-cols-2 gap-1 md:gap-4 px-0 md:px-10'>
                         {app && app?.install && app?.install?.length ? app?.install.map(item => (
-                            <div dir={language === 'fa' ? 'rtl' : "ltr"} onClick={() => downloadApp(item?.url ? item?.url : '')} className='w-full bg-black rounded-md flex items-center gap-2 py-1 px-2 cursor-pointer'>
+                            <div dir={isRtl(language) ? 'rtl' : "ltr"} onClick={() => downloadApp(item?.url ? item?.url : '')} className='w-full bg-black rounded-md flex items-center gap-2 py-1 px-2 cursor-pointer'>
                                 <div className='bg-transparent w-4 h-4 md:w-6 md:h-6 flex items-center justify-center overflow-visible'>
                                     <CardMedia
                                         sx={{ height: '100%', width: '100%', backgroundSize: 'cover' }}
@@ -224,7 +225,7 @@ const AppModal = ({ profileUrl }) => {
                                                 <Text fontSize='base' fontWeight='regular' className='text-[#495057]'>{item.title ? item.title : ''}</Text>
                                                 <Text fontSize='sm' fontWeight='normal' className='text-[#212529]'>{item.title === "Streisand" || item.title === 'Hiddify Next' || item.title === "استرایسند" || item.title === "هیدیفای نکست" ? t('*Recommended') : '' }</Text>
                                             </div>
-                                            {language === 'fa' ? <ArrowBackIosIcon /> : <ArrowForwardIosIcon />}
+                                            {isRtl(language) ? <ArrowBackIosIcon /> : <ArrowForwardIosIcon />}
                                         </div>
                                     </div> 
                                 </div>

@@ -1,4 +1,5 @@
 import MainBody from "./components/MainBody"
+import { isRtl } from '../../utils/languages';
 import BrandAndLogo from "./components/BrandAndLogo"
 import FooterSocialIcons from "./components/FooterSocialIcons"
 import Header from "./components/Header"
@@ -66,14 +67,9 @@ const Home = () => {
   useEffect(() => {
     // Match admin_v2: html lang drives Vazirmatn FD (Persian digits) via CSS.
     document.documentElement.lang = language || 'en'
-    document.documentElement.dir = language === 'fa' ? 'rtl' : 'ltr'
-    if (language === 'fa') {
-      document.body.classList.add('rtl');
-      document.body.classList.add('fa-font');
-    } else {
-      document.body.classList.remove('rtl');
-      document.body.classList.remove('fa-font');
-    }
+    document.documentElement.dir = isRtl(language) ? 'rtl' : 'ltr'
+    document.body.classList.toggle('rtl', isRtl(language));
+    document.body.classList.toggle('fa-font', language === 'fa');
   }, [language])
 
   useEffect(() => {

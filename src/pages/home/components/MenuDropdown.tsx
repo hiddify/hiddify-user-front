@@ -1,4 +1,5 @@
 import * as React from 'react';
+import { isRtl } from '../../../utils/languages';
 import { styled, alpha } from '@mui/material/styles';
 import Button from '@mui/material/Button';
 import Menu, { MenuProps } from '@mui/material/Menu';
@@ -72,8 +73,8 @@ const MenuDropdown: React.FC<propsTypes> = ({dohModal, showTeleProxy, showAllCon
         '& .MuiSvgIcon-root': {
           fontSize: 18,
           color: theme.palette.text.secondary,
-          marginRight: language === 'fa' ? 'unset' : theme.spacing(1.5),
-          marginLeft: language === 'fa' ? theme.spacing(1.5) : 'unset'
+          marginRight: isRtl(language) ? 'unset' : theme.spacing(1.5),
+          marginLeft: isRtl(language) ? theme.spacing(1.5) : 'unset'
         },
         '&:active': {
           backgroundColor: alpha(
