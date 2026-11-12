@@ -56,6 +56,12 @@ function dismissed(): boolean {
 
 const PLATFORMS: Platform[] = ["ios", "android", "desktop"];
 
+/** The user page's own app icon (the page's apple-touch-icon, the same set as its manifest), drawn in the scenes. */
+function appIconStyle(): Record<string, string> | undefined {
+  const href = document.head.querySelector<HTMLLinkElement>('link[rel="apple-touch-icon"]')?.href;
+  return href ? { "--app-icon-img": `url("${href}")` } : undefined;
+}
+
 const Scene = ({ platform }: { platform: Platform }) => {
   if (platform === "ios")
     return (
@@ -156,7 +162,7 @@ const PwaGuide = ({ enabled }: { enabled: boolean }) => {
 
   return (
     <Dialog open={open} onClose={gotIt} PaperProps={{ className: "pwa-guide-paper" }} dir={i18n.language === "fa" ? "rtl" : "ltr"}>
-      <div className="pwa-guide">
+      <div className="pwa-guide" style={appIconStyle()}>
         <div className="pwa-guide__hero">
           <h2>{t("Install the panel as an app")}</h2>
           <p>{t("Keep the panel one tap away, like any app on your phone or computer.")}</p>

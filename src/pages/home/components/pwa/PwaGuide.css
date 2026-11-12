@@ -111,7 +111,8 @@
   width: 1.5rem;
   height: 1.5rem;
   border-radius: 0.4rem;
-  background: linear-gradient(135deg, var(--p-primary-400, #60a5fa), var(--p-primary-700, #1d4ed8));
+  background: var(--app-icon-img, none) center / cover no-repeat,
+    linear-gradient(135deg, var(--p-primary-400, #60a5fa), var(--p-primary-700, #1d4ed8));
 }
 .pwa-guide .app-icon--tiny {
   width: 0.7rem;
