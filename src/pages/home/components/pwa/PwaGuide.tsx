@@ -56,10 +56,9 @@ function dismissed(): boolean {
 
 const PLATFORMS: Platform[] = ["ios", "android", "desktop"];
 
-/** The user page's own app icon (the page's apple-touch-icon, the same set as its manifest), drawn in the scenes. */
-function appIconStyle(): Record<string, string> | undefined {
-  const href = document.head.querySelector<HTMLLinkElement>('link[rel="apple-touch-icon"]')?.href;
-  return href ? { "--app-icon-img": `url("${href}")` } : undefined;
+/** The user page's own app icon, cut to its shape (the page's 256 px tab icon): shown at the top and in the scenes. */
+function appIcon(): string | undefined {
+  return document.head.querySelector<HTMLLinkElement>('link[rel="icon"][sizes="256x256"]')?.href || undefined;
 }
 
 const Scene = ({ platform }: { platform: Platform }) => {
@@ -131,6 +130,7 @@ const Scene = ({ platform }: { platform: Platform }) => {
 const PwaGuide = ({ enabled }: { enabled: boolean }) => {
   const { t, i18n } = useTranslation();
   const [open, setOpen] = useState(false);
+  const [icon] = useState(appIcon);
   const [detected] = useState<Platform>(detectPlatform);
   const [platform, setPlatform] = useState<Platform>(detected);
 
@@ -162,8 +162,10 @@ const PwaGuide = ({ enabled }: { enabled: boolean }) => {
 
   return (
     <Dialog open={open} onClose={gotIt} PaperProps={{ className: "pwa-guide-paper" }} dir={i18n.language === "fa" ? "rtl" : "ltr"}>
-      <div className="pwa-guide" style={appIconStyle()}>
+      <div className={`pwa-guide${icon ? " pwa-guide--own-icon" : ""}`} style={icon ? { ["--app-icon-img" as string]: `url("${icon}")` } : undefined}>
         <div className="pwa-guide__hero">
+          {/* The app as it will look on the home screen */}
+          {icon && <img className="pwa-guide__icon" src={icon} alt="" />}
           <h2>{t("Install the panel as an app")}</h2>
           <p>{t("Keep the panel one tap away, like any app on your phone or computer.")}</p>
         </div>

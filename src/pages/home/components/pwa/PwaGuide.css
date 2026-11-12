@@ -111,13 +111,17 @@
   width: 1.5rem;
   height: 1.5rem;
   border-radius: 0.4rem;
-  background: var(--app-icon-img, none) center / cover no-repeat,
-    linear-gradient(135deg, var(--p-primary-400, #60a5fa), var(--p-primary-700, #1d4ed8));
+  background: linear-gradient(135deg, var(--p-primary-400, #60a5fa), var(--p-primary-700, #1d4ed8));
 }
 .pwa-guide .app-icon--tiny {
   width: 0.7rem;
   height: 0.7rem;
   border-radius: 0.2rem;
+}
+/* The page's own icon is already cut to its shape: no corner radius, nothing behind it */
+.pwa-guide--own-icon .app-icon {
+  border-radius: 0;
+  background: var(--app-icon-img) center / contain no-repeat;
 }
 .pwa-guide .finger {
   position: absolute;
@@ -653,6 +657,13 @@
   padding: 1.4rem 1.5rem 0.4rem;
   text-align: center;
   background: radial-gradient(120% 90% at 50% 0%, rgb(69 95 233 / 18%), transparent 70%);
+}
+.pwa-guide__icon {
+  display: block;
+  width: 5rem;
+  height: 5rem;
+  margin: 0 auto 0.6rem;
+  filter: drop-shadow(0 10px 16px rgb(69 95 233 / 40%));
 }
 .pwa-guide__hero h2 {
   margin: 0 0 0.35rem;
