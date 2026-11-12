@@ -1,35 +1,43 @@
-name: Deploy React App to GitHub Pages
+name: Build the user page to gh-pages
+
+# Every push to main builds the page on its own (index.html + assets) into the gh-pages branch.
+# A panel uses it with Settings > Customizing User Page > user page URL:
+#   https://github.com/<owner>/hiddify-user-front/tree/gh-pages
+# (or the GitHub Pages address, when Pages is turned on for the branch). See "Custom user page" in the README.
 
 on:
   push:
     branches:
-      - main  # or your default branch
+      - main
+  workflow_dispatch:
+
 permissions:
   contents: write
+
 jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
     steps:
-    - name: Checkout Repository
-      uses: actions/checkout@v3
+      - name: Checkout
+        uses: actions/checkout@v4
 
-    - name: Setup Node.js environment
-      uses: actions/setup-node@v3
-      with:
-        node-version: '16'  # or the Node.js version of your choice
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: npm
 
-    - name: Install Yarn
-      run: npm install --global yarn
+      - name: Install dependencies
+        run: npm ci --no-audit --no-fund
 
-    - name: Install Dependencies
-      run: yarn
+      - name: Build
+        run: npx vite build
+        env:
+          USER_FRONT_OUT_DIR: dist
 
-    - name: Build React App
-      run: yarn build
-
-    - name: Deploy to GitHub Pages
-      uses: JamesIves/github-pages-deploy-action@v4
-      with:
-        branch: gh-pages  # The branch the action should deploy to.
-        folder: dist  # The folder the action should deploy.
-        token: ${{ secrets.GITHUB_TOKEN }}  # Using the built-in token
+      - name: Deploy to gh-pages
+        uses: JamesIves/github-pages-deploy-action@v4
+        with:
+          branch: gh-pages
+          folder: dist
+          clean: true

@@ -1,12 +1,12 @@
 import axios, { AxiosInstance, AxiosRequestConfig } from 'axios';
-import { getCurrentUrl } from './getCurrentUrl';
+import { apiBase } from './hiddify';
 import { getWindowData } from './getWindowData';
 // import { getAuthStorage, setAuthStorage } from '@containers/auth';
 
 
 const axiosInstance: AxiosInstance = axios.create({
   timeout: 150000,
-  baseURL: getCurrentUrl(false) + '/api/v2/user/',
+  baseURL: apiBase(),
 });
 
 axiosInstance.interceptors.request.use(

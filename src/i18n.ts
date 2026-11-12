@@ -8,10 +8,13 @@ declare global {
   }
 }
 
-/** Locale JSON lives next to the built assets (`static/user-front/i18n/`). */
+/**
+ * Locale JSON lives next to the built assets (`static/user-front/i18n/`). Without a base (a build served on its own,
+ * e.g. from GitHub Pages) it is relative to the page.
+ */
 function i18nLoadPath(): string {
   const base = (typeof window !== "undefined" && window.__USER_FRONT_STATIC__) || "";
-  return `${base.replace(/\/$/, "")}/i18n/{{lng}}.json`;
+  return base ? `${base.replace(/\/$/, "")}/i18n/{{lng}}.json` : "i18n/{{lng}}.json";
 }
 
 i18n
