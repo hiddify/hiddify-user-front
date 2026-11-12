@@ -148,7 +148,8 @@ const PwaGuide = ({ enabled }: { enabled: boolean }) => {
         ? [t("In Chrome, tap the ⋮ menu at the top"), t("Choose “Add to home screen” (or “Install app”)"), t("Tap Install: the panel opens like an app")]
         : [t("In Chrome, click the install icon at the end of the address bar"), t("Click Install"), t("The panel opens in its own window, like an app")];
   // On a phone the computer's system is unknown (an iPhone even says "Mac OS X"): just "Computer"
-  const tab = (p: Platform) => (p === "ios" ? "iPhone · Safari" : p === "android" ? "Android · Chrome" : `${detected === "desktop" ? desktopOsName() : t("Computer")} · Chrome`);
+  const device = (p: Platform) => (p === "ios" ? "iPhone" : p === "android" ? "Android" : detected === "desktop" ? desktopOsName() : t("Computer"));
+  const browser = (p: Platform) => (p === "ios" ? "Safari" : "Chrome");
 
   /** Seen once is enough: "Got it" (or closing it) and it does not come back in this browser. */
   function gotIt() {
@@ -163,32 +164,38 @@ const PwaGuide = ({ enabled }: { enabled: boolean }) => {
   return (
     <Dialog open={open} onClose={gotIt} PaperProps={{ className: "pwa-guide-paper" }} dir={i18n.language === "fa" ? "rtl" : "ltr"}>
       <div className={`pwa-guide${icon ? " pwa-guide--own-icon" : ""}`} style={icon ? { ["--app-icon-img" as string]: `url("${icon}")` } : undefined}>
-        <div className="pwa-guide__hero">
-          {/* The app as it will look on the home screen */}
-          {icon && <img className="pwa-guide__icon" src={icon} alt="" />}
-          <h2>{t("Install the panel as an app")}</h2>
-          <p>{t("Keep the panel one tap away, like any app on your phone or computer.")}</p>
-        </div>
-        <div className="guide">
-          <div className="guide__tabs" role="tablist" aria-label={t("Your device")}>
-            {PLATFORMS.map((p) => (
-              <button key={p} type="button" role="tab" aria-selected={platform === p} className={`guide__tab${platform === p ? " guide__tab--on" : ""}`} onClick={() => setPlatform(p)}>
-                {tab(p)}
-              </button>
-            ))}
+        {/* Only this part scrolls: on a short screen the icon stays at the top and "Got it" below stays in view */}
+        <div className="pwa-guide__body">
+          <div className="pwa-guide__hero">
+            {/* The app as it will look on the home screen */}
+            {icon && <img className="pwa-guide__icon" src={icon} alt="" />}
+            <h2>{t("Install the panel as an app")}</h2>
           </div>
-          {/* The drawing is the same in every language (left to right); remounted per platform to restart it */}
-          <div key={platform} className={`stage stage--${platform}`} dir="ltr" aria-hidden="true">
-            <Scene platform={platform} />
+          <div className="guide">
+            <div className="guide__tabs" role="tablist" aria-label={t("Your device")}>
+              {PLATFORMS.map((p) => (
+                <button key={p} type="button" role="tab" aria-selected={platform === p} className={`guide__tab${platform === p ? " guide__tab--on" : ""}`} onClick={() => setPlatform(p)}>
+                  {/* On a phone the tab names the device only (one short line); the first step names the browser */}
+                  <span>
+                    {device(p)}
+                    <span className="guide__tab-app"> · {browser(p)}</span>
+                  </span>
+                </button>
+              ))}
+            </div>
+            {/* The drawing is the same in every language (left to right); remounted per platform to restart it */}
+            <div key={platform} className={`stage stage--${platform}`} dir="ltr" aria-hidden="true">
+              <Scene platform={platform} />
+            </div>
+            <ol key={`s-${platform}`} className={`guide__steps guide__steps--${steps.length}`}>
+              {steps.map((s, i) => (
+                <li key={i} className="guide__step" style={{ ["--i" as string]: i }}>
+                  <span className="guide__n">{i + 1}</span>
+                  {s}
+                </li>
+              ))}
+            </ol>
           </div>
-          <ol key={`s-${platform}`} className={`guide__steps guide__steps--${steps.length}`}>
-            {steps.map((s, i) => (
-              <li key={i} className="guide__step" style={{ ["--i" as string]: i }}>
-                <span className="guide__n">{i + 1}</span>
-                {s}
-              </li>
-            ))}
-          </ol>
         </div>
         <button type="button" className="pwa-guide__got" onClick={gotIt} autoFocus>
           ✓ {t("Got it")}

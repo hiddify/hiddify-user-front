@@ -643,14 +643,26 @@
   width: min(27rem, calc(100vw - 1.5rem));
   margin: 0.75rem;
   border-radius: 22px;
+  /* The guide scrolls inside (pwa-guide__body), not the whole card: the card opened scrolled down to the focused
+     "Got it" button, with the icon and the title cut off at the top. */
+  overflow: hidden;
 }
 .pwa-guide {
   display: flex;
   flex-direction: column;
-  gap: 0.9rem;
-  padding: 1.25rem;
+  min-height: 0; /* the card is never taller than the screen: the body below takes what is left */
   font-family: var(--ui-font, inherit);
   color: var(--p-text-color);
+}
+.pwa-guide__body {
+  flex: 1 1 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 0.9rem;
+  min-height: 0;
+  padding: 1.25rem 1.25rem 0.9rem;
+  overflow-y: auto;
+  overscroll-behavior: contain;
 }
 .pwa-guide__hero {
   margin: -1.25rem -1.25rem 0;
@@ -666,15 +678,9 @@
   filter: drop-shadow(0 10px 16px rgb(69 95 233 / 40%));
 }
 .pwa-guide__hero h2 {
-  margin: 0 0 0.35rem;
+  margin: 0;
   font-size: 1.15rem;
   font-weight: 700;
-}
-.pwa-guide__hero p {
-  margin: 0;
-  font-size: 0.88rem;
-  line-height: 1.6;
-  color: var(--p-text-muted-color);
 }
 .pwa-guide__never {
   display: flex;
@@ -691,7 +697,8 @@
   accent-color: var(--p-primary-color);
 }
 .pwa-guide__got {
-  width: 100%;
+  flex: none;
+  margin: 0 1.25rem 1.25rem;
   padding: 0.75rem;
   border: 0;
   border-radius: 12px;
@@ -719,4 +726,93 @@
 .pwa-guide .finger {
   font-size: 0.8rem;
   line-height: 1;
+}
+
+/* Phones and short windows: a smaller top and tighter rows, so the whole guide fits most screens without scrolling */
+@media (max-width: 480px), (max-height: 740px) {
+  .pwa-guide-paper.MuiPaper-root {
+    max-height: calc(100% - 1.5rem);
+  }
+  .pwa-guide__body {
+    gap: 0.7rem;
+    padding: 1rem 1rem 0.7rem;
+  }
+  .pwa-guide__hero {
+    margin: -1rem -1rem 0;
+    padding: 1rem 1rem 0.2rem;
+  }
+  .pwa-guide__icon {
+    width: 4rem;
+    height: 4rem;
+    margin-bottom: 0.45rem;
+  }
+  .pwa-guide__hero h2 {
+    font-size: 1.05rem;
+  }
+  .pwa-guide .guide {
+    gap: 0.6rem;
+  }
+  .pwa-guide .guide__tabs {
+    padding: 0.2rem;
+    border-radius: 10px;
+  }
+  .pwa-guide .guide__tab {
+    padding: 0.3rem 0.25rem;
+    border-radius: 8px;
+    font-size: 0.74rem;
+  }
+  .pwa-guide .guide__steps {
+    gap: 0.25rem;
+  }
+  .pwa-guide .guide__step {
+    padding: 0.3rem 0.5rem;
+    font-size: 0.82rem;
+  }
+  .pwa-guide__got {
+    margin: 0 1rem 1rem;
+    padding: 0.65rem;
+  }
+}
+/* Phones: each tab names the device only, on one line */
+@media (max-width: 480px) {
+  .pwa-guide .guide__tab-app {
+    display: none;
+  }
+}
+/* Shorter screens (older phones, or the browser's bars showing): the drawing and the icon shrink too, step by step.
+   Each limit is the screen height under which the step above no longer fits without scrolling. */
+@media (max-height: 642px) {
+  .pwa-guide .stage {
+    zoom: 0.85;
+  }
+  .pwa-guide__icon {
+    width: 3.5rem;
+    height: 3.5rem;
+  }
+}
+@media (max-height: 603px) {
+  .pwa-guide .stage {
+    zoom: 0.72;
+  }
+  .pwa-guide__icon {
+    width: 3rem;
+    height: 3rem;
+  }
+}
+@media (max-height: 568px) {
+  .pwa-guide .stage {
+    zoom: 0.68;
+  }
+  .pwa-guide__hero h2 {
+    font-size: 1rem;
+  }
+  .pwa-guide .guide__step {
+    padding: 0.2rem 0.5rem;
+    font-size: 0.78rem;
+  }
+  .pwa-guide .guide__n {
+    width: 1.25rem;
+    height: 1.25rem;
+    font-size: 0.66rem;
+  }
 }
