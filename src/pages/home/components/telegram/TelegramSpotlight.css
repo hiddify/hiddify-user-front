@@ -1,0 +1,312 @@
+/* "Connect to Telegram" spotlight (user panel). One 9 s loop, three steps of 3 s:
+   1. /start sent, 2. the bot answers with the account card, 3. "User panel" tapped: the panel opens. */
+.tg-spot-paper.MuiPaper-root {
+  width: min(27rem, calc(100vw - 1.5rem));
+  margin: 0.75rem;
+  border-radius: 22px;
+}
+.tg-spot {
+  --tg: #229ed9;
+  --tg-dark: #1b7fb0;
+  --brand: #455fe9;
+  --ink: rgb(33 37 41 / 14%);
+  --dur: 9s;
+  display: flex;
+  flex-direction: column;
+  gap: 0.85rem;
+  padding: 1.25rem;
+  font-family: var(--ui-font, inherit);
+  color: #212529;
+}
+.tg-spot__hero {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.35rem;
+  margin: -1.25rem -1.25rem 0;
+  padding: 1.4rem 1.5rem 0.2rem;
+  text-align: center;
+  background: radial-gradient(120% 90% at 50% 0%, rgb(34 158 217 / 20%), transparent 70%);
+}
+.tg-spot__logo {
+  display: grid;
+  place-items: center;
+  width: 3rem;
+  height: 3rem;
+  margin-bottom: 0.25rem;
+  border-radius: 50%;
+  color: #fff;
+  background: linear-gradient(135deg, #37aee2, var(--tg-dark));
+  box-shadow: 0 10px 22px -10px rgb(34 158 217 / 80%);
+}
+.tg-spot__hero h2 {
+  margin: 0;
+  font-size: 1.12rem;
+  font-weight: 700;
+}
+.tg-spot__hero p {
+  margin: 0;
+  font-size: 0.88rem;
+  line-height: 1.6;
+  color: #6c757d;
+}
+
+/* --- the scene --- */
+.tg-stage {
+  position: relative;
+  height: 13rem;
+  display: grid;
+  place-items: center;
+  overflow: hidden;
+  border-radius: 16px;
+  background: radial-gradient(120% 100% at 50% 0%, rgb(34 158 217 / 16%), transparent 70%), #f2f4fb;
+}
+.tg-phone {
+  position: relative;
+  width: 8rem;
+  height: 12rem;
+  overflow: hidden;
+  border: 0.35rem solid #1f2937;
+  border-radius: 1.4rem;
+  background: #dbe7ef;
+  box-shadow: 0 14px 30px -14px rgb(0 0 0 / 55%);
+}
+.tg-head {
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+  padding: 0.55rem 0.45rem 0.35rem;
+  background: #fff;
+  font-size: 0.5rem;
+  font-weight: 700;
+}
+.tg-head__avatar {
+  width: 1rem;
+  height: 1rem;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #7b8ff1, var(--brand));
+}
+.tg-chat {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+  padding: 0.45rem 0.4rem;
+  font-size: 0.48rem;
+}
+.tg-msg {
+  max-width: 85%;
+  padding: 0.3rem 0.4rem;
+  border-radius: 0.55rem;
+  box-shadow: 0 1px 1px rgb(0 0 0 / 10%);
+}
+.tg-msg--me {
+  align-self: flex-end;
+  background: #e1ffc7;
+}
+.tg-msg--bot {
+  align-self: flex-start;
+  background: #fff;
+}
+.tg-start {
+  opacity: 0;
+  transform: translateY(6px);
+  animation: tg-start var(--dur) infinite;
+}
+.tg-card {
+  display: flex;
+  flex-direction: column;
+  gap: 0.22rem;
+  opacity: 0;
+  transform: translateY(8px) scale(0.96);
+  transform-origin: bottom left;
+  animation: tg-card var(--dur) infinite;
+}
+.tg-card__row {
+  display: flex;
+  flex-direction: column;
+  gap: 0.12rem;
+}
+.tg-bar {
+  display: block;
+  height: 0.22rem;
+  border-radius: 999px;
+  background: var(--ink);
+  overflow: hidden;
+}
+.tg-bar i {
+  display: block;
+  width: 30%;
+  height: 100%;
+  background: linear-gradient(90deg, #34d399, #10b981);
+}
+.tg-card__btn {
+  margin-top: 0.15rem;
+  padding: 0.2rem;
+  border-radius: 0.35rem;
+  text-align: center;
+  font-weight: 700;
+  color: var(--tg-dark);
+  background: rgb(34 158 217 / 12%);
+}
+.tg-open {
+  animation: tg-open-lit var(--dur) infinite;
+}
+/* The user panel, opened from the bot */
+.tg-panel {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.6rem;
+  padding-top: 1.4rem;
+  background: #f4f4f9;
+  opacity: 0;
+  transform: translateY(100%);
+  animation: tg-panel var(--dur) infinite;
+}
+.tg-panel__logo {
+  width: 1.4rem;
+  height: 1.4rem;
+  border-radius: 0.45rem;
+  background: linear-gradient(135deg, #7b8ff1, var(--brand));
+}
+.tg-panel__bar {
+  width: 60%;
+  height: 0.32rem;
+  border-radius: 999px;
+  background: var(--ink);
+}
+.tg-panel__ring {
+  width: 3rem;
+  height: 3rem;
+  border-radius: 50%;
+  border: 0.45rem solid #c7d0f7;
+  background: var(--brand);
+  box-shadow: 0 0 0 0.35rem #e0e4f5;
+}
+.tg-finger {
+  position: absolute;
+  z-index: 5;
+  font-size: 0.85rem;
+  line-height: 1;
+  color: rgb(17 24 39 / 55%);
+  pointer-events: none;
+  animation: tg-finger var(--dur) infinite ease-in-out;
+}
+
+@keyframes tg-start {
+  0%, 6% { opacity: 0; transform: translateY(6px); }
+  12%, 92% { opacity: 1; transform: none; }
+  100% { opacity: 0; }
+}
+@keyframes tg-card {
+  0%, 30% { opacity: 0; transform: translateY(8px) scale(0.96); }
+  38%, 92% { opacity: 1; transform: none; }
+  100% { opacity: 0; }
+}
+@keyframes tg-open-lit {
+  0%, 62% { box-shadow: none; }
+  66%, 72% { box-shadow: 0 0 0 3px rgb(34 158 217 / 40%); }
+  76%, 100% { box-shadow: none; }
+}
+@keyframes tg-panel {
+  0%, 72% { opacity: 0; transform: translateY(100%); }
+  78%, 94% { opacity: 1; transform: none; }
+  100% { opacity: 0; transform: translateY(100%); }
+}
+/* "/start" tapped (bottom), then "User panel" in the bot's card */
+@keyframes tg-finger {
+  0% { left: 60%; top: 85%; opacity: 0; }
+  4% { opacity: 1; }
+  8% { left: 62%; top: 80%; transform: scale(0.7); }
+  12% { transform: scale(1); }
+  40% { left: 70%; top: 92%; }
+  62% { left: 46%; top: 70%; transform: scale(1); }
+  66% { transform: scale(0.7); }
+  70% { left: 46%; top: 70%; transform: scale(1); opacity: 1; }
+  80%, 100% { left: 70%; top: 92%; opacity: 0; }
+}
+
+/* --- the steps, lit with the scene (thirds) --- */
+.tg-steps {
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.tg-steps li {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  padding: 0.4rem 0.55rem;
+  border-radius: 10px;
+  font-size: 0.86rem;
+  color: #6c757d;
+  animation: tg-step var(--dur) infinite;
+  animation-delay: calc(var(--dur) * var(--i) / 3);
+}
+.tg-steps li span {
+  flex: none;
+  display: grid;
+  place-items: center;
+  width: 1.45rem;
+  height: 1.45rem;
+  border-radius: 999px;
+  font-size: 0.72rem;
+  font-weight: 700;
+  color: #fff;
+  background: var(--tg);
+}
+@keyframes tg-step {
+  0%, 33% { background: rgb(34 158 217 / 12%); color: #212529; }
+  34%, 100% { background: transparent; color: #6c757d; }
+}
+
+.tg-spot__connect {
+  width: 100%;
+  padding: 0.75rem;
+  border: 0;
+  border-radius: 12px;
+  background: linear-gradient(135deg, #37aee2, var(--tg-dark));
+  color: #fff;
+  font: inherit;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+}
+.tg-spot__connect:hover {
+  filter: brightness(1.06);
+}
+.tg-spot__connect:focus-visible,
+.tg-spot__later:focus-visible {
+  outline: 3px solid rgb(34 158 217 / 40%);
+  outline-offset: 2px;
+}
+.tg-spot__later {
+  margin-top: -0.35rem;
+  padding: 0.4rem;
+  border: 0;
+  background: transparent;
+  color: #6c757d;
+  font: inherit;
+  font-size: 0.88rem;
+  cursor: pointer;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .tg-stage *,
+  .tg-steps li {
+    animation: none !important;
+  }
+  .tg-start,
+  .tg-card {
+    opacity: 1;
+    transform: none;
+  }
+  .tg-finger {
+    display: none;
+  }
+}
