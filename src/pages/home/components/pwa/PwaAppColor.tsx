@@ -63,7 +63,7 @@ const PwaAppColor = ({ color, onChoose, rtl }: { color: string; onChoose: (c: st
         anchorOrigin={{ vertical: "bottom", horizontal: "center" }}
         transformOrigin={{ vertical: "top", horizontal: "center" }}
         TransitionComponent={Grow}
-        transitionDuration={{ enter: 420, exit: 240 }}
+        transitionDuration={{ enter: 500, exit: 240 }}
         slotProps={{ paper: { className: "app-color-pop", dir: rtl ? "rtl" : "ltr" } }}
       >
         <section className="icon-colors">

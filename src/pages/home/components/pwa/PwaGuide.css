@@ -1019,7 +1019,7 @@
 }
 @media (max-height: 474px) {
   .pwa-guide .stage {
-    zoom: 0.58;
+    zoom: 0.55;
   }
   .pwa-guide__icon {
     width: 2.6rem;
