@@ -19,31 +19,51 @@
 }
 .pwa-guide .guide__tabs {
   display: flex;
-  gap: 0.3rem;
-  padding: 0.25rem;
-  border-radius: 12px;
-  background: var(--p-content-hover-background);
+  gap: 0.45rem;
 }
+/* One tab per system: its logo in its own colors, on a very pale tint of its own */
 .pwa-guide .guide__tab {
+  --tab: #8e8e93;
   flex: 1;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  gap: 0.35rem;
-  padding: 0.4rem 0.3rem;
+  display: grid;
+  place-items: center;
+  height: 2.5rem;
+  padding: 0;
   border: 0;
-  border-radius: 9px;
-  background: transparent;
-  color: var(--p-text-muted-color);
-  font: inherit;
-  font-size: 0.78rem;
-  font-weight: 600;
+  border-radius: 12px;
+  background: color-mix(in srgb, var(--tab) 11%, transparent);
+  box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--tab) 16%, transparent);
+  color: var(--p-text-color);
   cursor: pointer;
+  transition:
+    background-color 0.2s ease,
+    box-shadow 0.2s ease;
 }
+.pwa-guide .guide__tab--android {
+  --tab: #3ddc84;
+}
+.pwa-guide .guide__tab--desktop {
+  --tab: #00a4ef;
+}
+.pwa-guide .guide__os {
+  display: block;
+  height: 1.35rem;
+  width: auto;
+  opacity: 0.6;
+  transition: opacity 0.2s ease;
+}
+.pwa-guide .guide__tab:hover .guide__os,
+.pwa-guide .guide__tab--on .guide__os {
+  opacity: 1;
+}
+.pwa-guide .guide__tab:focus-visible {
+  outline: 2px solid var(--p-primary-color);
+  outline-offset: 2px;
+}
+/* The chosen one: a little more of its tint, and a ring in its color */
 .pwa-guide .guide__tab--on {
-  background: var(--p-content-background);
-  color: var(--p-primary-color);
-  box-shadow: 0 1px 3px rgb(0 0 0 / 12%);
+  background: color-mix(in srgb, var(--tab) 20%, transparent);
+  box-shadow: inset 0 0 0 1.5px color-mix(in srgb, var(--tab) 70%, transparent);
 }
 
 /* --- the stage --- */
@@ -75,6 +95,7 @@
   width: 2.2rem;
   height: 0.5rem;
   border-radius: 999px;
+  z-index: 6; /* over the home screen too */
   background: #1f2937;
   transform: translateX(-50%);
 }
@@ -137,6 +158,91 @@
 .pwa-guide .hit-3,
 .pwa-guide .hit-4 {
   border-radius: 6px;
+}
+/* The app in an install prompt: its name and, under it, its address (as the real prompts show) */
+.pwa-guide .app-name {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  line-height: 1.3;
+}
+.pwa-guide .app-name b,
+.pwa-guide .app-name small {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.pwa-guide .app-name b {
+  font-size: 0.52rem;
+  color: var(--p-text-color);
+}
+.pwa-guide .app-name small {
+  font-size: 0.4rem;
+  color: var(--p-text-muted-color);
+}
+/* After the last tap on a phone: the home screen, with the app among the others */
+.pwa-guide .home {
+  position: absolute;
+  inset: 0;
+  z-index: 5;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  align-content: start;
+  gap: 0.75rem 0.2rem;
+  padding: 1.3rem 0.45rem 0;
+  background: linear-gradient(165deg, color-mix(in srgb, var(--p-primary-color) 34%, var(--p-content-background)), color-mix(in srgb, var(--p-primary-color) 10%, var(--p-content-background)));
+  opacity: 0;
+  animation: home-4 var(--dur) infinite;
+}
+.pwa-guide .stage--android .home {
+  padding-top: 0.7rem;
+  animation-name: home-3;
+}
+.pwa-guide .home__app {
+  justify-self: center;
+  width: 1.2rem;
+  height: 1.2rem;
+  border-radius: 0.33rem;
+  background: color-mix(in srgb, var(--p-text-color) 15%, transparent);
+}
+.pwa-guide .home__app--new {
+  position: relative;
+  background: none;
+  animation: home-new-4 var(--dur) infinite;
+}
+.pwa-guide .stage--android .home__app--new {
+  animation-name: home-new-3;
+}
+.pwa-guide .home__app--new .app-icon {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+.pwa-guide .home__app--new b {
+  position: absolute;
+  top: calc(100% + 0.1rem);
+  left: 50%;
+  font-size: 0.34rem;
+  font-weight: 600;
+  white-space: nowrap;
+  color: var(--p-text-color);
+  transform: translateX(-50%);
+}
+@keyframes home-4 {
+  0%, 91% { opacity: 0; }
+  94%, 100% { opacity: 1; }
+}
+@keyframes home-3 {
+  0%, 88% { opacity: 0; }
+  91%, 100% { opacity: 1; }
+}
+@keyframes home-new-4 {
+  0%, 92% { transform: scale(0.3); }
+  96%, 100% { transform: scale(1); }
+}
+@keyframes home-new-3 {
+  0%, 89% { transform: scale(0.3); }
+  94%, 100% { transform: scale(1); }
 }
 
 /* --- iOS Safari --- */
@@ -249,6 +355,34 @@
   gap: 0.4rem;
   padding-top: 0.4rem;
 }
+/* "Open as Web App", on: the sheet's own switch */
+.pwa-guide .ios-add__opt {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 0.15rem;
+  padding: 0.25rem 0.3rem;
+  border-radius: 6px;
+  background: var(--p-content-hover-background);
+  font-size: 0.42rem;
+}
+.pwa-guide .ios-add__switch {
+  position: relative;
+  width: 0.8rem;
+  height: 0.46rem;
+  border-radius: 999px;
+  background: #34c759;
+}
+.pwa-guide .ios-add__switch::after {
+  content: "";
+  position: absolute;
+  top: 0.05rem;
+  right: 0.05rem;
+  width: 0.36rem;
+  height: 0.36rem;
+  border-radius: 50%;
+  background: #fff;
+}
 .pwa-guide .finger--ios {
   animation: finger-ios var(--dur) infinite ease-in-out;
 }
@@ -263,9 +397,10 @@
   63% { left: 55%; top: 87%; transform: scale(1); }
   67% { transform: scale(0.7); }
   72% { left: 55%; top: 87%; transform: scale(1); }
-  88% { left: 84%; top: 13%; transform: scale(1); }
-  92% { transform: scale(0.7); }
-  96%, 100% { left: 84%; top: 13%; transform: scale(1); }
+  84% { left: 84%; top: 13%; transform: scale(1); }
+  87% { transform: scale(0.7); }
+  90% { left: 84%; top: 13%; transform: scale(1); }
+  98%, 100% { left: 70%; top: 60%; transform: scale(1); }
 }
 
 /* --- Android Chrome --- */
@@ -343,7 +478,7 @@
   font-size: 0.5rem;
   opacity: 0;
   transform: scale(0.9);
-  animation: pop-3 var(--dur) infinite;
+  animation: pop-3-phone var(--dur) infinite;
 }
 .pwa-guide .and-dialog__app {
   display: flex;
@@ -372,9 +507,10 @@
   50% { left: 62%; top: 31%; transform: scale(1); }
   56% { transform: scale(0.7); }
   62% { left: 62%; top: 31%; transform: scale(1); }
-  82% { left: 76%; top: 66%; transform: scale(1); }
-  88% { transform: scale(0.7); }
-  93%, 100% { left: 76%; top: 66%; transform: scale(1); }
+  78% { left: 76%; top: 66%; transform: scale(1); }
+  82% { transform: scale(0.7); }
+  86% { left: 76%; top: 66%; transform: scale(1); }
+  97%, 100% { left: 50%; top: 70%; transform: scale(1); }
 }
 
 /* --- Chrome on a computer --- */
@@ -497,6 +633,7 @@
   gap: 0.3rem;
   padding: 0.3rem 0.45rem;
   background: color-mix(in srgb, var(--p-primary-color) 18%, var(--p-content-background));
+  font-size: 0.45rem;
 }
 .pwa-guide .cursor {
   position: absolute;
@@ -534,9 +671,9 @@
   76%, 100% { background: var(--p-content-hover-background); }
 }
 @keyframes lit-4 {
-  0%, 88% { background: transparent; }
-  91%, 98% { background: color-mix(in srgb, var(--hit) 22%, transparent); }
-  100% { background: transparent; }
+  0%, 82% { background: transparent; }
+  85%, 90% { background: color-mix(in srgb, var(--hit) 22%, transparent); }
+  92%, 100% { background: transparent; }
 }
 @keyframes sheet-2 {
   0%, 22% { transform: translateY(110%); }
@@ -548,9 +685,11 @@
   52%, 73% { transform: translateY(0); }
   77%, 100% { transform: translateY(110%); }
 }
+/* The last sheet goes once "Add" is tapped: the home screen shows for the rest of the step */
 @keyframes sheet-4 {
   0%, 72% { transform: translateY(110%); }
-  77%, 100% { transform: translateY(0); }
+  77%, 90% { transform: translateY(0); }
+  93%, 100% { transform: translateY(110%); }
 }
 @keyframes pop-2 {
   0%, 28% { opacity: 0; transform: scale(0.85); }
@@ -561,6 +700,12 @@
   0%, 62% { opacity: 0; transform: scale(0.9); }
   67%, 96% { opacity: 1; transform: scale(1); }
   100% { opacity: 0; transform: scale(0.9); }
+}
+/* On a phone the install dialog closes after "Install": the home screen shows for the rest of the step */
+@keyframes pop-3-phone {
+  0%, 62% { opacity: 0; transform: scale(0.9); }
+  67%, 87% { opacity: 1; transform: scale(1); }
+  90%, 100% { opacity: 0; transform: scale(0.9); }
 }
 /* Android and desktop step 2/3 rows light in their own windows */
 .pwa-guide .stage--android .hit-2,
@@ -576,33 +721,41 @@
   62%, 100% { filter: none; outline: 0 solid transparent; }
 }
 @keyframes lit-pop-3 {
-  0%, 80% { outline: 0 solid transparent; }
-  84%, 94% { outline: 3px solid color-mix(in srgb, var(--hit) 35%, transparent); }
-  100% { outline: 0 solid transparent; }
+  0%, 76% { outline: 0 solid transparent; }
+  79%, 86% { outline: 3px solid color-mix(in srgb, var(--hit) 35%, transparent); }
+  88%, 100% { outline: 0 solid transparent; }
 }
 
-/* --- the steps, lit in time with the scene --- */
+/* --- the steps, one at a time, in time with the scene --- */
+/* One box for all the steps: they lie on top of each other and each shows only during its part of the scene. The
+   box is as tall as the longest step, so nothing moves when the step changes. */
 .pwa-guide .guide__steps {
-  display: flex;
-  flex-direction: column;
-  gap: 0.35rem;
+  display: grid;
   margin: 0;
   padding: 0;
   list-style: none;
+  border-radius: 12px;
+  background: color-mix(in srgb, var(--p-primary-color) 11%, transparent);
+  overflow: hidden;
 }
 .pwa-guide .guide__step {
+  grid-area: 1 / 1;
   display: flex;
   align-items: center;
   gap: 0.6rem;
-  padding: 0.4rem 0.55rem;
-  border-radius: 10px;
-  font-size: 0.86rem;
-  animation: step-4 var(--dur) infinite;
+  padding: 0.55rem 0.65rem;
+  font-size: 0.88rem;
+  opacity: 0;
+  animation: step-4 var(--dur) infinite ease-in-out backwards;
   animation-delay: calc(var(--dur) * var(--i) / 4);
 }
 .pwa-guide .guide__steps--3 .guide__step {
   animation-name: step-3;
   animation-delay: calc(var(--dur) * var(--i) / 3);
+}
+/* Should the animation not run, the first step is there */
+.pwa-guide .guide__step:first-child {
+  opacity: 1;
 }
 .pwa-guide .guide__n {
   flex: none;
@@ -616,20 +769,71 @@
   color: var(--p-primary-contrast-color);
   background: var(--p-primary-color);
 }
+/* A step comes up into the box as the one before it leaves upward: the two cross for a moment (its own part of the
+   scene is the first quarter, or third, of its timeline). */
 @keyframes step-4 {
-  0%, 25% { background: color-mix(in srgb, var(--p-primary-color) 12%, transparent); color: var(--p-text-color); }
-  26%, 100% { background: transparent; color: var(--p-text-muted-color); }
+  0% { opacity: 0; transform: translateY(0.6rem); }
+  4.5%, 25% { opacity: 1; transform: none; }
+  29.5%, 100% { opacity: 0; transform: translateY(-0.6rem); }
 }
 @keyframes step-3 {
-  0%, 33% { background: color-mix(in srgb, var(--p-primary-color) 12%, transparent); color: var(--p-text-color); }
-  34%, 100% { background: transparent; color: var(--p-text-muted-color); }
+  0% { opacity: 0; transform: translateY(0.6rem); }
+  4.5%, 33.33% { opacity: 1; transform: none; }
+  37.83%, 100% { opacity: 0; transform: translateY(-0.6rem); }
+}
+/* Under the box: a mark for each step, the current one long */
+.pwa-guide .guide__ticks {
+  display: flex;
+  justify-content: center;
+  gap: 0.3rem;
+  margin-top: -0.3rem;
+}
+.pwa-guide .guide__tick {
+  width: 0.4rem;
+  height: 0.25rem;
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--p-text-color) 16%, transparent);
+  animation: tick-4 var(--dur) infinite ease-in-out backwards;
+  animation-delay: calc(var(--dur) * var(--i) / 4);
+}
+.pwa-guide .guide__ticks--3 .guide__tick {
+  animation-name: tick-3;
+  animation-delay: calc(var(--dur) * var(--i) / 3);
+}
+.pwa-guide .guide__tick:first-child {
+  width: 1.4rem;
+  background: var(--p-primary-color);
+}
+@keyframes tick-4 {
+  0% { width: 0.4rem; background: color-mix(in srgb, var(--p-text-color) 16%, transparent); }
+  4.5%, 25% { width: 1.4rem; background: var(--p-primary-color); }
+  29.5%, 100% { width: 0.4rem; background: color-mix(in srgb, var(--p-text-color) 16%, transparent); }
+}
+@keyframes tick-3 {
+  0% { width: 0.4rem; background: color-mix(in srgb, var(--p-text-color) 16%, transparent); }
+  4.5%, 33.33% { width: 1.4rem; background: var(--p-primary-color); }
+  37.83%, 100% { width: 0.4rem; background: color-mix(in srgb, var(--p-text-color) 16%, transparent); }
 }
 
-/* No motion: the first frame, every step plain */
+/* No motion: the first frame of the scene, and every step in a plain list */
 @media (prefers-reduced-motion: reduce) {
   .pwa-guide .stage *,
-  .pwa-guide .guide__step {
+  .pwa-guide .guide__step,
+  .pwa-guide .guide__tick {
     animation: none !important;
+  }
+  .pwa-guide .guide__steps {
+    display: flex;
+    flex-direction: column;
+    gap: 0.35rem;
+    background: none;
+  }
+  .pwa-guide .guide__step {
+    padding: 0.4rem 0.55rem;
+    opacity: 1;
+  }
+  .pwa-guide .guide__ticks {
+    display: none;
   }
   .pwa-guide .finger,
   .pwa-guide .cursor {
@@ -668,14 +872,15 @@
   margin: -1.25rem -1.25rem 0;
   padding: 1.4rem 1.5rem 0.4rem;
   text-align: center;
-  background: radial-gradient(120% 90% at 50% 0%, rgb(69 95 233 / 18%), transparent 70%);
+  background: radial-gradient(120% 90% at 50% 0%, color-mix(in srgb, var(--pwa-accent, #455fe9) 18%, transparent), transparent 70%);
+  transition: background 0.3s ease;
 }
 .pwa-guide__icon {
   display: block;
   width: 5rem;
   height: 5rem;
   margin: 0 auto 0.6rem;
-  filter: drop-shadow(0 10px 16px rgb(69 95 233 / 40%));
+  filter: drop-shadow(0 10px 16px color-mix(in srgb, var(--pwa-accent, #455fe9) 40%, transparent));
 }
 .pwa-guide__hero h2 {
   margin: 0;
@@ -733,7 +938,7 @@
 }
 
 /* Phones and short windows: a smaller top and tighter rows, so the whole guide fits most screens without scrolling */
-@media (max-width: 480px), (max-height: 740px) {
+@media (max-width: 480px), (max-height: 640px) {
   .pwa-guide-paper.MuiPaper-root {
     max-height: calc(100% - 1.5rem);
   }
@@ -756,36 +961,28 @@
   .pwa-guide .guide {
     gap: 0.6rem;
   }
-  .pwa-guide .guide__tabs {
-    padding: 0.2rem;
+  .pwa-guide .guide__tab {
+    height: 2.2rem;
     border-radius: 10px;
   }
-  .pwa-guide .guide__tab {
-    padding: 0.3rem 0.25rem;
-    border-radius: 8px;
-    font-size: 0.74rem;
+  .pwa-guide .guide__os {
+    height: 1.2rem;
   }
-  .pwa-guide .guide__steps {
-    gap: 0.25rem;
+  .app-color__button {
+    margin-bottom: 0.5rem;
   }
   .pwa-guide .guide__step {
-    padding: 0.3rem 0.5rem;
-    font-size: 0.82rem;
+    padding: 0.5rem 0.6rem;
+    font-size: 0.85rem;
   }
   .pwa-guide__got {
     margin: 0 1rem 1rem;
     padding: 0.65rem;
   }
 }
-/* Phones: each tab names the device only, on one line */
-@media (max-width: 480px) {
-  .pwa-guide .guide__tab-app {
-    display: none;
-  }
-}
 /* Shorter screens (older phones, or the browser's bars showing): the drawing and the icon shrink too, step by step.
    Each limit is the screen height under which the step above no longer fits without scrolling. */
-@media (max-height: 642px) {
+@media (max-height: 596px) {
   .pwa-guide .stage {
     zoom: 0.85;
   }
@@ -794,7 +991,7 @@
     height: 3.5rem;
   }
 }
-@media (max-height: 603px) {
+@media (max-height: 557px) {
   .pwa-guide .stage {
     zoom: 0.72;
   }
@@ -803,7 +1000,7 @@
     height: 3rem;
   }
 }
-@media (max-height: 568px) {
+@media (max-height: 522px) {
   .pwa-guide .stage {
     zoom: 0.68;
   }
@@ -811,12 +1008,32 @@
     font-size: 1rem;
   }
   .pwa-guide .guide__step {
-    padding: 0.2rem 0.5rem;
-    font-size: 0.78rem;
+    padding: 0.4rem 0.55rem;
+    font-size: 0.8rem;
   }
   .pwa-guide .guide__n {
     width: 1.25rem;
     height: 1.25rem;
     font-size: 0.66rem;
+  }
+}
+@media (max-height: 474px) {
+  .pwa-guide .stage {
+    zoom: 0.55;
+  }
+  .pwa-guide__icon {
+    width: 2.6rem;
+    height: 2.6rem;
+    margin-bottom: 0.35rem;
+  }
+  .app-color__button {
+    margin-bottom: 0.35rem;
+    padding-block: 0.22rem;
+  }
+  .pwa-guide .guide__tab {
+    height: 1.9rem;
+  }
+  .pwa-guide .guide__os {
+    height: 1.05rem;
   }
 }

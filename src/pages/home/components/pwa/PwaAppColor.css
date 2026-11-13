@@ -1,0 +1,261 @@
+/* "App Color" (user panel): the button under the app icon and its small window, as in admin_v2's PwaColorButton.vue
+   and PwaIconColors.vue. The window is drawn outside the guide, so it carries the guide's colours itself. */
+.app-color__button {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  margin: 0 auto 0.7rem;
+  padding: 0.32rem 0.65rem 0.32rem 0.7rem;
+  border: 1px solid var(--p-content-border-color);
+  border-radius: 999px;
+  background: var(--p-content-background);
+  color: var(--p-text-color);
+  font: inherit;
+  font-size: 0.8rem;
+  font-weight: 600;
+  white-space: nowrap;
+  cursor: pointer;
+  transition:
+    background-color 0.2s ease,
+    border-color 0.2s ease;
+}
+.app-color__button:hover {
+  background: var(--p-content-hover-background);
+}
+.app-color__button:focus-visible {
+  outline: 2px solid var(--p-primary-color);
+  outline-offset: 2px;
+}
+/* The color chosen now, as a small glass tile */
+.app-color__dot {
+  --swatch: var(--p-primary-color);
+  flex: none;
+  width: 1.05rem;
+  height: 1.05rem;
+  border-radius: 31%;
+  background:
+    radial-gradient(120% 80% at 28% 0%, rgb(255 255 255 / 52%) 0%, rgb(255 255 255 / 0%) 55%),
+    linear-gradient(180deg, color-mix(in srgb, var(--swatch) 86%, white) 0%, var(--swatch) 46%, color-mix(in srgb, var(--swatch) 80%, black) 100%);
+  box-shadow:
+    inset 0 0 0 1px rgb(255 255 255 / 28%),
+    0 1px 2px rgb(0 0 0 / 28%);
+}
+.app-color__caret {
+  font-size: 1rem;
+  opacity: 0.7;
+  transition: transform 0.25s ease;
+}
+.app-color__caret--up {
+  transform: rotate(180deg);
+}
+
+/* The window */
+.app-color-pop.MuiPaper-root {
+  --p-primary-color: #455fe9;
+  --p-text-color: #212529;
+  --p-text-muted-color: #6c757d;
+  --p-content-background: #ffffff;
+  --p-content-border-color: #e0e4f5;
+  width: min(21rem, calc(100vw - 1.5rem));
+  max-height: min(36rem, calc(100dvh - 1.5rem));
+  margin-top: 0.4rem;
+  padding: 0.9rem 0.95rem 1rem;
+  border-radius: 18px;
+  background: var(--p-content-background);
+  color: var(--p-text-color);
+  font-family: var(--ui-font, inherit);
+  box-shadow:
+    0 18px 40px -12px rgb(20 30 80 / 35%),
+    0 0 0 1px rgb(20 30 80 / 6%);
+  overflow-y: auto;
+  overscroll-behavior: contain;
+}
+.icon-colors {
+  display: flex;
+  flex-direction: column;
+  gap: 0.65rem;
+  text-align: start;
+}
+.icon-colors__head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem;
+}
+.icon-colors__label {
+  font-size: 0.86rem;
+  font-weight: 600;
+}
+.icon-colors__code {
+  padding: 0.1rem 0.5rem;
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--p-text-color) 7%, transparent);
+  color: var(--p-text-muted-color);
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  font-size: 0.74rem;
+  letter-spacing: 0.02em;
+}
+/* 25 colors and "your own": three rows of nine */
+.icon-colors__grid {
+  display: grid;
+  grid-template-columns: repeat(9, minmax(0, 1fr));
+  gap: 0.55rem 0.3rem;
+}
+/* Each color as a small glass tile, in the shape of the icon */
+.icon-colors__swatch {
+  --swatch: var(--p-primary-color);
+  position: relative;
+  display: grid;
+  place-items: center;
+  justify-self: center;
+  width: 100%;
+  max-width: 2.15rem;
+  aspect-ratio: 1;
+  padding: 0;
+  border: 0;
+  border-radius: 31%;
+  background:
+    radial-gradient(120% 80% at 28% 0%, rgb(255 255 255 / 52%) 0%, rgb(255 255 255 / 0%) 55%),
+    linear-gradient(180deg, color-mix(in srgb, var(--swatch) 86%, white) 0%, var(--swatch) 46%, color-mix(in srgb, var(--swatch) 80%, black) 100%);
+  box-shadow:
+    inset 0 0 0 1px rgb(255 255 255 / 26%),
+    inset 0 -5px 8px -5px rgb(0 0 0 / 32%),
+    0 5px 9px -6px color-mix(in srgb, var(--swatch) 65%, black);
+  color: #fff;
+  font-size: 0.95rem;
+  cursor: pointer;
+  transition:
+    transform 0.16s ease,
+    box-shadow 0.16s ease;
+}
+.icon-colors__swatch svg {
+  filter: drop-shadow(0 1px 1px rgb(0 0 0 / 45%));
+}
+.icon-colors__swatch--light {
+  color: rgb(0 0 0 / 72%);
+}
+.icon-colors__swatch--light svg {
+  filter: none;
+}
+.icon-colors__swatch:hover {
+  transform: translateY(-2px) scale(1.06);
+}
+.icon-colors__swatch:focus-visible {
+  outline: 2px solid var(--p-primary-color);
+  outline-offset: 3px;
+}
+/* The chosen one: a ring in its own color */
+.icon-colors__swatch--on {
+  box-shadow:
+    inset 0 0 0 1px rgb(255 255 255 / 40%),
+    0 0 0 2px var(--p-content-background),
+    0 0 0 4px color-mix(in srgb, var(--swatch) 72%, var(--p-text-color));
+}
+/* "Your own": every color at once, until one is made */
+.icon-colors__swatch--own:not(.icon-colors__swatch--made) {
+  background:
+    radial-gradient(120% 80% at 28% 0%, rgb(255 255 255 / 45%) 0%, rgb(255 255 255 / 0%) 55%),
+    conic-gradient(from 200deg, #ff383c, #ff8d28, #ffcc00, #34c759, #00c8b3, #0a84ff, #6155f5, #cb30e0, #fe007c, #ff383c);
+  box-shadow:
+    inset 0 0 0 1px rgb(255 255 255 / 30%),
+    0 5px 9px -6px rgb(0 0 0 / 55%);
+}
+/* One's own color: the system's picker and the color's code; it opens softly */
+.icon-colors__own {
+  display: grid;
+  grid-template-rows: 0fr;
+  opacity: 0;
+  transition:
+    grid-template-rows 0.3s ease,
+    opacity 0.25s ease;
+}
+.icon-colors__own--open {
+  grid-template-rows: 1fr;
+  opacity: 1;
+}
+.icon-colors__own-in {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+  min-height: 0;
+  overflow: hidden;
+}
+.icon-colors__own--open .icon-colors__own-in {
+  padding-top: 0.6rem;
+  border-top: 1px solid var(--p-content-border-color);
+}
+.icon-colors__own-label {
+  font-size: 0.8rem;
+  color: var(--p-text-muted-color);
+}
+.icon-colors__own-fields {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+.icon-colors__picker {
+  flex: none;
+  width: 2.3rem;
+  height: 2.3rem;
+  padding: 0;
+  border: 0;
+  border-radius: 31%;
+  background: none;
+  cursor: pointer;
+  overflow: hidden;
+}
+.icon-colors__picker::-webkit-color-swatch-wrapper {
+  padding: 0;
+}
+.icon-colors__picker::-webkit-color-swatch {
+  border: 0;
+  border-radius: 31%;
+}
+.icon-colors__picker::-moz-color-swatch {
+  border: 0;
+  border-radius: 31%;
+}
+.icon-colors__hex {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
+  height: 2.3rem;
+  padding: 0 0.6rem;
+  border: 1px solid var(--p-content-border-color);
+  border-radius: 10px;
+  color: var(--p-text-muted-color);
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  font-size: 0.92rem;
+}
+.icon-colors__hex:focus-within {
+  border-color: var(--p-primary-color);
+}
+.icon-colors__hex input {
+  width: 4.6rem;
+  padding: 0;
+  border: 0;
+  outline: 0;
+  background: none;
+  color: var(--p-text-color);
+  font: inherit;
+  text-transform: uppercase;
+}
+.icon-colors__hex input[aria-invalid="true"] {
+  color: #d32f2f;
+}
+.icon-colors__hint {
+  font-size: 0.75rem;
+  line-height: 1.5;
+  color: var(--p-text-muted-color);
+}
+@media (prefers-reduced-motion: reduce) {
+  .icon-colors__swatch,
+  .icon-colors__own,
+  .app-color__caret {
+    transition: none;
+  }
+  .icon-colors__swatch:hover {
+    transform: none;
+  }
+}
