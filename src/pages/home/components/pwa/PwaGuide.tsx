@@ -63,6 +63,32 @@ function appIcon(): string | undefined {
   return document.head.querySelector<HTMLLinkElement>('link[rel="icon"][sizes="256x256"]')?.href || undefined;
 }
 
+/** This page's address: the install prompts show it under the app's name. */
+const HOST = typeof window === "undefined" ? "" : window.location.host;
+
+/** The app as an install prompt shows it: its name and, under it, its address. */
+const AppName = () => (
+  <span className="app-name">
+    <b>Hiddify</b>
+    <small>{HOST}</small>
+  </span>
+);
+
+/** A phone's home screen with the app among the others (the end of the phone scenes). */
+const Home = () => (
+  <div className="home">
+    {[0, 1, 2, 3, 4].map((n) => (
+      <span key={n} className="home__app" />
+    ))}
+    <span className="home__app home__app--new">
+      <span className="app-icon" />
+      <b>Hiddify</b>
+    </span>
+    <span className="home__app" />
+    <span className="home__app" />
+  </div>
+);
+
 const Scene = ({ platform }: { platform: Platform }) => {
   if (platform === "ios")
     return (
@@ -82,8 +108,11 @@ const Scene = ({ platform }: { platform: Platform }) => {
         </div>
         <div className="sheet ios-add">
           <div className="ios-add__head"><span>Cancel</span><b>Add to Home Screen</b><span className="ios-add__btn hit-4">Add</span></div>
-          <div className="ios-add__app"><span className="app-icon" /><span className="page__bar" /></div>
+          <div className="ios-add__app"><span className="app-icon" /><AppName /></div>
+          <div className="ios-add__opt"><span>Open as Web App</span><i className="ios-add__switch" /></div>
         </div>
+        {/* After the last tap: the home screen, with the app on it */}
+        <Home />
         <span className="finger finger--ios">●</span>
       </div>
     );
@@ -100,9 +129,11 @@ const Scene = ({ platform }: { platform: Platform }) => {
         </div>
         <div className="and-dialog">
           <b>Install app</b>
-          <div className="and-dialog__app"><span className="app-icon" /><span className="page__bar" /></div>
+          <div className="and-dialog__app"><span className="app-icon" /><AppName /></div>
           <div className="and-dialog__btns"><span>Cancel</span><span className="and-dialog__ok hit-3">Install</span></div>
         </div>
+        {/* After the last tap: the home screen, with the app on it */}
+        <Home />
         <span className="finger finger--android">●</span>
       </div>
     );
@@ -117,11 +148,11 @@ const Scene = ({ platform }: { platform: Platform }) => {
       <div className="page page--wide"><span className="page__bar page__bar--wide" /><span className="page__card" /><span className="page__bar" /></div>
       <div className="win-pop">
         <b>Install app?</b>
-        <div className="win-pop__app"><span className="app-icon" /><span className="page__bar" /></div>
+        <div className="win-pop__app"><span className="app-icon" /><AppName /></div>
         <div className="win-pop__btns"><span className="win-pop__ok hit-2">Install</span><span>Cancel</span></div>
       </div>
       <div className="win-app">
-        <div className="win-app__title"><span className="app-icon app-icon--tiny" /><span className="page__bar" /></div>
+        <div className="win-app__title"><span className="app-icon app-icon--tiny" /><b>Hiddify</b></div>
         <div className="page"><span className="page__bar page__bar--wide" /><span className="page__card" /></div>
       </div>
       <span className="cursor"><NorthEastRoundedIcon fontSize="inherit" /></span>
@@ -189,6 +220,7 @@ const PwaGuide = ({ enabled }: { enabled: boolean }) => {
             <div key={platform} className={`stage stage--${platform}`} dir="ltr" aria-hidden="true">
               <Scene platform={platform} />
             </div>
+            {/* The steps, one at a time: only the step the scene is showing now, so the guide stays short */}
             <ol key={`s-${platform}`} className={`guide__steps guide__steps--${steps.length}`}>
               {steps.map((s, i) => (
                 <li key={i} className="guide__step" style={{ ["--i" as string]: i }}>
@@ -197,6 +229,12 @@ const PwaGuide = ({ enabled }: { enabled: boolean }) => {
                 </li>
               ))}
             </ol>
+            {/* Which step of how many */}
+            <div key={`t-${platform}`} className={`guide__ticks guide__ticks--${steps.length}`} aria-hidden="true">
+              {steps.map((_, i) => (
+                <span key={i} className="guide__tick" style={{ ["--i" as string]: i }} />
+              ))}
+            </div>
           </div>
         </div>
         <button type="button" className="pwa-guide__got" onClick={gotIt} autoFocus>
