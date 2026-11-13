@@ -961,14 +961,15 @@
   .pwa-guide .guide {
     gap: 0.6rem;
   }
-  .pwa-guide .guide__tabs {
-    padding: 0.2rem;
+  .pwa-guide .guide__tab {
+    height: 2.2rem;
     border-radius: 10px;
   }
-  .pwa-guide .guide__tab {
-    padding: 0.3rem 0.25rem;
-    border-radius: 8px;
-    font-size: 0.74rem;
+  .pwa-guide .guide__os {
+    height: 1.2rem;
+  }
+  .app-color__button {
+    margin-bottom: 0.5rem;
   }
   .pwa-guide .guide__step {
     padding: 0.5rem 0.6rem;
@@ -981,7 +982,7 @@
 }
 /* Shorter screens (older phones, or the browser's bars showing): the drawing and the icon shrink too, step by step.
    Each limit is the screen height under which the step above no longer fits without scrolling. */
-@media (max-height: 548px) {
+@media (max-height: 596px) {
   .pwa-guide .stage {
     zoom: 0.85;
   }
@@ -990,7 +991,7 @@
     height: 3.5rem;
   }
 }
-@media (max-height: 509px) {
+@media (max-height: 557px) {
   .pwa-guide .stage {
     zoom: 0.72;
   }
@@ -999,7 +1000,7 @@
     height: 3rem;
   }
 }
-@media (max-height: 474px) {
+@media (max-height: 522px) {
   .pwa-guide .stage {
     zoom: 0.68;
   }
@@ -1014,5 +1015,25 @@
     width: 1.25rem;
     height: 1.25rem;
     font-size: 0.66rem;
+  }
+}
+@media (max-height: 474px) {
+  .pwa-guide .stage {
+    zoom: 0.58;
+  }
+  .pwa-guide__icon {
+    width: 2.6rem;
+    height: 2.6rem;
+    margin-bottom: 0.35rem;
+  }
+  .app-color__button {
+    margin-bottom: 0.35rem;
+    padding-block: 0.22rem;
+  }
+  .pwa-guide .guide__tab {
+    height: 1.9rem;
+  }
+  .pwa-guide .guide__os {
+    height: 1.05rem;
   }
 }
