@@ -19,31 +19,51 @@
 }
 .pwa-guide .guide__tabs {
   display: flex;
-  gap: 0.3rem;
-  padding: 0.25rem;
-  border-radius: 12px;
-  background: var(--p-content-hover-background);
+  gap: 0.45rem;
 }
+/* One tab per system: its logo in its own colors, on a very pale tint of its own */
 .pwa-guide .guide__tab {
+  --tab: #8e8e93;
   flex: 1;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  gap: 0.35rem;
-  padding: 0.4rem 0.3rem;
+  display: grid;
+  place-items: center;
+  height: 2.5rem;
+  padding: 0;
   border: 0;
-  border-radius: 9px;
-  background: transparent;
-  color: var(--p-text-muted-color);
-  font: inherit;
-  font-size: 0.78rem;
-  font-weight: 600;
+  border-radius: 12px;
+  background: color-mix(in srgb, var(--tab) 11%, transparent);
+  box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--tab) 16%, transparent);
+  color: var(--p-text-color);
   cursor: pointer;
+  transition:
+    background-color 0.2s ease,
+    box-shadow 0.2s ease;
 }
+.pwa-guide .guide__tab--android {
+  --tab: #3ddc84;
+}
+.pwa-guide .guide__tab--desktop {
+  --tab: #00a4ef;
+}
+.pwa-guide .guide__os {
+  display: block;
+  height: 1.35rem;
+  width: auto;
+  opacity: 0.6;
+  transition: opacity 0.2s ease;
+}
+.pwa-guide .guide__tab:hover .guide__os,
+.pwa-guide .guide__tab--on .guide__os {
+  opacity: 1;
+}
+.pwa-guide .guide__tab:focus-visible {
+  outline: 2px solid var(--p-primary-color);
+  outline-offset: 2px;
+}
+/* The chosen one: a little more of its tint, and a ring in its color */
 .pwa-guide .guide__tab--on {
-  background: var(--p-content-background);
-  color: var(--p-primary-color);
-  box-shadow: 0 1px 3px rgb(0 0 0 / 12%);
+  background: color-mix(in srgb, var(--tab) 20%, transparent);
+  box-shadow: inset 0 0 0 1.5px color-mix(in srgb, var(--tab) 70%, transparent);
 }
 
 /* --- the stage --- */
@@ -852,14 +872,15 @@
   margin: -1.25rem -1.25rem 0;
   padding: 1.4rem 1.5rem 0.4rem;
   text-align: center;
-  background: radial-gradient(120% 90% at 50% 0%, rgb(69 95 233 / 18%), transparent 70%);
+  background: radial-gradient(120% 90% at 50% 0%, color-mix(in srgb, var(--pwa-accent, #455fe9) 18%, transparent), transparent 70%);
+  transition: background 0.3s ease;
 }
 .pwa-guide__icon {
   display: block;
   width: 5rem;
   height: 5rem;
   margin: 0 auto 0.6rem;
-  filter: drop-shadow(0 10px 16px rgb(69 95 233 / 40%));
+  filter: drop-shadow(0 10px 16px color-mix(in srgb, var(--pwa-accent, #455fe9) 40%, transparent));
 }
 .pwa-guide__hero h2 {
   margin: 0;
@@ -956,12 +977,6 @@
   .pwa-guide__got {
     margin: 0 1rem 1rem;
     padding: 0.65rem;
-  }
-}
-/* Phones: each tab names the device only, on one line */
-@media (max-width: 480px) {
-  .pwa-guide .guide__tab-app {
-    display: none;
   }
 }
 /* Shorter screens (older phones, or the browser's bars showing): the drawing and the icon shrink too, step by step.
