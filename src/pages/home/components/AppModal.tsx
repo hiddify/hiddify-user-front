@@ -223,7 +223,7 @@ const AppModal = ({ profileUrl }) => {
                                         <div className='w-full flex items-center justify-between'>
                                             <div className='flex flex-col'>
                                                 <Text fontSize='base' fontWeight='regular' className='text-[#495057]'>{item.title ? item.title : ''}</Text>
-                                                <Text fontSize='sm' fontWeight='normal' className='text-[#212529]'>{item.title === "Streisand" || item.title === 'Hiddify Next' || item.title === "استرایسند" || item.title === "هیدیفای نکست" ? t('*Recommended') : '' }</Text>
+                                                <Text fontSize='sm' fontWeight='normal' className='text-[#212529]'>{item.recommended ? t('*Recommended') : ''}</Text>
                                             </div>
                                             {isRtl(language) ? <ArrowBackIosIcon /> : <ArrowForwardIosIcon />}
                                         </div>
