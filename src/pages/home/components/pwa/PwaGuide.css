@@ -820,3 +820,27 @@
     font-size: 0.66rem;
   }
 }
+
+/* Inside Telegram: one line and its own "Add to Home Screen" (no browser steps to draw) */
+.pwa-guide--telegram .pwa-guide__lead {
+  margin: 8px 0 0;
+  font-size: 15px;
+  line-height: 1.5;
+  opacity: 0.75;
+  text-align: center;
+}
+.pwa-guide--telegram .pwa-guide__got {
+  margin-bottom: 0;
+}
+.pwa-guide__later {
+  display: block;
+  margin: 4px 1.25rem 0.75rem;
+  padding: 10px;
+  border: 0;
+  background: none;
+  color: inherit;
+  font: inherit;
+  font-size: 15px;
+  opacity: 0.7;
+  cursor: pointer;
+}

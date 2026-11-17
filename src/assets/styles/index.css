@@ -67,3 +67,10 @@ input::placeholder {
 .rtl {
   direction: rtl;
 }
+
+/* A Telegram Mini App in full screen: Telegram's own buttons (close, menu) float over the top of the page and the
+   phone's notch is not covered; Telegram gives both heights as CSS variables (src/utils/telegramMiniApp.ts). */
+html.tg-fullscreen body {
+  padding-top: calc(var(--tg-safe-area-inset-top, 0px) + var(--tg-content-safe-area-inset-top, 0px));
+  padding-bottom: var(--tg-safe-area-inset-bottom, 0px);
+}
