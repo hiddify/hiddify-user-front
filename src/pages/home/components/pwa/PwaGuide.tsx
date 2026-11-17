@@ -3,6 +3,8 @@ import { useTranslation } from "react-i18next";
 import Dialog from "@mui/material/Dialog";
 import CheckRoundedIcon from "@mui/icons-material/CheckRounded";
 import NorthEastRoundedIcon from "@mui/icons-material/NorthEastRounded";
+import AddToHomeScreenRoundedIcon from "@mui/icons-material/AddToHomeScreenRounded";
+import { canAddToHomeScreen, isTelegramMiniApp, withTelegram, type TelegramWebApp } from "../../../../utils/telegramMiniApp";
 import "./PwaGuide.css";
 
 /**
@@ -12,6 +14,8 @@ import "./PwaGuide.css";
  * the Telegram spotlight comes first) — and never again after "Got it" (or closing it). Visits before that, or while
  * not linked, do not count. Never when the panel already runs as the installed app.
  * The same guide as admin_v2's PwaInstallDialog / PwaInstallGuide.
+ * Inside Telegram (the page as the bot's Mini App) there is no browser to show: Telegram itself puts the page on the
+ * phone's home screen, so the dialog is one button that asks it to (only when Telegram can and it is not there yet).
  */
 type Platform = "ios" | "android" | "desktop";
 
@@ -132,11 +136,21 @@ const Scene = ({ platform }: { platform: Platform }) => {
 const PwaGuide = ({ enabled }: { enabled: boolean }) => {
   const { t, i18n } = useTranslation();
   const [open, setOpen] = useState(false);
+  const [telegram, setTelegram] = useState<TelegramWebApp | null>(null);
   const [icon] = useState(appIcon);
   const [detected] = useState<Platform>(detectPlatform);
   const [platform, setPlatform] = useState<Platform>(detected);
 
   useEffect(() => {
+    if (isTelegramMiniApp()) {
+      // In Telegram: its own "Add to Home Screen", when it can and the page is not there yet
+      if (dismissed() || countVisit() < SHOW_ON_VISIT) return;
+      let timer = 0;
+      withTelegram((app) => canAddToHomeScreen(app, (yes) => {
+        if (yes) timer = window.setTimeout(() => (setTelegram(app), setOpen(true)), 1200);
+      }));
+      return () => window.clearTimeout(timer);
+    }
     if (!enabled || dismissed() || isStandalone()) return;
     if (countVisit() < SHOW_ON_VISIT) return;
     const timer = window.setTimeout(() => setOpen(true), 1200); // after the page has drawn
@@ -162,6 +176,39 @@ const PwaGuide = ({ enabled }: { enabled: boolean }) => {
     }
     setOpen(false);
   }
+
+  if (telegram)
+    return (
+      <Dialog open={open} onClose={gotIt} PaperProps={{ className: "pwa-guide-paper" }} dir={i18n.language === "fa" ? "rtl" : "ltr"}>
+        <div className="pwa-guide pwa-guide--telegram">
+          <div className="pwa-guide__body">
+            <div className="pwa-guide__hero">
+              {icon && <img className="pwa-guide__icon" src={icon} alt="" />}
+              <h2>{t("Add to Home Screen")}</h2>
+              <p className="pwa-guide__lead">{t("Open your page from your phone's home screen, like an app.")}</p>
+            </div>
+          </div>
+          <button
+            type="button"
+            className="pwa-guide__got"
+            autoFocus
+            onClick={() => {
+              try {
+                telegram.addToHomeScreen?.();
+              } catch {
+                /* Telegram refused: nothing more to do here */
+              }
+              gotIt();
+            }}
+          >
+            <AddToHomeScreenRoundedIcon fontSize="inherit" /> {t("Add to Home Screen")}
+          </button>
+          <button type="button" className="pwa-guide__later" onClick={gotIt}>
+            {t("Not now")}
+          </button>
+        </div>
+      </Dialog>
+    );
 
   return (
     <Dialog open={open} onClose={gotIt} PaperProps={{ className: "pwa-guide-paper" }} dir={i18n.language === "fa" ? "rtl" : "ltr"}>
