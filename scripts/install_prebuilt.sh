@@ -1,43 +1,64 @@
 #!/usr/bin/env bash
-# Low-memory install: copy hiddify-user-front@gh-pages into static/user-front/
-# and write a minimal Vite-compatible manifest.json (no npm).
+# Low-memory install (no npm): copy the CI build of this commit from hiddify-user-front@gh-pages into static/user-front/.
+#
+# The files are copied byte for byte, never edited. The bundle finds its locales through window.__USER_FRONT_STATIC__,
+# which the panel sets to /<proxy>/static/user-front (panel/user/templates/user_front.html), so i18n/ only has to sit
+# next to assets/. gh-pages also carries the Vite manifest.json that Flask reads to find the entry files.
 set -euo pipefail
 
 ROOT="$(cd "$(dirname "$0")/.." && pwd)"
 OUT="$(cd "$ROOT/../static" && pwd)/user-front"
+REPO="https://github.com/hiddify/hiddify-user-front.git"
+DEPTH=100 # gh-pages commits searched for the build of this commit
 tmp="$(mktemp -d /var/tmp/hiddify-user-front-XXXXXX)"
 trap 'rm -rf "$tmp"' EXIT
+src="$tmp/src"
 
 echo "Installing prebuilt user_front from gh-pages → static/user-front/…"
-git clone --depth 1 --branch gh-pages --single-branch --quiet \
-  https://github.com/hiddify/hiddify-user-front.git "$tmp/src"
+# Blobless: only the history is fetched here, and the files of the one build checked out below.
+if ! git clone --quiet --no-checkout --filter=blob:none --depth "$DEPTH" --branch gh-pages --single-branch "$REPO" "$src" 2>/dev/null; then
+  rm -rf "$src"
+  git clone --quiet --no-checkout --depth "$DEPTH" --branch gh-pages --single-branch "$REPO" "$src"
+fi
+
+# The gh-pages deploy names its source commit: "Deploying to gh-pages from @ hiddify/hiddify-user-front@<sha> 🚀".
+want="$(git -C "$ROOT" rev-parse HEAD 2>/dev/null || true)"
+build=""
+if [ -n "$want" ]; then
+  build="$(git -C "$src" log --format='%H %s' | awk -v sha="@$want" '!found && index($0, sha) { print $1; found = 1 }')"
+fi
+if [ -n "$build" ]; then
+  echo "gh-pages build of user_front ${want:0:7}: ${build:0:7}"
+else
+  build="$(git -C "$src" rev-parse HEAD)"
+  what="${want:0:7}"
+  [ -n "$want" ] || what="(not a git checkout)"
+  echo "WARNING: gh-pages has no build of user_front $what; using the newest one (${build:0:7})," \
+    "which may not match this panel. Run 'make build-ui' to build this commit from source." >&2
+fi
+git -C "$src" -c advice.detachedHead=false checkout --quiet "$build"
+
+# Check the build before touching the installed one.
+python3 - "$src" <<'PY'
+import json, pathlib, sys
+root = pathlib.Path(sys.argv[1])
+try:
+    entries = json.loads((root / "manifest.json").read_text(encoding="utf-8"))
+except (OSError, ValueError) as e:
+    sys.exit(f"gh-pages build has no usable manifest.json ({e})")
+entry = next((e for e in entries.values() if e.get("isEntry") and e.get("file")), None)
+if entry is None:
+    sys.exit("gh-pages manifest.json has no entry")
+missing = [f for f in [entry["file"], *(entry.get("css") or [])] if not (root / f).is_file()]
+if missing:
+    sys.exit(f"gh-pages build is missing {', '.join(missing)}")
+if not (root / "i18n").is_dir():
+    sys.exit("gh-pages build has no i18n/")
+print(f"manifest entry → {entry['file']}" + "".join(f" + {c}" for c in entry.get("css") or []))
+PY
 
 rm -rf "$OUT"
 mkdir -p "$OUT"
-cp -a "$tmp/src/assets" "$OUT/assets"
-[ -d "$tmp/src/i18n" ] && cp -a "$tmp/src/i18n" "$OUT/i18n"
-
-# Build a tiny manifest so Flask can resolve the entry the same way as a Vite build.
-js="$(basename "$(ls "$OUT/assets"/index-*.js | head -n1)")"
-css=""
-if ls "$OUT/assets"/index-*.css >/dev/null 2>&1; then
-  css="$(basename "$(ls "$OUT/assets"/index-*.css | head -n1)")"
-fi
-python3 - "$OUT" "$js" "$css" <<'PY'
-import json, sys
-out, js, css = sys.argv[1], sys.argv[2], sys.argv[3]
-entry = {"file": f"assets/{js}", "isEntry": True, "src": "index.html"}
-if css:
-    entry["css"] = [f"assets/{css}"]
-(out_path := __import__("pathlib").Path(out)).mkdir(parents=True, exist_ok=True)
-(out_path / "manifest.json").write_text(json.dumps({"index.html": entry}, indent=2) + "\n", encoding="utf-8")
-print(f"manifest entry → assets/{js}" + (f" + assets/{css}" if css else ""))
-PY
-
-# gh-pages bundles load locales from ../i18n/ (relative to the user page URL).
-# Rewrite to the static/user-front tree Flask serves.
-if compgen -G "$OUT/assets/*.js" >/dev/null; then
-  sed -i 's|../i18n/|../static/user-front/i18n/|g' "$OUT/assets"/*.js
-fi
+cp -a "$src/assets" "$src/i18n" "$src/manifest.json" "$OUT/"
 
 echo "User front ready at hiddifypanel/static/user-front/ (prebuilt)"
